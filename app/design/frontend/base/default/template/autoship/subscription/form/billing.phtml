@@ -1,0 +1,188 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Dennis Rogers <dennis@storefrontconsulting.com>
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+<?php
+$subscription = $this->getSubscription();
+?>
+<ul class="messages"></ul>
+<form id="co-billing-form-<?php echo $subscription->getSubscriptionId() ?>" class="co-billing-form"
+      action="<?php echo $this->getSubmitUrl() ?>">
+    <input type="hidden" name="id" id="subscription_id_<?php echo $this->getSubscription()->getSubscriptionId() ?>"
+           value="<?php echo $this->getSubscription()->getSubscriptionId() ?>"/>
+    <ul class="form-list">
+        <?php if ($this->customerHasAddresses()): ?>
+            <li class="wide">
+                <label
+                    for="billing-address-select-<?php echo $subscription->getSubscriptionId() ?>"><?php echo $this->__('Select a billing address from your address book or enter a new address.') ?></label>
+
+                <div class="input-box">
+                    <?php echo $this->getAddressesHtmlSelect('billing', $subscription->getSubscriptionId()) ?>
+                </div>
+            </li>
+        <?php endif; ?>
+        <li id="billing-new-address-form-<?php echo $subscription->getSubscriptionId() ?>"
+            class="billing-new-address-form" <?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif; ?>>
+            <fieldset>
+                <ul>
+                    <li class="fields"><?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getAddress('billing')
+                             ? $this->getAddress('billing') : $subscription->getCustomer())
+                            ->setForceUseCustomerRequiredAttributes(!$this->isCustomerLoggedIn())->setFieldIdFormat('billing:%s')
+                            ->setFieldNameFormat('billing[%s]')->toHtml() ?></li>
+                    <li class="fields">
+                        <div class="field">
+                            <label
+                                for="<?php echo $subscription->getSubscriptionId() ?>:billing:company"><?php echo $this->__('Company') ?></label>
+
+                            <div class="input-box">
+                                <input type="text" id="<?php echo $subscription->getSubscriptionId() ?>:billing:company"
+                                       name="billing[company]" title="<?php echo $this->__('Company') ?>"
+                                       class="input-text <?php // Temp - disbale this class for 1.10.x compatibility // echo $this->helper('customer/address')->getAttributeValidationClass('company') ?>"/>
+                            </div>
+                        </div>
+                        <?php if (!$this->isCustomerLoggedIn()): ?>
+                            <div class="field">
+                                <label for="<?php echo $subscription->getSubscriptionId() ?>:billing:email"
+                                       class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+
+                                <div class="input-box">
+                                    <input type="text" name="billing[email]"
+                                           id="<?php echo $subscription->getSubscriptionId() ?>:billing:email"
+                                           title="<?php echo $this->__('Email Address') ?>"
+                                           class="input-text validate-email required-entry"/>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </li>
+                    <?php $_streetValidationClass =
+                        ' '; // Temp - disbale this class for 1.10.x compatibility // $this->helper('customer/address')->getAttributeValidationClass('street'); ?>
+                    <li class="wide">
+                        <label for="<?php echo $subscription->getSubscriptionId() ?>:billing:street1"
+                               class="required"><em>*</em><?php echo $this->__('Address') ?></label>
+
+                        <div class="input-box">
+                            <input type="text" title="<?php echo $this->__('Street Address') ?>" name="billing[street][]"
+                                   id="<?php echo $subscription->getSubscriptionId() ?>:billing:street1"
+                                   class="input-text <?php echo $_streetValidationClass ?>"/>
+                        </div>
+                    </li>
+                    <?php $_streetValidationClass = trim(str_replace('required-entry', '', $_streetValidationClass)); ?>
+                    <?php for ($_i = 2, $_n = $this->helper('customer/address')->getStreetLines(); $_i <= $_n; $_i++): ?>
+                        <li class="wide">
+                            <div class="input-box">
+                                <input type="text" title="<?php echo $this->__('Street Address %s', $_i) ?>" name="billing[street][]"
+                                       id="<?php echo $subscription->getSubscriptionId() ?>:billing:street<?php echo $_i ?>"
+                                       class="input-text <?php echo $_streetValidationClass ?>"/>
+                            </div>
+                        </li>
+                    <?php endfor; ?>
+                    <li class="fields">
+                        <div class="field">
+                            <label for="<?php echo $subscription->getSubscriptionId() ?>:billing:city"
+                                   class="required"><em>*</em><?php echo $this->__('City') ?></label>
+
+                            <div class="input-box">
+                                <input type="text" title="<?php echo $this->__('City') ?>" name="billing[city]"
+                                       class="input-text <?php // Temp - disbale this class for 1.10.x compatibility // echo $this->helper('customer/address')->getAttributeValidationClass('city') ?>"
+                                       id="<?php echo $subscription->getSubscriptionId() ?>:billing:city"/>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="<?php echo $subscription->getSubscriptionId() ?>:billing:region_id"
+                                   class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
+
+                            <div class="input-box">
+                                <select id="<?php echo $subscription->getSubscriptionId() ?>:billing:region_id"
+                                        name="billing[region_id]" title="<?php echo $this->__('State/Province') ?>"
+                                        class="validate-select" style="display:none;">
+                                    <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                                </select>
+                                <input type="text" id="<?php echo $subscription->getSubscriptionId() ?>:billing:region"
+                                       name="billing[region]" title="<?php echo $this->__('State/Province') ?>"
+                                       class="input-text <?php // Temp - disbale this class for 1.10.x compatibility // echo $this->helper('customer/address')->getAttributeValidationClass('region') ?>"
+                                       style="display:none;"/>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fields">
+                        <div class="field">
+                            <label for="<?php echo $subscription->getSubscriptionId() ?>:billing:postcode"
+                                   class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
+
+                            <div class="input-box">
+                                <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="billing[postcode]"
+                                       id="<?php echo $subscription->getSubscriptionId() ?>:billing:postcode"
+                                       class="input-text validate-zip-international <?php // Temp - disbale this class for 1.10.x compatibility // echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>"/>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="<?php echo $subscription->getSubscriptionId() ?>:billing:country_id"
+                                   class="required"><em>*</em><?php echo $this->__('Country') ?></label>
+
+                            <div class="input-box">
+                                <?php echo $this->getCountryHtmlSelect('billing', $subscription->getSubscriptionId()) ?>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fields">
+                        <div class="field">
+                            <label for="<?php echo $subscription->getSubscriptionId() ?>:billing:telephone"
+                                   class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
+
+                            <div class="input-box">
+                                <input type="text" name="billing[telephone]" title="<?php echo $this->__('Telephone') ?>"
+                                       class="input-text <?php // Temp - disbale this class for 1.10.x compatibility // echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>"
+                                       id="<?php echo $subscription->getSubscriptionId() ?>:billing:telephone"/>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label
+                                for="<?php echo $subscription->getSubscriptionId() ?>:billing:fax"><?php echo $this->__('Fax') ?></label>
+
+                            <div class="input-box">
+                                <input type="text" name="billing[fax]" title="<?php echo $this->__('Fax') ?>"
+                                       class="input-text <?php // Temp - disbale this class for 1.10.x compatibility // echo $this->helper('customer/address')->getAttributeValidationClass('fax') ?>"
+                                       id="<?php echo $subscription->getSubscriptionId() ?>:billing:fax"/>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="no-display"><input type="hidden" name="billing[save_in_address_book]" value="1"/></li>
+                </ul>
+            </fieldset>
+        </li>
+    </ul>
+    <div class="buttons-set" id="billing-buttons-container-<?php echo $subscription->getSubscriptionId() ?>">
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+        <button type="submit" title="<?php echo $this->__('Continue') ?>" class="button">
+            <span><span><?php echo $this->__('Continue') ?></span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+    //<![CDATA[
+    $j(document).ready(function () {
+        var billingForm<?php echo $subscription->getSubscriptionId() ?> = new VarienForm('co-billing-form-<?php echo $subscription->getSubscriptionId() ?>');
+        var billingAddressRegionUpdater<?php echo $subscription->getSubscriptionId() ?> = new RegionUpdater(
+            '<?php echo $subscription->getSubscriptionId() ?>:billing:country_id',
+            '<?php echo $subscription->getSubscriptionId() ?>:billing:region',
+            '<?php echo $subscription->getSubscriptionId() ?>:billing:region_id',
+            regionsJson,
+            undefined,
+            '<?php echo $subscription->getSubscriptionId() ?>:billing:postcode'
+        );
+    });
+    //]]>
+</script>

@@ -1,0 +1,26 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+<?php if (Mage::getStoreConfig('payment/subscribe_pro/active') == '1'): ?>
+<?php if (Mage::getStoreConfig('payment/subscribe_pro/use_transparent_redirect') == '1'): ?>
+    <script type="text/javascript">
+        var jsonpEnvironmentKey = "<?php echo $this->getEnvironmentKey() ?>";
+        var jsonpUrl = "<?php echo $this->getJSONPUrl() ?>";
+    </script>
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/autoship/checkout.js') ?>"></script>
+<?php endif; ?>
+<?php endif; ?>

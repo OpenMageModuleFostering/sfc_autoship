@@ -1,0 +1,80 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @author    Dennis Rogers <dennis@storefrontconsulting.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+<?php if(Mage::getStoreConfig('autoship_general/general/enabled') == '1'): ?>
+<?php if($this->isProductAutoshipEligible()): ?>
+<div class="subscription-product">
+<ul class="options-list">
+	<li>
+		<input type="radio" onclick="" class="radio" id="delivery-option-one-time" name="delivery-option" value="one-time-delivery"/>
+		<div class="radio-text">
+		<span class=label>
+			<label for="delivery-option-one-time">One Time Delivery</label>
+		</span>
+        <p><span class="price">Price: <?php echo $this->getOneTimePurchasePrice(true) ?></span></p>
+        </div>
+		<div class="clearer"></div>
+	</li>
+	<li>
+		<input type="radio" onclick="" class="radio" id="delivery-option-subscribe" name="delivery-option" value="subscribe" checked="checked"/>
+		<span class=label>
+		<div class="radio-text">
+			<label for="delivery-option-subscribe">Regular Delivery</label>
+		</span>
+        <p><span class="product-price"><?php echo $this->getDiscountText() ?></span></p>
+        <p>
+		<label for="delivery-interval">Delivery every:</label><br />
+        <select onchange="" id="delivery-interval" name="delivery-interval" class="">
+        	<?php foreach($this->getIntervals() as $interval): ?>
+        	<option value="<?php echo $interval ?>"><?php echo $interval ?></option>
+        	<?php endforeach; ?>
+        </select>
+        </p>
+    </div>
+    <div class="clearer"></div>
+	</li>
+</ul>
+</div>
+<?php if(Mage::getStoreConfig('autoship_subscription/subscription/use_new_subscription_page') == '1'): ?>
+<script type="text/javascript">
+//<![CDATA[
+    $j = jQuery;
+    $j(document).ready(function () {
+        toggleAddToCart();
+        $j('input[name=delivery-option]').bind('change', function () {
+            toggleAddToCart();
+        });
+        $j('#subscribe_button').bind('click', function (e) {
+            e.preventDefault();
+            window.location = '<?php echo $this->getUrl('autoship/newsubscription/index') ?>product_id/<?php echo $this->getProduct()->getId() ?>/qty/' + $j('#qty').val() + '/interval/' + $j('#delivery-interval').val() + '/';
+        });
+    });
+    function toggleAddToCart() {
+        if ($j('#delivery-option-one-time').is(':checked')) {
+            $j('#add_to_cart').show();
+            $j('#subscribe').hide();
+        } else {
+            $j('#add_to_cart').hide();
+            $j('#subscribe').show();
+        }
+    }
+//]]>
+</script>
+<?php endif; ?>
+<?php endif; ?>
+<?php endif; ?>

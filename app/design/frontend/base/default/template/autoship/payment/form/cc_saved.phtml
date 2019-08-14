@@ -1,0 +1,68 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+<?php $_code = $this->getMethodCode() ?>
+<?php $_paymentProfile = $this->getMethod()->getSavedPaymentProfile() ?>
+<?php echo $this->getChildHtml() ?>
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
+    <input type="hidden" id="<?php echo $_code ?>_payment_token" name="payment[payment_token]"
+           title="<?php echo $this->__('Payment Token') ?>" value="<?php echo $_paymentProfile->getData('payment_token') ?>"/>
+    <input type="hidden" id="<?php echo $_code ?>_is_new_card" name="payment[is_new_card]"
+           title="<?php echo $this->__('Is New Card') ?>" value="0"/>
+    <input type="hidden" id="<?php echo $_code ?>_cc_number" name="payment[cc_number]"
+           title="<?php echo $this->__('Obscured Card Number') ?>" value="<?php echo $this->getObscuredCardNumber() ?>"/>
+    <input type="hidden" id="<?php echo $_code ?>_cc_type" name="payment[cc_type]" title="<?php echo $this->__('Card Type') ?>"
+           value="<?php echo $this->getMagentoCardType() ?>"/>
+    <li id="<?php echo $_code ?>_cc_type_exp_div">
+        <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em><?php echo $this->__('Expiration Date') ?></label>
+
+        <div class="input-box">
+            <div class="v-fix">
+                <select id="<?php echo $_code ?>_expiration" name="payment[cc_exp_month]" class="month validate-cc-exp required-entry">
+                    <?php $_ccExpMonth = $_paymentProfile->getData('creditcard_month') ?>
+                    <?php foreach ($this->getCcMonths() as $k => $v): ?>
+                        <option value="<?php echo $k ? $k : '' ?>"<?php if ($k == $_ccExpMonth
+                        ): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+            <div class="v-fix">
+                <?php $_ccExpYear = $_paymentProfile->getData('creditcard_year') ?>
+                <select id="<?php echo $_code ?>_expiration_yr" name="payment[cc_exp_year]" class="year required-entry">
+                    <?php foreach ($this->getCcYears() as $k => $v): ?>
+                        <option value="<?php echo $k ? $k : '' ?>"<?php if ($k == $_ccExpYear
+                        ): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+        </div>
+    </li>
+    <?php if ($this->hasVerification()): ?>
+        <li id="<?php echo $_code ?>_cc_type_cvv_div">
+            <label for="<?php echo $_code ?>_cc_cid" class="required"><em>*</em><?php echo $this->__('Card Verification Number') ?>
+            </label>
+
+            <div class="input-box">
+                <div class="v-fix">
+                    <input type="text" title="<?php echo $this->__('Card Verification Number') ?>" class="input-text cvv required-entry"
+                           id="<?php echo $_code ?>_cc_cid" name="payment[cc_cid]" value=""/>
+                </div>
+                <a href="#" class="cvv-what-is-this"><?php echo $this->__('What is this?') ?></a>
+            </div>
+        </li>
+    <?php endif; ?>
+</ul>

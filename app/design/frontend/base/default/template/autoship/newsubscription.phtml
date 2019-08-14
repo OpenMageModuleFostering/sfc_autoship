@@ -1,0 +1,75 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+
+<div class="page-title">
+	<h1>Create New Product Subscription</h1>
+</div>
+
+<div class="new-subscription subscription">
+    <div class="top-row">
+    	<div class="product-info-block">
+    		<?php echo $this->getChildHtml('newsubscription.product_info') ?>
+    	</div>
+    	<div class="block delivery-date-block">
+    		<?php echo $this->getChildHtml('newsubscription.delivery_date') ?>
+    	</div>
+    	<div class="clearer"></div>
+    </div><!-- end top-row -->
+    <div class="bottom-row">
+    	<div class="bottom-left">
+	    	<div class="bottom-top">
+	  			<div class="block frequency-block">
+	  				<?php echo $this->getChildHtml('newsubscription.delivery_frequency') ?>
+	  			</div>
+	  			<div class="block payment-block">
+	  				<?php echo $this->getChildHtml('newsubscription.payment') ?>
+	  			</div>
+	  			<div class="clearer"></div>
+	    	</div><!-- end bottom-top -->
+	  		<div class="bottom-bottom">
+	  			<div class="block billing-address-block">
+	  				<?php echo $this->getChildHtml('newsubscription.billing_address') ?>
+	  			</div>
+	  			<div class="block shipping-address-block">
+	  				<?php echo $this->getChildHtml('newsubscription.shipping_address') ?>
+	  			</div>
+	  			<div class="clearer"></div>
+	  		</div><!-- end bottom-bottom -->
+    	</div><!-- end bottom-left -->
+    	<div class="bottom-right">
+    		<div class="block summary-block" id="newsubscription_summary">
+    			<?php echo $this->getChildHtml('newsubscription.summary') ?>
+    		</div>
+    	</div><!-- end bottom-right -->
+    </div><!-- end bottom-row -->
+    <span class="please-wait" id="please-wait" style="display:none;">
+        <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Updating...') ?>" title="<?php echo $this->__('Updating...') ?>" class="v-middle" /> <?php echo $this->__('Updating...') ?>
+    </span>
+</div><!-- end new-subscription -->
+
+<div style="clear:both;"></div>
+
+<div id="updated-subscription-content" style="display:none;"></div>
+
+<script type="text/javascript">
+//<![CDATA[
+    var regionsJson = 
+        <?php echo $this->helper('directory')->getRegionJson() ?>
+        ;
+//]]>
+</script>

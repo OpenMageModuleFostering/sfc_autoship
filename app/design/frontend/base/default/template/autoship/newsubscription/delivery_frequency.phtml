@@ -1,0 +1,44 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+<?php
+$subscription = $this->getSubscription();
+$qty = $subscription->getQty();
+$intervals = $this->getIntervals();
+$platformProduct = $this->getPlatformProduct();
+?>
+
+<div class="block-title">
+	<h2>Delivery Frequency</h2>
+</div>
+
+<div class="box-padding">
+<p>
+    <input type="hidden" id="frequency_form" value="<?php echo Mage::getUrl('autoship/newsubscription/update') ?>" />
+    <select id="delivery_qty" name="delivery_qty" class="" title="Quantity">
+    	<?php for($i=$platformProduct->getMinQty(); $i<=$platformProduct->getMaxQty(); $i++): ?>
+       	<option value="<?php echo $i ?>" <?php if($qty == $i): ?>selected="selected"<?php endif; ?>><?php echo $i ?></option>
+       	<?php endfor; ?>
+    </select>
+	 unit(s) every
+    <select id="delivery_interval" name="delivery_interval" class="" title="Delivery Interval">
+      	<?php foreach($intervals as $interval): ?>
+       	<option value="<?php echo $interval ?>" <?php if($interval == $subscription->getInterval()): ?>selected="selected"<?php endif; ?>><?php echo $interval ?></option>
+       	<?php endforeach; ?>
+    </select>
+</p>
+</div>

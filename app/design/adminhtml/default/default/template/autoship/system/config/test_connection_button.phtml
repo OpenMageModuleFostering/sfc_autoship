@@ -1,0 +1,24 @@
+<script type="text/javascript">
+    //<![CDATA[
+    function testConnection() {
+        new Ajax.Request('<?php echo $this->getAjaxCheckUrl() ?>', {
+            method:     'post',
+            parameters: {
+                host: $('autoship_general_platform_api_platform_host').value,
+                client_id: $('autoship_general_platform_api_client_id').value,
+                client_secret: $('autoship_general_platform_api_client_secret').value
+            },
+            onSuccess: function(transport){
+                if (transport.responseText == 1){
+                    $('test_connection_result').update('<span style="padding-left: 10px;color: #468847;"><strong>(Connected Successfully.)</strong></span>');
+                }
+                else {
+                    $('test_connection_result').update('<span style="padding-left: 10px;color: #b94a48;"><strong>(Failed to connect to platform!)</strong></span>');
+                }
+            }
+        });
+    }
+    //]]>
+</script>
+
+<?php echo $this->getButtonHtml() ?>

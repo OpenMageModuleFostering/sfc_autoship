@@ -1,0 +1,77 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @author    Dennis Rogers <dennis@storefrontconsulting.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+<?php
+$subscription = $this->getSubscription();
+$paymentProfile = $subscription->getPaymentProfile();
+?>
+
+<div class="block-title">
+	<h2>Payment Method</h2>
+</div>
+
+<div class="box-padding">
+    <?php if($paymentProfile->getCustomerCardnumber()): ?>
+    	<p>Credit card ending in <?php echo $paymentProfile->getCustomerCardnumber() ?>.  <a class="change" href="">(Change)</a></p>
+    <?php else: ?>
+      <p>Haven't saved a credit card yet? <a class="change" href="">Add one now</a>.</p>
+    <?php endif; ?>
+
+    <?php if ($this->useCouponCode()): ?>
+    <br/>
+
+    <div class="field">
+        <label for="coupon_code"><?php echo $this->__('Enter coupon code:') ?></label>
+        <div class="input-box">
+            <input type="text" id="coupon_code" name="coupon_code" value="<?php echo $subscription->getCouponCode() ?>"
+                   class="input-text"/>
+        </div>
+    </div>
+    <?php endif; ?>
+
+	<input type="text" id="cim_payment_profile_id" name="cim_payment_profile_id" value="<?php echo $paymentProfile->getId() ?>"  class="input-text" style="display:none;" />
+
+	<div class="change" style="display:none;">
+		<div class="block-title">
+			<h2>Change Payment Method</h2>
+		</div>
+		<div class="block-content">
+			<?php echo $this->getChildHtml("payment") ?>
+		</div>
+	</div>
+
+</div>
+<script type="text/javascript">
+//<![CDATA[
+	$j(function(){
+    	if($j('input[name="payment[method]"]').size() == 1){
+        	$j('input[name="payment[method]"]').parent('dt').hide();
+        	$j('input[name="payment[method]"]').click();
+    	}
+    	$j('input[name="payment[method]"]').on('change', function(){
+        	hideCcForm();
+    	});
+    	hideCcForm();
+	});
+	function hideCcForm(){
+    	if($j("#p_method_authnettoken").is("input")){
+            $j(".new-cc-form-list").toggle($j("#p_method_authnettoken").is(":checked"));
+    	}
+	}
+//]]>
+</script>

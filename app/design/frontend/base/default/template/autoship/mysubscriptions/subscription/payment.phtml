@@ -1,0 +1,49 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @author    Dennis Rogers <dennis@storefrontconsulting.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+<?php
+$subscription = $this->getSubscription();
+?>
+<div class="block subscription-payment">
+    <p><strong>Payment Information:</strong></p>
+    <?php if (strlen($subscription->getData('payment_token'))): ?>
+        <p>Credit card ending in <?php echo $subscription->getData('creditcard_last_digits') ?> <a class="change" href="">(Change)</a></p>
+        <p><a href="<?php echo $this->getNewCardUrl() ?>">Add a new credit card</a></p>
+    <?php else: ?>
+        <p>Haven't saved a credit card yet? <a href="<?php echo $this->getNewCardUrl() ?>">Add one now</a>.</p>
+    <?php endif; ?>
+
+    <input type="text" id="payment_token" name="payment_token" value="<?php echo $subscription->getData('payment_token') ?>"
+           class="input-text" style="display:none;"/>
+
+    <div class="change" style="display:none;">
+        <div class="block-title">
+            <h2>Change Payment Method</h2>
+        </div>
+        <div class="block-content">
+            <?php
+            // Output payment form
+            echo $this->getLayout()->createBlock('autoship/mysubscriptions_subscription_form_payment')
+                ->setParentBlock($this)
+                ->setTemplate('autoship/subscription/form/payment.phtml')
+                ->setSubscription($this->getSubscription())
+                ->toHtml();
+            ?>
+        </div>
+    </div>
+</div>

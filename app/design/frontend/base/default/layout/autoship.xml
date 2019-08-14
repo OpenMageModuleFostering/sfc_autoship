@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+-->
+<layout version="0.1.0">
+
+	<!-- My Product Subscriptions page -->
+	<autoship_mysubscriptions_index>
+		<label>My Product Subscriptions</label>
+		<update handle="customer_account" />
+
+		<reference name="head">
+			<action method="addCss"><stylesheet>css/autoship.css</stylesheet></action>
+			<action method="addItem"><type>skin_js</type><name>js/autoship/jquery/jquery-1.10.1.min.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/autoship/jquery/ui/jquery.ui.core.min.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/autoship/jquery/ui/jquery.ui.datepicker.min.js</name></action>
+			<action method="addItem"><type>skin_css</type><name>js/autoship/jquery/ui/theme/jquery-ui.css</name></action>
+
+			<action method="addItem"><type>skin_js</type><name>js/autoship/jquery/noconflict.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/autoship/mysubscription.js</name></action>
+
+            <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params/><!--<if/><condition>can_load_calendar_js</condition>--></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+		</reference>
+
+        <reference name="customer_account_navigation">
+            <action method="setActive"><path>autoship/mysubscriptions/</path></action>
+        </reference>
+
+		<reference name="my.account.wrapper">
+			<block type="autoship/mysubscriptions" name="mysubscriptions" template="autoship/mysubscriptions.phtml" />
+        </reference>
+	</autoship_mysubscriptions_index>
+
+	<!-- Customer dashboard link -->
+	<customer_account>
+		<reference name="customer_account_navigation">
+			<action method="addLink" translate="label" module="autoship" ifconfig="autoship_general/general/enabled">
+                <name>mysubscriptions</name>
+                <path>autoship/mysubscriptions/</path>
+                <label>My Product Subscriptions</label>
+            </action>
+		</reference>
+	</customer_account>
+
+	<!-- New Subscription page -->
+	<autoship_newsubscription_index>
+		<label>Create New Product Subscription</label>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+
+		<reference name="head">
+			<action method="addCss"><stylesheet>css/autoship.css</stylesheet></action>
+			<action method="addItem"><type>skin_js</type><name>js/autoship/jquery/jquery-1.10.1.min.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/autoship/jquery/ui/jquery.ui.core.min.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/autoship/jquery/ui/jquery.ui.datepicker.min.js</name></action>
+			<action method="addItem"><type>skin_css</type><name>js/autoship/jquery/ui/theme/jquery-ui.css</name></action>
+
+			<action method="addItem"><type>skin_js</type><name>js/autoship/jquery/noconflict.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/autoship/newsubscription.js</name></action>
+
+            <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params/><!--<if/><condition>can_load_calendar_js</condition>--></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+		</reference>
+
+        <reference name="content">
+			<block type="autoship/newsubscription" name="newsubscription" template="autoship/newsubscription.phtml" >
+				<block type="autoship/newsubscription" name="newsubscription.product_info" template="autoship/newsubscription/product_info.phtml" />
+				<block type="autoship/newsubscription" name="newsubscription.delivery_date" template="autoship/newsubscription/delivery_date.phtml">
+                    <block type="core/html_calendar" name="html_calendar" as="html_calendar" template="page/js/calendar.phtml"/>
+				</block>
+				<block type="autoship/newsubscription" name="newsubscription.delivery_frequency" template="autoship/newsubscription/delivery_frequency.phtml" />
+				<block type="autoship/newsubscription" name="newsubscription.payment" template="autoship/newsubscription/payment.phtml">
+					<block type="autoship/newsubscription_form_payment" name="payment" template="autoship/subscription/form/payment.phtml" />
+                </block>
+				<block type="autoship/newsubscription" name="newsubscription.billing_address" template="autoship/newsubscription/billing_address.phtml">
+				    <block type="autoship/newsubscription_form_billing" name="billing_address_select" template="autoship/subscription/form/billing.phtml"/>
+				</block>
+				<block type="autoship/newsubscription" name="newsubscription.shipping_address" template="autoship/newsubscription/shipping_address.phtml">
+				    <block type="autoship/newsubscription_form_shipping" name="shipping_address_select" template="autoship/subscription/form/shipping.phtml"/>
+				</block>
+				<block type="autoship/newsubscription" name="newsubscription.summary" template="autoship/newsubscription/summary.phtml" />
+			</block>
+        </reference>
+
+	</autoship_newsubscription_index>
+
+    <!-- This layout handle handles all ajax controllers that update new subscription page contents -->
+    <autoship_newsubscription_update>
+        <remove name="right"/>
+        <remove name="left"/>
+
+    	<block type="autoship/newsubscription" name="root" output="toHtml" template="autoship/newsubscription/ajax_update.phtml">
+            <block type="autoship/newsubscription" name="newsubscription.delivery_date" template="autoship/newsubscription/delivery_date.phtml">
+                <block type="core/html_calendar" name="html_calendar" as="html_calendar" template="page/js/calendar.phtml"/>
+            </block>
+            <block type="autoship/newsubscription" name="newsubscription.delivery_frequency" template="autoship/newsubscription/delivery_frequency.phtml" />
+            <block type="autoship/newsubscription" name="newsubscription.payment" template="autoship/newsubscription/payment.phtml">
+                <block type="autoship/newsubscription_form_payment" name="payment" template="autoship/subscription/form/payment.phtml" />
+            </block>
+            <block type="autoship/newsubscription" name="newsubscription.billing_address" template="autoship/newsubscription/billing_address.phtml">
+                <block type="autoship/newsubscription_form_billing" name="billing_address_select" template="autoship/subscription/form/billing.phtml"/>
+            </block>
+            <block type="autoship/newsubscription" name="newsubscription.shipping_address" template="autoship/newsubscription/shipping_address.phtml">
+                <block type="autoship/newsubscription_form_shipping" name="shipping_address_select" template="autoship/subscription/form/shipping.phtml"/>
+            </block>
+            <block type="autoship/newsubscription" name="newsubscription.summary" template="autoship/newsubscription/summary.phtml" />
+        </block>
+	</autoship_newsubscription_update>
+
+	<autoship_newsubscription_paymentsave>
+        <update handle="autoship_newsubscription_update"/>
+	</autoship_newsubscription_paymentsave>
+
+	<autoship_newsubscription_billingsave>
+        <update handle="autoship_newsubscription_update"/>
+	</autoship_newsubscription_billingsave>
+
+	<autoship_newsubscription_shippingsave>
+        <update handle="autoship_newsubscription_update"/>
+	</autoship_newsubscription_shippingsave>
+
+<!--
+Product view
+-->
+
+    <catalog_product_view>
+	    <reference name="head">
+			<action method="addCss"><stylesheet>css/autoship.css</stylesheet></action>
+		</reference>
+
+    	<!-- Create subscribe and autoship block in product info area -->
+        <reference name="product.info">
+        	<block type="autoship/product_subscribe" name="product.info.subscribe" as="product.info.subscribe" template="autoship/product/subscribe.phtml"/>
+		</reference>
+
+    	<!-- Insert block into correct location in product info with insert method -->
+		<reference name="product.info.options.wrapper.bottom">
+			<action method="insert"><block>product.info.subscribe</block><siblingName>product.info.addtocart</siblingName></action>
+		</reference>
+
+    	<!-- Replace addtocart.phtml template with ours -->
+		<reference name="product.info.addtocart">
+			<action method="setTemplate"><template>autoship/product/view/addtocart.phtml</template></action>
+		</reference>
+
+    </catalog_product_view>
+
+    <!-- Add subscription features to cart page -->
+    <checkout_cart_index>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/autoship.css</stylesheet></action>
+        </reference>
+        <reference name="additional.product.info">
+            <block type="autoship/cart_product_subscription" name="autoship.product.subscription" template="autoship/cart/product/subscription.phtml"/>
+        </reference>
+    </checkout_cart_index>
+
+    <!-- Add message about subscriptions to checkout success page -->
+    <checkout_onepage_success translate="label">
+        <reference name="checkout.success">
+            <block type="core/template" name="checkout.success.subscriptions" template="autoship/checkout/success.phtml"/>
+        </reference>
+    </checkout_onepage_success>
+
+    <!-- Payment Profile grid-->
+    <autoship_mycreditcards_index>
+        <label>Payment Profiles</label>
+        <update handle="customer_account"/>
+        <reference name="customer_account_navigation">
+            <action method="setActive">
+                <path>subscriptions/mycreditcards/</path>
+            </action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="autoship/payment_profile_grid" name="payment_profile_index"
+                   template="autoship/payment/profile/grid.phtml"/>
+        </reference>
+    </autoship_mycreditcards_index>
+
+    <!-- Payment Profile customer dashboard link -->
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="autoship" ifconfig="payment/subscribe_pro/active">
+                <name>mycreditcards</name>
+                <path>subscriptions/mycreditcards/</path>
+                <label>My Credit Cards</label>
+            </action>
+        </reference>
+    </customer_account>
+
+    <!-- Edit Payment Profile -->
+    <autoship_mycreditcards_edit>
+        <label>Edit Payment Profile</label>
+        <update handle="customer_account"/>
+        <reference name="customer_account_navigation">
+            <action method="setActive">
+                <path>subscriptions/mycreditcards/</path>
+            </action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="autoship/payment_profile_edit" name="payment_profile_edit"
+                   template="autoship/payment/profile/edit.phtml">
+            </block>
+        </reference>
+    </autoship_mycreditcards_edit>
+
+    <!-- New Payment Profile -->
+    <autoship_mycreditcards_new>
+        <label>New Payment Profile</label>
+        <update handle="customer_account"/>
+        <reference name="customer_account_navigation">
+            <action method="setActive">
+                <path>subscriptions/mycreditcards/</path>
+            </action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="autoship/payment_profile_edit" name="payment_profile_edit"
+                   template="autoship/payment/profile/new.phtml">
+            </block>
+        </reference>
+    </autoship_mycreditcards_new>
+
+    <!-- Include transparent redirect javascript in one page checkout -->
+    <checkout_onepage_index>
+        <reference name="head">
+            <action method="addItem" ifconfig="payment/subscribe_pro/use_transparent_redirect"><type>skin_js</type><name>js/autoship/jquery/jquery-1.10.1.min.js</name></action>
+            <action method="addItem" ifconfig="payment/subscribe_pro/use_transparent_redirect"><type>skin_js</type><name>js/autoship/jquery/noconflict.js</name></action>
+        </reference>
+        <reference name="content">
+            <block type="autoship/checkout_jsonp" name="jsonp" template="autoship/checkout/jsonp.phtml" after="-"/>
+            <block type="autoship/checkout_jsonp" name="serversideapi" template="autoship/checkout/serversideapi.phtml" after="-"/>
+        </reference>
+    </checkout_onepage_index>
+
+</layout>

@@ -1,0 +1,69 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+<?php
+$subscription = $this->getSubscription();
+$summary = $this->getSummary();
+$coreHelper = $this->helper('core');
+?>
+
+<div class="block-title">
+	<h2>Estimated Order Summary</h2>
+</div>
+<ul class="messages"></ul>
+<div class="box-padding">
+    <?php // If $summary is an array, it has totals, otherwise it's a string with error message ?>
+	<?php if (is_array($summary)): ?>
+	<p>The following are the estimated costs for each of your shipments:</p>
+	<div class="subscription-summary-table">
+		<table>
+			<tbody>
+				<tr>
+					<td class="a-right">Product Total</td>
+					<td class="a-right"><?php echo $coreHelper->currency($summary['product_total'], true, false); ?></td>
+				</tr>
+                <tr>
+                    <td class="a-right">Subscription Discount</td>
+                    <td class="a-right"><?php echo $coreHelper->currency($summary['discount'], true, false); ?></td>
+                </tr>
+                <tr>
+                    <td class="a-right">Shipping</td>
+                    <td class="a-right"><?php echo $coreHelper->currency($summary['shipping'], true, false); ?></td>
+                </tr>
+				<tr>
+					<td class="a-right">Tax</td>
+					<td class="a-right"><?php echo $coreHelper->currency($summary['tax'], true, false); ?></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td class="a-right"><strong>Estimated Order Total</strong></td>
+					<td class="a-right"><strong><span class="price"><?php echo $coreHelper->currency($summary['total'], true, false); ?></span></strong></td>
+				</tr>
+			</tfoot>
+		</table>
+	</div><!-- subscription-summary-table -->
+	<div style="clear:both;"></div>
+    <?php // If $summary is an array, it has totals, otherwise it's a string with error message ?>
+	<?php else: ?>
+	<p><?php echo $summary ?></p>
+	<?php endif; ?>
+</div><!-- end box-padding -->
+<div class="subscribe-button-block">
+	<?php $buttonTitle = $this->__('Subscribe Now'); ?>
+	<button type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" id="subscribe" href="<?php echo $this->getPostActionUrl() ?>"><span><span><?php echo $buttonTitle ?></span></span></button>
+</div><!-- end subscribe-button-block -->

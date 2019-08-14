@@ -1,0 +1,75 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @author    Dennis Rogers <dennis@storefrontconsulting.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+<?php if(Mage::getStoreConfig('autoship_general/general/enabled') == '1'): ?>
+<?php if(Mage::getStoreConfig('autoship_subscription/subscription/use_new_subscription_page') != '1'): ?>
+<?php $quoteItem = $this->getQuoteItem(); ?>
+<?php if ($this->isItemSubscriptionEligible()): ?>
+    <div class="subscription-product">
+    		<p><?php echo $this->__('Would you like to receive regular shipments of this item?') ?></p>
+        <ul class="options-list">
+            <li>
+                <input type="radio" onclick="" class="radio"
+                       onchange="this.form.submit();"
+                       id="<?php echo $quoteItem->getId() ?>-delivery-option-one-time"
+                       name="cart[<?php echo $quoteItem->getId() ?>][delivery-option]"
+                       value="one-time-delivery"
+                       <?php if (!$this->isItemFlaggedToCreateNewSubscription()): ?>checked="checked"<?php endif; ?>
+                    />
+
+                <div class="radio-text">
+		            <span class=label>
+			            <label for="delivery-option-one-time">One Time Delivery</label>
+		            </span>
+                </div>
+                <div class="clearer"></div>
+            </li>
+            <li>
+                <input type="radio" onclick="" class="radio"
+                       onchange="this.form.submit();"
+                       id="<?php echo $quoteItem->getId() ?>-delivery-option-subscribe"
+                       name="cart[<?php echo $quoteItem->getId() ?>][delivery-option]" value="subscribe"
+                       <?php if ($this->isItemFlaggedToCreateNewSubscription()): ?>checked="checked"<?php endif; ?>
+                    />
+
+                <div class="radio-text">
+		            <span class=label>
+                        <label for="delivery-option-subscribe">Regular Delivery</label>
+		            </span>
+
+                    <p>
+                        <label for="delivery-interval">Delivery every:</label><br/>
+                        <select onchange=""
+                                id="<?php echo $quoteItem->getId() ?>-delivery-interval"
+                                name="cart[<?php echo $quoteItem->getId() ?>][delivery-interval]"
+                                class="">
+                            <?php foreach ($this->getIntervals() as $interval): ?>
+                                <option value="<?php echo $interval ?>" <?php if($interval == $this->getNewSubscriptionInterval()): ?>selected="selected"<?php endif; ?>>
+                                    <?php echo $interval ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </p>
+                </div>
+                <div class="clearer"></div>
+            </li>
+        </ul>
+    </div>
+<?php endif; ?>
+<?php endif; ?>
+<?php endif; ?>

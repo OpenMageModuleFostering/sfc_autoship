@@ -1,0 +1,65 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @author    Dennis Rogers <dennis@storefrontconsulting.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+<?php
+$productId = $this->getProduct()->getId();
+?>
+<?php if (Mage::getStoreConfig('autoship_general/general/enabled') == '1'): ?>
+    <?php if (Mage::getStoreConfig('autoship_subscription/subscription/use_new_subscription_page') != '1'): ?>
+        <?php if ($this->isProductAutoshipEligible()): ?>
+            <div class="subscription-product">
+                <ul class="options-list">
+                    <li>
+                        <input type="radio" onclick="" class="radio" id="delivery-option-one-time" name="delivery-option[<?php echo $productId ?>]"
+                               value="one-time-delivery"/>
+
+                        <div class="radio-text">
+                    		<span class=label>
+			                    <label for="delivery-option-one-time">One Time Delivery</label>
+		                    </span>
+
+                            <p><span class="price">Price: <?php echo $this->getOneTimePurchasePrice(true) ?></span></p>
+                        </div>
+                        <div class="clearer"></div>
+                    </li>
+                    <li>
+                        <div class="radio-text">
+                            <input type="radio" onclick="" class="radio" id="delivery-option-subscribe" name="delivery-option[<?php echo $productId ?>]"
+                               value="subscribe" checked="checked"/>
+		                        <span class=label>
+                                    <label for="delivery-option-subscribe">Regular Delivery</label>
+		                        </span>
+
+                                <p><span class="product-price"><?php echo $this->getDiscountText() ?></span></p>
+
+                                <p>
+                                    <label for="delivery-interval">Delivery every:</label><br/>
+                                    <select onchange="" id="delivery-interval" name="delivery-interval[<?php echo $productId ?>]" class="">
+                                        <?php foreach ($this->getIntervals() as $interval): ?>
+                                            <option value="<?php echo $interval ?>"><?php echo $interval ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </p>
+                            </div>
+                        <div class="clearer"></div>
+                    </li>
+                </ul>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+<?php endif; ?>

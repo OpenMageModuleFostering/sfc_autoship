@@ -1,0 +1,89 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+<?php $paymentProfiles = $this->getPaymentProfiles() ?>
+<div class="page-title">
+    <h1>My Credit Cards</h1>
+</div>
+
+<fieldset>
+    <div class="pager">
+        <p class="amount">
+            <?php echo count($paymentProfiles); ?> Item(s)
+        </p>
+    </div>
+    <table class="data-table" id="cc-table">
+        <thead>
+        <tr class="first last">
+            <th>Card Number</th>
+            <th>Billing Customer Name</th>
+            <th>Edit / Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php $i= 0; ?>
+        <?php foreach($paymentProfiles as $profile) : ?>
+            <?php $billingAddress = $profile->getData('billing_address'); ?>
+            <?php if($i % 2 == 0) { $row = 'even'; } else { $row='odd'; } ?>
+            <tr class="<?php echo $row; ?>">
+                <td>
+                    <?php $card = 'XXXX' . $profile->getData('creditcard_last_digits') ?>
+                    <?php echo $card ?>
+                </td>
+                <td>
+                    <?php echo $billingAddress->getData('first_name') . ' ' . $billingAddress->getData('last_name'); ?>
+                </td>
+                <td>
+                    <span><a href="<?php echo Mage::getUrl('subscriptions/mycreditcards/edit'); ?>id/<?php echo $profile->getId() ?>"><b>Edit</b></a></span> |
+                    <span><a href="#" class="link-reorder" onclick="confirmDelete(<?php echo $profile->getId() ?>)"> Delete</a></span>
+                </td>
+            </tr>
+            <?php $i++; ?>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+    <div class="pager">
+        <p class="amount">
+            <?php echo count($paymentProfiles); ?> Item(s)
+        </p>
+    </div>
+</fieldset>
+
+<br/>
+
+<div class="buttons-set form-buttons">
+    <p class="back-link"><a href="<?php echo Mage::getUrl('customer/account/'); ?>"><small>&#171;</small> Back</a></p>
+    <button type="submit" class="button" title="Save" onclick="window.location.href='<?php echo Mage::getUrl('subscriptions/mycreditcards/new'); ?>customerid/<?php echo Mage::getSingleton('customer/session')->getCustomer()->getId() ?>'">
+        <span><span>New Credit Card</span></span>
+    </button>
+</div>
+<script type="text/javascript">
+    function confirmDelete(id)
+    {
+        var x;
+        var r=confirm("Are you sure you want to delete this credit card?");
+        if (r==true)
+        {
+            window.location="<?php echo Mage::getUrl('subscriptions/mycreditcards/delete'); ?>id/" + id;
+        }
+        else
+        {
+            return false;
+        }
+    }
+</script>
+

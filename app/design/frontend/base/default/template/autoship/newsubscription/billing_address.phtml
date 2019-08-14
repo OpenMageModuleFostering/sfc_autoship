@@ -1,0 +1,51 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+<?php
+$subscription = $this->getSubscription();
+$billingAddress = $subscription->getBillingAddress();
+?>
+
+<div class="block-title">
+	<h2>Billing Address</h2>
+</div>
+
+<div class="box-padding">
+	<p>Please select the address associated with your payment method: <a class="change" href="">(Change)</a></p>
+
+	<address>
+	<?php echo $billingAddress->getFirstname() ?> <?php echo $billingAddress->getLastname() ?><br/>
+	<?php if(strlen($billingAddress->getCompany())): ?>
+	<?php echo $billingAddress->getCompany() ?><br/>
+	<?php endif; ?>
+	<?php foreach($billingAddress->getStreet() as $street): ?>
+	<?php echo $street ?><br/>
+	<?php endforeach; ?>
+	<?php echo $billingAddress->getCity() ?>, <?php echo $billingAddress->getRegion() ?> <?php echo $billingAddress->getPostcode() ?><br/>
+	</address>
+
+	<input type="text" id="billing_address_id" name="billing_address_id" value="<?php echo $billingAddress->getId() ?>"  class="input-text" style="display:none;" />
+
+	<div class="change">
+		<div class="block-title">
+			<h2>Change Billing Address</h2>
+		</div>
+		<div class="block-content">
+    		<?php echo $this->getChildHtml("billing_address_select") ?>
+		</div>
+	</div>
+</div>

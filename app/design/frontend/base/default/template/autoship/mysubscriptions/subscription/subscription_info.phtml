@@ -1,0 +1,95 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @author    Dennis Rogers <dennis@storefrontconsulting.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+<?php
+$subscription = $this->getSubscription();
+$platformProduct = $subscription->getPlatformProduct();
+$qty = $subscription->getQty();
+$intervals = $this->getIntervals();
+?>
+<div class="subscription-info">
+    <form class="interval" action="<?php echo Mage::getUrl('autoship/mysubscriptions/change', array('_secure' => true)) ?>">
+        <?php if ($this->getNextOrderDateMode() == SFC_Autoship_Model_System_Config_Source_Nextorderdatemode::MODE_MULTIPLE_DATES): ?>
+            <p>Next Ship Date:</p>
+            <?php if ($subscription->getStatus() == 'Active' && $subscription->getNextOrderDate() >= date('Y-m-d', strtotime('+2 days'))
+            ): ?>
+                <?php // Only allow change of next ship date if its more than 2 days in the future ?>
+                <div class="input-box">
+                    <input type="text" id="delivery_date_<?php echo $subscription->getSubscriptionId() ?>"
+                           name="delivery_date"
+                           value="<?php echo $subscription->getNextOrderDateText() ?>"
+                           title="<?php echo $this->__('Next Ship Date:') ?>" class="input-text delivery_date"/>
+                </div>
+            <?php
+            elseif ($subscription->getStatus() == 'Active' && $subscription->getNextOrderDate() < date('Y-m-d', strtotime('+2 days'))
+            ): ?>
+                <p><span class="next-order-date"><strong><?php echo $subscription->getNextOrderDateText() ?></strong></span></p>
+            <?php
+            else: ?>
+                <p><span class="next-order-date"><strong><?php echo 'n/a' ?></strong></span></p>
+            <?php endif; ?>
+        <?php endif; ?>
+        <?php if ($subscription->getStatus() == 'Active' || $subscription->getStatus() == 'Failed' || $subscription->getStatus() == 'Retry'): ?>
+            <p>
+                <input type="hidden" name="id" id="subscription_id_<?php echo $subscription->getSubscriptionId() ?>"
+                       value="<?php echo $subscription->getSubscriptionId() ?>"/>
+                <select id="delivery_qty_<?php echo $subscription->getSubscriptionId() ?>"
+                        name="delivery_qty" class="delivery_qty" title="Quantity">
+                    <?php if ($qty < $platformProduct->getMinQty()): ?>
+                        <option value="<?php echo $qty ?>" selected="selected"><?php echo $qty ?></option>
+                    <?php endif; ?>
+                    <?php for ($i = $platformProduct->getMinQty(); $i <= $platformProduct->getMaxQty(); $i++): ?>
+                        <option value="<?php echo $i ?>"
+                                <?php if ($qty == $i): ?>selected="selected"<?php endif; ?>><?php echo $i ?></option>
+                    <?php endfor; ?>
+                    <?php if ($qty > $platformProduct->getMaxQty()): ?>
+                        <option value="<?php echo $qty ?>" selected="selected"><?php echo $qty ?></option>
+                    <?php endif; ?>
+                </select>
+                unit(s) every
+                <select id="delivery_interval_<?php echo $subscription->getSubscriptionId() ?>"
+                        name="delivery_interval" class="delivery_interval" title="Delivery Interval">
+                    <?php foreach ($intervals as $interval): ?>
+                        <option value="<?php echo $interval ?>" <?php if ($interval ==
+                        $subscription->getInterval()): ?>selected="selected"<?php endif; ?>><?php echo $interval ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </p>
+        <?php endif; ?>
+    </form>
+</div>
+<?php if ($this->getNextOrderDateMode() == SFC_Autoship_Model_System_Config_Source_Nextorderdatemode::MODE_MULTIPLE_DATES): ?>
+<script type="text/javascript">
+    //<![CDATA[
+    $j(function () {
+        $j("#delivery_date_<?php echo $subscription->getSubscriptionId() ?>").datepicker({
+            minDate: 2,
+            showOn: "button",
+            buttonImage: "<?php echo $this->getSkinUrl('images/autoship/calendar_icon.png')?>",
+            buttonImageOnly: true,
+            buttonText: "Click to change date.",
+            dateFormat: "mm/dd/y",
+            onSelect: function () {
+                var form = $j(this).closest("form");
+                updateMySubscription(form);
+            }
+        })
+    });
+    //]]>
+</script>
+<?php endif; ?>

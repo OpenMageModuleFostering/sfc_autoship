@@ -1,0 +1,64 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @author    Dennis Rogers <dennis@storefrontconsulting.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+<ul class="messages"></ul>
+<form id="co-payment-form" class="payment-form" action="<?php echo $this->getSubmitUrl() ?>">
+<input type="hidden" name="id" id="subscription_id_<?php echo $this->getSubscription()->getSubscriptionId() ?>"
+    value="<?php echo $this->getSubscription()->getSubscriptionId() ?>"/>
+<fieldset>
+<dl>
+
+<?php
+	// Get saved credit cards
+	$savedCards = $this->getSavedCards();
+    $selectedCard = $this->getCurrentCard();
+?>
+<?php foreach ($savedCards as $card): ?>
+<dt>
+    	<?php $curMethodName = 'Use my Saved Card Ending in ' . $card['creditcard_last_digits']; ?>
+        <input
+        	id="payment_token_<?php echo $card['payment_token'] ?>"
+        	value="<?php echo $card['payment_token'] ?>"
+        	type="radio" name="payment[method]"
+        	title="<?php echo $this->htmlEscape($curMethodName) ?>"
+        	onclick=""
+        	class="radio"
+        	<?php if($card['payment_token'] == $selectedCard['payment_token']): ?>checked="checked"<?php endif; ?> />
+        <label for="payment_token_<?php echo $card['payment_token'] ?>">
+        	<?php echo $this->escapeHtml($curMethodName) ?><?php if (strlen($card['edit_url'])): ?> <a href="<?php echo $card['edit_url'] ?>">(Edit)</a><?php endif; ?>
+        </label>
+</dt>
+<dd>
+    <ul class="form-list" id="payment_form_<?php echo $card['payment_token'] ?>" style="display:none;">
+        <li>
+            <input type="hidden" id="<?php echo $card['payment_token'] ?>_creditcard_last_digits"
+                   name="payment[creditcard_last_digits][<?php echo $card['payment_token'] ?>]"
+                   value="<?php echo $card['creditcard_last_digits'] ?>" />
+        </li>
+    </ul>
+</dd>
+<?php endforeach; ?>
+</dl>
+<div class="buttons-set" id="billing-buttons-container">
+    <button type="submit" title="<?php echo $this->__('Continue') ?>" class="button"><span><span><?php echo $this->__('Continue') ?></span></span></button>
+    <span class="please-wait" id="billing-please-wait" style="display:none;">
+        <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Updating...') ?>" title="<?php echo $this->__('Updating...') ?>" class="v-middle" /> <?php echo $this->__('Updating...') ?>
+    </span>
+</div>
+</fieldset>
+</form>

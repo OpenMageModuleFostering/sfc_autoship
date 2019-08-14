@@ -1,0 +1,47 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+<?php $_product = $this->getProduct(); ?>
+<?php if(Mage::getStoreConfig('autoship_general/general/enabled') == '1'): ?>
+<?php $_useNewSubPage = Mage::getStoreConfig('autoship_subscription/subscription/use_new_subscription_page') == '1'; ?>
+<?php // Do autoship version of add to cart block? ?>
+<?php if($_useNewSubPage && $this->isProductAutoshipEligible()): ?>
+<?php $buttonTitle = $this->__('Subscribe Now'); ?>
+<?php if($_product->isSaleable()): ?>
+    <div class="add-to-cart" id="subscribe" style="display:none;">
+        <?php if(!$_product->isGrouped()): ?>
+        <label for="qty"><?php echo $this->__('Qty:') ?></label>
+        <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+        <?php endif; ?>
+        <button id="subscribe_button" type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick=""><span><span><?php echo $buttonTitle ?></span></span></button>
+        <?php echo $this->getChildHtml('', true, true) ?>
+    </div>
+<?php endif; ?>
+<?php endif; ?>
+<?php endif; ?>
+<?php // Spit out regular version of add to cart block? ?>
+<?php $buttonTitle = $this->__('Add to Cart'); ?>
+<?php if($_product->isSaleable()): ?>
+    <div class="add-to-cart" id="add_to_cart">
+        <?php if(!$_product->isGrouped()): ?>
+        <label for="qty"><?php echo $this->__('Qty:') ?></label>
+        <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+        <?php endif; ?>
+        <button type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
+        <?php echo $this->getChildHtml('', true, true) ?>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,415 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+-->
+<config>
+    <tabs>
+        <autoship translate="label" module="autoship">
+            <label>Subscribe Pro</label>
+            <sort_order>200</sort_order>
+        </autoship>
+    </tabs>
+    <sections>
+        <autoship_general translate="label" module="autoship">
+            <label>General</label>
+            <tab>autoship</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Subscription Features Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Enable/Disable Subscriptions features.</comment>
+                        </enabled>
+                    </fields>
+                </general>
+                <platform_api translate="label">
+                    <label>Subscribe Pro Platform API Connection</label>
+                    <sort_order>300</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <test_connection translate="label">
+                            <label>Test Connection</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>autoship/adminhtml_system_config_form_testConnectionButton</frontend_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </test_connection>
+                        <platform_host translate="label">
+                            <label>Platform Hostname</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </platform_host>
+                        <client_id translate="label">
+                            <label>Client Id</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </client_id>
+                        <client_secret translate="label">
+                            <label>Client Secret</label>
+                            <frontend_type>obscure</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </client_secret>
+                        <log_request translate="label">
+                            <label>Log Platform API Requests</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>When this settings is enabled, you should also enable Magento's general logging under System > Configuration > Developer > Log Settings.  NOTE: This should only be enabled on non-production systems. The request data can include sensitive customer data and your account credentials!</comment>
+                        </log_request>
+                    </fields>
+                </platform_api>
+                <advanced translate="label">
+                    <label>Advanced</label>
+                    <sort_order>500</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <cache_lifetime translate="label">
+                            <label>API Data Cache Lifetime</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Enter cache lifetime value in seconds.  DEFAULT: 300 seconds</comment>
+                        </cache_lifetime>
+                    </fields>
+                </advanced>
+            </groups>
+        </autoship_general>
+        <autoship_subscription translate="label" module="autoship">
+            <label>Subscriptions</label>
+            <tab>autoship</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>200</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <options translate="label">
+                    <label>Subscription Mode</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <next_order_date_mode translate="label">
+                            <label>Allow Single or Multiple Subscription Order Dates</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>autoship/system_config_source_nextorderdatemode</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Should customer be allowed to place subscriptions on multiple days or should all subscriptions be
+                                combined to a single order date.
+                            </comment>
+                        </next_order_date_mode>
+                        <allow_coupon translate="label">
+                            <label>Save Coupons With Subscriptions</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Allow coupons to be added when a customer creates a new subscription using the New Subscription
+                                page and saved with subscriptions created during the checkout process.
+                            </comment>
+                        </allow_coupon>
+                    </fields>
+                </options>
+                <discount translate="label">
+                    <label>Subscription Discount</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>110</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <apply_discount_to_catalog_price translate="label">
+                            <label>Apply Discount To Catalog Price</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Apply subscription discount when catalog price rule or special price discount is in effect.
+                            </comment>
+                        </apply_discount_to_catalog_price>
+                        <cartrule_combine_type translate="label">
+                            <label>Cart Rule Combine Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>autoship/system_config_source_cartrulediscountcombinetype</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Specify how to combine the subscription discount with any shopping cart price rules or coupon code
+                                discounts.
+                            </comment>
+                        </cartrule_combine_type>
+                    </fields>
+                </discount>
+                <subscription translate="label">
+                    <label>New Subscription Page</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>120</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>DO NOT USE NEW SUBSCRIPTION PAGE UNLESS INSTRUCTED TO DO SO BY SUBSCRIBE PRO SUPPORT!  This is a legacy feature only.</comment>
+                    <fields>
+                        <use_new_subscription_page translate="label">
+                            <label>Use New Subscription Page</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Use the New Subscription page as the default method for customers to create new subscriptions.
+                                "Create Subscription" button will appear on product details page, button will redirect customers to New
+                                Subscription page.
+                            </comment>
+                        </use_new_subscription_page>
+                        <shipping_method translate="label">
+                            <label>Subscription Shipping Method</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>autoship/system_config_source_shippingmethods</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Select the single shipping method which shall be used for Subscribe Pro subscription orders placed
+                                via the New Subscription page. NOTE: Order placed through cart / checkout ordering process will be
+                                eligible for any shipping method available in the Magento checkout process.
+                            </comment>
+                        </shipping_method>
+                        <shipping_method_onetime_enabled translate="label">
+                            <label>Allow Method for One-Time Purchases</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Should the shipping method selected above for subscription orders be enabled or disabled for
+                                one-time purchase checkouts by customers?
+                            </comment>
+                        </shipping_method_onetime_enabled>
+                    </fields>
+                </subscription>
+            </groups>
+        </autoship_subscription>
+        <payment>
+            <groups>
+                <subscribe_pro translate="label" module="autoship">
+                    <label>Subscribe Pro Vault</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment></comment>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <active_non_subscription translate="label">
+                            <label>Enabled for Non-Subscription Transactions</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active_non_subscription>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <payment_action translate="label">
+                            <label>Payment Action</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>paygate/authorizenet_source_paymentAction</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </payment_action>
+                        <order_status translate="label">
+                            <label>New Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_processing</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status>
+                        <cctypes translate="label">
+                            <label>Credit Card Types</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>paygate/authorizenet_source_cctype</source_model>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </cctypes>
+                        <useccv translate="label">
+                            <label>Credit Card Verification (CVV) Field Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>46</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>NOTE: CVV field is always shown in Admin panel ordering interface.  This configuration setting turns the CVV field on and off for the customer-facing frontend features.</comment>
+                        </useccv>
+                        <currency translate="label">
+                            <label>Accepted Currency</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_currency</source_model>
+                            <sort_order>49</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>One currency per Magento website must be selected.  NOTE: Magento's currency conversion feature can be used to display values in multiple currencies, but payment transactions and orders will only be placed in the single base currency for the website.</comment>
+                        </currency>
+                        <allowspecific translate="label">
+                            <label>Payment from Applicable Countries</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <sort_order>50</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Payment from Specific Countries</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>51</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </specificcountry>
+                        <min_order_total translate="label">
+                            <label>Minimum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>98</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </min_order_total>
+                        <max_order_total translate="label">
+                            <label>Maximum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>99</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </max_order_total>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sort_order>
+                        <allow_guest_checkout translate="label">
+                            <label>Allow Guest Checkout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </allow_guest_checkout>
+                        <checkout_save_card_checkbox translate="label">
+                            <label>Enable "Save Card" Checkbox during Checkout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </checkout_save_card_checkbox>
+                        <use_transparent_redirect translate="label">
+                            <label>Use Transparent Redirect / JSONP For Checkout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>If this feature is disabled, it can significantly increase your PCI compliance requirements since sensitive cardholder data will be touching your servers.</comment>
+                        </use_transparent_redirect>
+                    </fields>
+                </subscribe_pro>
+            </groups>
+        </payment>
+    </sections>
+</config>

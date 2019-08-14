@@ -1,0 +1,65 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+<?php if (Mage::getStoreConfig('payment/subscribe_pro/active') == '1'): ?>
+    <?php if (Mage::getStoreConfig('payment/subscribe_pro/use_transparent_redirect') != '1'): ?>
+        <script type="text/javascript">
+            document.observe('dom:loaded', pageInit);
+            function pageInit() {
+                // Replace payment save function
+                payment.save = function () {
+                    if (this.currentMethod != 'subscribe_pro') {
+                        // Call original payment save function
+                        return Payment.prototype.save.call(this);
+                    }
+                    // Save this ref so we can use to call original payment.save method
+                    var paymentSaveThis = this;
+                    // Check if we are already running and return immediately if so
+                    if (checkout.loadWaiting != false)
+                        return;
+                    // Check if we already have a tokenized card
+                    var cardAlreadyTokenized =
+                            $('subscribe_pro_payment_token').value.length > 0 &&
+                            $('subscribe_pro_cc_number').value.indexOf('XXXXXX') >= 0
+                        ;
+                    // Check if card is already tokenized
+                    if (cardAlreadyTokenized) {
+                        // Card already tokenized, so skip js validation
+                        // Turn on waiting indicator
+                        checkout.setLoadWaiting('payment');
+                        // Make payment save ajax call (without doing validation first)
+                        var request = new Ajax.Request(
+                            this.saveUrl,
+                            {
+                                method:'post',
+                                onComplete: this.onComplete,
+                                onSuccess: this.onSave,
+                                onFailure: checkout.ajaxFailure.bind(checkout),
+                                parameters: Form.serialize(this.form)
+                            }
+                        );
+                    }
+                    else {
+                        // Call original payment save function
+                        // Original method include js validation, then ajax POST to server
+                        return Payment.prototype.save.call(this);
+                    }
+                }
+            }
+        </script>
+    <?php endif; ?>
+<?php endif; ?>

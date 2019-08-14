@@ -1,0 +1,39 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @author    Dennis Rogers <dennis@storefrontconsulting.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+<?php
+$subscription = $this->getSubscription();
+$product = $this->getProduct();
+?>
+<div class="subscription-product">
+    <?php // Product Image ?>
+    <a href="<?php echo $product->getProductUrl() ?>"
+       title="<?php echo $this->stripTags($this->getImageLabel($product, 'small_image'), null, true) ?>" class="product-image"><img
+            src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(80); ?>" width="80" height="80"
+            alt="<?php echo $this->stripTags($this->getImageLabel($product, 'small_image'), null, true) ?>"/></a>
+    <?php // Product Name ?>
+    <?php $_productNameStripped = $this->stripTags($product->getName(), null, true); ?>
+    <h2 class="product-name"><a href="<?php echo $product->getProductUrl() ?>"
+                                title="<?php echo $_productNameStripped; ?>"><?php echo $product->getName() ?></a></h2>
+
+    <p><span class="product-original-price">One-Time Purchase Price: <?php echo $this->getOneTimePurchasePrice(true) ?></span><br/>
+        <span class="product-price"><?php echo $this->getSubscriptionPriceText() ?></span></p>
+    <?php if (strlen($subscription->getCouponCode())): ?>
+        <p>Applied coupon code: <?php echo $subscription->getCouponCode() ?></p>
+    <?php endif; ?>
+</div>

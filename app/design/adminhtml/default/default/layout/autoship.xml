@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+-->
+
+<layout version="0.1.0">
+
+    <adminhtml_sales_order_create_index>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/autoship/jquery/jquery-1.10.1.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/autoship/jquery/noconflict.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/autoship/sales_create_order.js</name></action>
+        </reference>
+        <reference name="js">
+            <block type="autoship/adminhtml_sales_order_create_jsonp" name="jsonp" template="autoship/sales/create_order/jsonp.phtml" after="-"/>
+        </reference>
+    </adminhtml_sales_order_create_index>
+
+    <!-- Saved Credit Cards tab in ADMIN > CUSTOMER > EDIT > GRID -->
+    <adminhtml_customer_edit>
+        <reference name="customer_edit_tabs">
+            <action method="addTab">
+                <name>paymentprofile</name>
+                <block>autoship/adminhtml_customer_paymentprofiles_paymentprofile</block>
+            </action>
+        </reference>
+    </adminhtml_customer_edit>
+
+</layout>

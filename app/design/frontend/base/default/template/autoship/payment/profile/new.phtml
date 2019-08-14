@@ -1,0 +1,218 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+?>
+<?php $paymentProfile = $this->getCimProfile(); ?>
+<?php $billingAddress = $paymentProfile['billing_address']; ?>
+<?php $countries = Mage::getResourceModel('directory/country_collection')->loadByStore()->toOptionArray(); ?>
+
+<div class="page-title">
+    <h1><?php echo $this->getTitle(); ?></h1>
+</div>
+
+<form id="edit_form" accept-charset="UTF-8" action="<?php echo $this->getRedirectPostUrl() ?>" method="POST">
+    <input name="redirect_url" type="hidden" value="<?php echo $this->getRedirectUrl() ?>" />
+    <input name="environment_key" type="hidden" value="<?php echo $this->getEnvironmentKey() ?>" />
+    <input name="utf8" type="hidden" value="✓" />
+
+    <div class="fieldset">
+        <h2 class="legend">Cardholder Information</h2>
+        <ul class="form-list">
+            <li class="fields">
+                <div class="field name-firstname">
+                    <label for="bill_to_forename" class="required"><em>*</em>First Name</label>
+
+                    <div class="input-box">
+                        <input type="text" id="bill_to_forename" name="credit_card[first_name]"
+                               value="<?php echo $this->escapeHtml($billingAddress->getData('first_name')) ?>" title="First Name"
+                               maxlength="255" class="input-text required-entry"/>
+                    </div>
+                </div>
+                <div class="field name-lastname">
+                    <label for="bill_to_surname" class="required"><em>*</em>Last Name</label>
+
+                    <div class="input-box">
+                        <input type="text" id="bill_to_surname" name="credit_card[last_name]"
+                               value="<?php echo $this->escapeHtml($billingAddress->getData('last_name')) ?>" title="Last Name"
+                               maxlength="255" class="input-text required-entry"/>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="fieldset">
+        <h2 class="legend">Billing Address</h2>
+        <ul class="form-list">
+            <li class="wide">
+                <div class="address">
+                    <label for="bill_to_address_line1" class="required">Street Address</label>
+
+                    <div class="input-box">
+                        <input type="text" id="bill_to_address_line1" name="credit_card[address1]"
+                               value="<?php echo $this->escapeHtml($billingAddress->getData('street1')) ?>" title="Address" maxlength="255"
+                               class="input-text"/>
+                    </div>
+                </div>
+            </li>
+            <li class="wide">
+                <div class="address">
+                    <label for="bill_to_address_line2" class="required"></label>
+
+                    <div class="input-box">
+                        <input type="text" id="bill_to_address_line2" name="credit_card[address2]"
+                               value="<?php echo $this->escapeHtml($billingAddress->getData('street2')) ?>" title="Address" maxlength="255"
+                               class="input-text"/>
+                    </div>
+                </div>
+            </li>
+            <li class="fields">
+                <div class="field name-firstname">
+                    <label for="bill_to_address_city" class="required">City</label>
+
+                    <div class="input-box">
+                        <input type="text" id="bill_to_address_city" name="credit_card[city]" value="<?php echo $this->escapeHtml($billingAddress->getData('city')) ?>"
+                               title="City" maxlength="255" class="input-text"/>
+                    </div>
+                </div>
+                <div class="field name-lastname">
+                    <label for="bill_to_address_state" class="required">State/Province</label>
+
+                    <div class="input-box">
+                        <input type="text" id="bill_to_address_state" name="credit_card[state]"
+                               value="<?php echo $this->escapeHtml($billingAddress->getData('region')) ?>" title="State" maxlength="255"
+                               class="input-text"/>
+                    </div>
+                </div>
+            </li>
+            <li class="fields">
+                <div class="field name-firstname">
+                    <label for="bill_to_address_postal_code" class="required">Zip/Postal Code</label>
+
+                    <div class="input-box">
+                        <input type="text" id="bill_to_address_postal_code" name="credit_card[zip]"
+                               value="<?php echo $this->escapeHtml($billingAddress->getData('postcode')) ?>" title="Zip" maxlength="255"
+                               class="input-text"/>
+                    </div>
+                </div>
+            </li>
+            <li class="wide">
+                <div class="country">
+                    <label for="bill_to_address_country" class="required">Country</label>
+
+                    <div class="input-box">
+                        <select id="bill_to_address_country" name="credit_card[country]" title="Country" class="input-text">
+                            <?php foreach ($countries as $country) : ?>
+                                <option value="<?php echo $country['value']; ?>" <?php if ($country['value'] ==
+                                    $billingAddress->getData('country')
+                                ) {
+                                    echo 'selected="selected"';
+                                } ?>><?php echo $country['label']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+            </li>
+            <li class="fields">
+                <div class="field name-firstname">
+                    <label for="bill_to_phone" class="required">Telephone</label>
+
+                    <div class="input-box">
+                        <input type="text" id="bill_to_phone" name="credit_card[phone_number]"
+                               value="<?php echo $this->escapeHtml($billingAddress->getData('phone')) ?>" title="Phone" maxlength="255"
+                               class="input-text"/>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="fieldset">
+        <h2 class="legend">Payment Information</h2>
+        <ul class="form-list">
+            <li>
+                <label for="card_type" class="required"><em>*</em><?php echo $this->__('Credit Card Type') ?></label>
+                <div class="input-box">
+                    <select id="card_type" name="credit_card[card_type]" class="required-entry validate-cc-type-select">
+                        <option value=""><?php echo $this->__('--Please Select--') ?></option>
+                        <?php $_ccType = $paymentProfile->getData('creditcard_type'); ?>
+                        <?php foreach ($this->getCcAvailableTypesSubscribeProFormat() as $_typeCode => $_typeName): ?>
+                            <option value="<?php echo $_typeCode ?>"<?php if ($_typeCode == $_ccType
+                            ): ?> selected="selected"<?php endif ?>><?php echo $_typeName ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+            </li>
+            <li class="wide">
+                <div class="">
+                    <label for="card_number" class="required"><em>*</em>Card Number</label>
+
+                    <div class="input-box">
+                        <input type="text" id="card_number" name="credit_card[number]"
+                               value="<?php echo $this->escapeHtml('XXXX' . $paymentProfile->getData('creditcard_last_digits')) ?>"
+                               class="input-text required-entry"/>
+                    </div>
+                </div>
+            </li>
+            <?php if ($this->useVerification()): ?>
+                <li>
+                    <label for="card_cvn" class="required"><em>*</em><?php echo $this->__('Card Verification Number') ?></label>
+
+                    <div class="input-box">
+                        <input type="text" title="<?php echo $this->__('Card Verification Number') ?>" class="input-text cvv required-entry validate-cc-cvn" id="card_cvn" name="credit_card[verification_value]" value="" />
+                    </div>
+                </li>
+            <?php endif; ?>
+            <li class="fields">
+                <div class="field name-firstname">
+                    <label for="cc_exp_month" class="required"><em>*</em><?php echo $this->__('Expiration Month') ?></label>
+
+                    <div class="input-box">
+                        <select id="cc_exp_month" name="credit_card[month]" class="validate-month required-entry">
+                            <?php $_ccExpMonth = $paymentProfile->getData('creditcard_month') ?>
+                            <?php foreach ($this->getCcMonths() as $k => $v): ?>
+                                <option value="<?php echo $k ? $k : '' ?>"<?php if ($k == $_ccExpMonth
+                                ): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="field name-lastname">
+                    <label for="cc_exp_year" class="required"><em>*</em><?php echo $this->__('Expiration Year') ?></label>
+
+                    <div class="input-box">
+                        <?php $_ccExpYear = $paymentProfile->getData('creditcard_year') ?>
+                        <select id="cc_exp_year" name="credit_card[year]" class="year required-entry validate-year">
+                            <?php foreach ($this->getCcYears() as $k => $v): ?>
+                                <option value="<?php echo $k ? $k : '' ?>"<?php if ($k == $_ccExpYear
+                                ): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="buttons-set form-buttons">
+        <p class="back-link"><a href="<?php echo $this->getBackUrl() ?>">
+                <small>&#171;</small>
+                Back</a></p>
+        <button type="submit" class="button" title="Save">
+            <span><span>Save Credit Card</span></span>
+        </button>
+    </div>
+</form>
