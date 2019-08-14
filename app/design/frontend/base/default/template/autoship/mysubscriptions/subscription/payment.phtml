@@ -22,18 +22,20 @@ $subscription = $this->getSubscription();
 <div class="block subscription-payment">
     <p><strong>Payment Information:</strong></p>
     <?php if (strlen($subscription->getData('payment_token'))): ?>
-        <p>Credit card ending in <?php echo $subscription->getData('creditcard_last_digits') ?> <a class="change" href="">(Change)</a></p>
+        <p><?php echo $this->__("Credit card ending in") ?> <?php echo $subscription->getData('creditcard_last_digits') ?> <a class="adjust" href=""><?php echo $this->__("(Change)") ?></a></p>
         <p><a href="<?php echo $this->getNewCardUrl() ?>">Add a new credit card</a></p>
     <?php else: ?>
-        <p>Haven't saved a credit card yet? <a href="<?php echo $this->getNewCardUrl() ?>">Add one now</a>.</p>
+        <p><?php
+            echo $this->__('Haven\'t saved a credit card yet? <a href="%s">Add one now</a>.', $this->getNewCardUrl());
+        ?></p>
     <?php endif; ?>
 
     <input type="text" id="payment_token" name="payment_token" value="<?php echo $subscription->getData('payment_token') ?>"
            class="input-text" style="display:none;"/>
 
-    <div class="change" style="display:none;">
+    <div class="adjust" style="display:none;">
         <div class="block-title">
-            <h2>Change Payment Method</h2>
+            <h2><?php echo $this->__("Change Payment Method") ?></h2>
         </div>
         <div class="block-content">
             <?php

@@ -27,11 +27,11 @@
     <input name="payment_profile_id" type="hidden" value="<?php echo $paymentProfile->getId() ?>" />
 
 <div class="fieldset">
-    <h2 class="legend">Cardholder Information</h2>
+    <h2 class="legend"><?php echo $this->__("Cardholder Information") ?></h2>
     <ul class="form-list">
         <li class="fields">
             <div class="field name-firstname">
-                <label for="bill_to_forename" class="required"><em>*</em>First Name</label>
+                <label for="bill_to_forename" class="required"><em>*</em><?php echo $this->__("First Name") ?></label>
 
                 <div class="input-box">
                     <input type="text" id="bill_to_forename" name="billing_address[first_name]"
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="field name-lastname">
-                <label for="bill_to_surname" class="required"><em>*</em>Last Name</label>
+                <label for="bill_to_surname" class="required"><em>*</em><?php echo $this->__("Last Name") ?></label>
 
                 <div class="input-box">
                     <input type="text" id="bill_to_surname" name="billing_address[last_name]"
@@ -53,11 +53,11 @@
 </div>
 
 <div class="fieldset">
-    <h2 class="legend">Billing Address</h2>
+    <h2 class="legend"><?php echo $this->__("Billing Address") ?></h2>
     <ul class="form-list">
         <li class="wide">
             <div class="address">
-                <label for="bill_to_address_line1" class="required">Street Address</label>
+                <label for="bill_to_address_line1" class="required"><?php echo $this->__("Street Address") ?></label>
 
                 <div class="input-box">
                     <input type="text" id="bill_to_address_line1" name="billing_address[street1]"
@@ -79,7 +79,7 @@
         </li>
         <li class="fields">
             <div class="field name-firstname">
-                <label for="bill_to_address_city" class="required">City</label>
+                <label for="bill_to_address_city" class="required"><?php echo $this->__("City") ?></label>
 
                 <div class="input-box">
                     <input type="text" id="bill_to_address_city" name="billing_address[city]" value="<?php echo $this->escapeHtml($billingAddress->getData('city')) ?>"
@@ -87,7 +87,7 @@
                 </div>
             </div>
             <div class="field name-lastname">
-                <label for="bill_to_address_state" class="required">State/Province</label>
+                <label for="bill_to_address_state" class="required"><?php echo $this->__("State/Province") ?></label>
 
                 <div class="input-box">
                     <input type="text" id="bill_to_address_state" name="billing_address[region]"
@@ -98,7 +98,7 @@
         </li>
         <li class="fields">
             <div class="field name-firstname">
-                <label for="bill_to_address_postal_code" class="required">Zip/Postal Code</label>
+                <label for="bill_to_address_postal_code" class="required"><?php echo $this->__("Zip/Postal Code") ?></label>
 
                 <div class="input-box">
                     <input type="text" id="bill_to_address_postal_code" name="billing_address[postcode]"
@@ -109,7 +109,7 @@
         </li>
         <li class="wide">
             <div class="country">
-                <label for="bill_to_address_country" class="required">Country</label>
+                <label for="bill_to_address_country" class="required"><?php echo $this->__("Country") ?></label>
 
                 <div class="input-box">
                     <select id="bill_to_address_country" name="billing_address[country]" title="Country" class="input-text">
@@ -126,7 +126,7 @@
         </li>
         <li class="fields">
             <div class="field name-firstname">
-                <label for="bill_to_phone" class="required">Telephone</label>
+                <label for="bill_to_phone" class="required"><?php echo $this->__("Telephone") ?></label>
 
                 <div class="input-box">
                     <input type="text" id="bill_to_phone" name="billing_address[phone]"
@@ -139,7 +139,7 @@
 </div>
 
 <div class="fieldset">
-    <h2 class="legend">Payment Information</h2>
+    <h2 class="legend"><?php echo $this->__("Payment Information") ?></h2>
     <ul class="form-list">
         <li>
             <label for="card_type" class="required"><em>*</em><?php echo $this->__('Credit Card Type') ?></label>
@@ -156,7 +156,7 @@
         </li>
         <li class="wide">
             <div class="">
-                <label for="card_number" class="required"><em>*</em>Card Number</label>
+                <label for="card_number" class="required"><em>*</em><?php echo $this->__("Card Number") ?></label>
 
                 <div class="input-box">
                     <input type="text" id="card_number" name="credit_card[number]"  disabled="disabled"
@@ -199,9 +199,11 @@
 <div class="buttons-set form-buttons">
     <p class="back-link"><a href="<?php echo $this->getBackUrl() ?>">
             <small>&#171;</small>
-            Back</a></p>
+<?php echo $this->__("Back") ?></a></p>
+    <?php if (!$paymentProfile->isThirdParty()): ?>
     <button type="submit" class="button" title="Save">
-        <span><span>Save Credit Card</span></span>
+        <span><span><?php echo $this->__("Save Credit Card") ?></span></span>
     </button>
+    <?php endif; ?>
 </div>
 </form>

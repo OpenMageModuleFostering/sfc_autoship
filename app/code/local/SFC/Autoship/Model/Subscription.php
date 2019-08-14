@@ -21,7 +21,7 @@
  * This model is not persisted to the Magento DB, but instead is persisted to the platform API
  *
  */
-class SFC_Autoship_Model_Subscription extends Mage_Core_Model_Abstract
+class SFC_Autoship_Model_Subscription extends Varien_Object
 {
     /**
      * Constants
@@ -35,6 +35,13 @@ class SFC_Autoship_Model_Subscription extends Mage_Core_Model_Abstract
     // Members
     private $_platformProduct = null;
     private $_paymentProfile = null;
+
+    /**
+     * Name of object id field
+     *
+     * @var string
+     */
+    protected $_idFieldName = 'subscription_id';
 
     protected function _construct()
     {
@@ -64,6 +71,9 @@ class SFC_Autoship_Model_Subscription extends Mage_Core_Model_Abstract
         return $address;
     }
 
+    /**
+     * @return SFC_Autoship_Model_Payment_Profile
+     */
     public function getPaymentProfile()
     {
         if($this->_paymentProfile == null || $this->_paymentProfile->getData('cim_payment_profile_id') != $this->getData('cim_payment_profile_id')) {
@@ -110,5 +120,4 @@ class SFC_Autoship_Model_Subscription extends Mage_Core_Model_Abstract
 
         return date_format($date, 'm/d/y');
     }
-
 }

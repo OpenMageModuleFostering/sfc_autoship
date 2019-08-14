@@ -20,7 +20,7 @@ $subscription = $this->getSubscription();
 $billingAddress = $subscription->getBillingAddress();
 ?>
 <div class="block subscription-billing-address">
-    <p><strong>Billing address:</strong> <a class="change" href="">(Change)</a></p>
+    <p><strong><?php echo $this->__("Billing address:") ?></strong> <a class="adjust" href=""><?php echo $this->__("(Change)") ?></a></p>
     <address>
         <?php echo $billingAddress->getFirstname() ?> <?php echo $billingAddress->getLastname() ?><br/>
         <?php if (strlen($billingAddress->getCompany())): ?>
@@ -36,9 +36,9 @@ $billingAddress = $subscription->getBillingAddress();
     <input type="text" id="billing_address_id" name="billing_address_id" value="<?php echo $billingAddress->getId() ?>"
            class="input-text" style="display:none;"/>
 
-    <div class="change" style="display: none;">
+    <div class="adjust" style="display: none;">
         <div class="block-title">
-            <h2>Change Billing Address</h2>
+            <h2><?php echo $this->__("Change Billing Address") ?></h2>
         </div>
         <div class="block-content">
             <?php

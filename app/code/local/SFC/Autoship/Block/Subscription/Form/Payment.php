@@ -124,7 +124,6 @@ class SFC_Autoship_Block_Subscription_Form_Payment extends SFC_Autoship_Block_Su
         {
             default:
             case SFC_Autoship_Helper_Platform::PAY_METHOD_CODE_SFC_CIM_10XX:
-            case SFC_Autoship_Helper_Platform::PAY_METHOD_CODE_PARADOX_TRANSARMOR:
                 return false;
 
             case SFC_Autoship_Helper_Platform::PAY_METHOD_CODE_SFC_CIM:
@@ -190,6 +189,7 @@ class SFC_Autoship_Block_Subscription_Form_Payment extends SFC_Autoship_Block_Su
                     $cards[] = array(
                         'payment_token' => $curProfile->getData('cim_payment_profile_id'),
                         'creditcard_last_digits' => $curProfile->getData('customer_cardnumber'),
+                        'edit_url' => ''
                     );
                 }
                 break;
@@ -204,6 +204,7 @@ class SFC_Autoship_Block_Subscription_Form_Payment extends SFC_Autoship_Block_Su
                     $cards[] = array(
                         'payment_token' => $curProfile->getData('cim_payment_profile_id'),
                         'creditcard_last_digits' => $curProfile->getData('customer_cardnumber'),
+                        'edit_url' => ''
                     );
                 }
                 break;
@@ -220,6 +221,7 @@ class SFC_Autoship_Block_Subscription_Form_Payment extends SFC_Autoship_Block_Su
                         'creditcard_month' => $paymentProfile->getData('creditcard_month'),
                         'creditcard_year' => $paymentProfile->getData('creditcard_year'),
                         'edit_url' => Mage::getUrl('subscriptions/mycreditcards/edit') . 'id/' . $paymentProfile->getId(),
+                        'is_third_party' => $paymentProfile->isThirdParty()
                     );
                 }
 
@@ -235,20 +237,7 @@ class SFC_Autoship_Block_Subscription_Form_Payment extends SFC_Autoship_Block_Su
                     $cards[] = array(
                         'payment_token' => $curProfile->getData('payment_token'),
                         'creditcard_last_digits' => $curProfile->getData('customer_cardnumber'),
-                    );
-                }
-                break;
-
-            case SFC_Autoship_Helper_Platform::PAY_METHOD_CODE_PARADOX_TRANSARMOR:
-                // Lookup profiles for this customer
-                $cardCollection = Mage::getModel('transarmor/card')->getCollection();
-                $cardCollection
-                    ->addFieldToFilter('customer_id', $customer->getId());
-                // Translate to std data structure
-                foreach($cardCollection as $curCard) {
-                    $cards[] = array(
-                        'payment_token' => $curCard->getData('trans_id'),
-                        'creditcard_last_digits' => $curCard->getData('last4'),
+                        'edit_url' => ''
                     );
                 }
                 break;

@@ -114,6 +114,48 @@ class SFC_Autoship_MysubscriptionsController extends Mage_Core_Controller_Front_
         }
     }
 
+    public function changeSkuAction()
+    {
+        try {
+            $data = $this->getRequest()->getPost();
+
+            if (isset($data['product_sku']) && strlen($data['product_sku'])) {
+                //Ensure we have a valid product that is active for subscriptions
+                $product = Mage::getModel("catalog/product")->loadByAttribute('sku', $data['product_sku']);
+                if ($product->getId() && $product->getData('subscription_enabled')) {
+                    $data['product_id'] = $product->getId();
+                } else {
+                    Mage::throwException($this->__("Please supply a valid product sku enabled for subscriptions."));
+                }
+            }
+
+            if (isset($data['id'])) {
+                $data['subscription_id'] = $data['id'];
+            }
+
+            if (!isset($data['subscription_id'])) {
+                Mage::throwException($this->__("Please supply a valid subscription id."));
+            }
+            $subscription = Mage::helper("autoship/platform")->getSubscription($data['subscription_id']);
+
+            //Update the SKU data
+            $subscription
+                ->setProductSku($data['product_sku'])
+                ->setProductId($data['product_id']);
+
+            //Update the subscription
+            Mage::helper('autoship/platform')->updateSubscription($subscription->getSubscriptionId(), $subscription);
+
+            echo $this->getLayout()->createBlock('autoship/mysubscriptions_subscription')
+                ->setTemplate('autoship/mysubscriptions/subscription.phtml')
+                ->setSubscription($subscription)
+                ->toHtml();
+        } Catch (Exception $e) {
+            $this->handleAjaxException($e);
+        }
+    }
+
+
     /**
      * Retrieve post data for changeAction and validate it
      */
@@ -378,13 +420,15 @@ class SFC_Autoship_MysubscriptionsController extends Mage_Core_Controller_Front_
      */
     public function skipAction()
     {
+        /** @var SFC_Autoship_Helper_Platform $platformHelper */
+        $platformHelper = Mage::helper('autoship/platform');
         try {
             // Get subscription id from request
             $subscriptionId = $this->getRequest()->getParam('id');
             // Call API to delete subscription
-            Mage::helper('autoship/platform')->skipSubscription($subscriptionId);
+            $platformHelper->skipSubscription($subscriptionId);
             // Now call platform to get subscription again
-            $subscription = Mage::helper('autoship/platform')->getSubscription($subscriptionId);
+            $subscription = $platformHelper->getSubscription($subscriptionId);
             // Return the rendered html for this new subscription state
             echo $this->getLayout()->createBlock('autoship/mysubscriptions_subscription')
                 ->setTemplate('autoship/mysubscriptions/subscription.phtml')
@@ -402,13 +446,41 @@ class SFC_Autoship_MysubscriptionsController extends Mage_Core_Controller_Front_
      */
     public function cancelAction()
     {
+        /** @var SFC_Autoship_Helper_Platform $platformHelper */
+        $platformHelper = Mage::helper('autoship/platform');
         try {
             // Get subscription id from request
             $subscriptionId = $this->getRequest()->getParam('id');
             // Call API to delete subscription
-            Mage::helper('autoship/platform')->cancelSubscription($subscriptionId);
+            $platformHelper->cancelSubscription($subscriptionId);
             // Now call platform to get subscription again
-            $subscription = Mage::helper('autoship/platform')->getSubscription($subscriptionId);
+            $subscription = $platformHelper->getSubscription($subscriptionId);
+            // Return the rendered html for this new subscription state
+            echo $this->getLayout()->createBlock('autoship/mysubscriptions_subscription')
+                ->setTemplate('autoship/mysubscriptions/subscription.phtml')
+                ->setSubscription($subscription)
+                ->toHtml();
+        }
+        catch (Exception $e) {
+            $this->handleAjaxException($e);
+        }
+    }
+
+    /**
+     * Pause subscription action
+     *
+     */
+    public function pauseAction()
+    {
+        /** @var SFC_Autoship_Helper_Platform $platformHelper */
+        $platformHelper = Mage::helper('autoship/platform');
+        try {
+            // Get subscription id from request
+            $subscriptionId = $this->getRequest()->getParam('id');
+            // Call API to delete subscription
+            $platformHelper->pauseSubscription($subscriptionId);
+            // Now call platform to get subscription again
+            $subscription = $platformHelper->getSubscription($subscriptionId);
             // Return the rendered html for this new subscription state
             echo $this->getLayout()->createBlock('autoship/mysubscriptions_subscription')
                 ->setTemplate('autoship/mysubscriptions/subscription.phtml')
@@ -426,13 +498,15 @@ class SFC_Autoship_MysubscriptionsController extends Mage_Core_Controller_Front_
      */
     public function restartAction()
     {
+        /** @var SFC_Autoship_Helper_Platform $platformHelper */
+        $platformHelper = Mage::helper('autoship/platform');
         try {
             // Get subscription id from request
             $subscriptionId = $this->getRequest()->getParam('id');
             // Call API to delete subscription
-            Mage::helper('autoship/platform')->restartSubscription($subscriptionId);
+            $platformHelper->restartSubscription($subscriptionId);
             // Now call platform to get subscription again
-            $subscription = Mage::helper('autoship/platform')->getSubscription($subscriptionId);
+            $subscription = $platformHelper->getSubscription($subscriptionId);
             // Return the rendered html for this new subscription state
             echo $this->getLayout()->createBlock('autoship/mysubscriptions_subscription')
                 ->setTemplate('autoship/mysubscriptions/subscription.phtml')
@@ -492,7 +566,7 @@ class SFC_Autoship_MysubscriptionsController extends Mage_Core_Controller_Front_
                     $model->save();
                 }
                 catch (Exception $e) {
-                    Mage::throwException('Failed to save credit card!');
+                    Mage::throwException($this->__('Failed to save credit card!'));
                 }
 
                 // Return new model
@@ -524,7 +598,7 @@ class SFC_Autoship_MysubscriptionsController extends Mage_Core_Controller_Front_
                     $model->save();
                 }
                 catch (Exception $e) {
-                    Mage::throwException('Failed to save credit card!');
+                    Mage::throwException($this->__('Failed to save credit card!'));
                 }
 
                 // Return new model
@@ -562,7 +636,7 @@ class SFC_Autoship_MysubscriptionsController extends Mage_Core_Controller_Front_
                     $model->save();
                 }
                 catch (Exception $e) {
-                    Mage::throwException('Failed to save credit card!');
+                    Mage::throwException($this->__('Failed to save credit card!'));
                 }
 
                 // Return new model
@@ -570,36 +644,6 @@ class SFC_Autoship_MysubscriptionsController extends Mage_Core_Controller_Front_
                     'payment_token' => $model->getData('payment_token'),
                     'creditcard_last_digits' => $model->getData('customer_cardnumber'),
                 );
-
-            case SFC_Autoship_Helper_Platform::PAY_METHOD_CODE_PARADOX_TRANSARMOR:
-                // Create payment using paradox ext
-                $payment = array(
-                    'firstname' => $customer->getData('firstname'),
-                    'lastname' => $customer->getData('lastname'),
-                    'cc_type' => $data['cc_type'],
-                    'cc_type' => $data['cc_type'],
-                    'cc_number' => $data['cc_number'],
-                    'cc_exp_month' => $data['cc_exp_month'],
-                    'cc_exp_year' => $data['cc_exp_year'],
-                );
-                // If customer has selected billing address, add billing address data to new CIM profile
-                if (strlen($subscription->getBillingAddressId())) {
-                    $billingAddress = Mage::getModel('customer/address')->load($subscription->getBillingAddressId());
-                    $payment['address1'] = $billingAddress->getStreet(1);
-                    $payment['city'] = $billingAddress->getData('city');
-                    $payment['state'] = $billingAddress->getData('region');
-                    $payment['zip'] = $billingAddress->getData('postcode');
-                    $payment['country'] = $billingAddress->getData('country_id');
-                }
-                $paymentId = Mage::getModel('transarmor/payment')->createCustomerPaymentProfile( $payment, $customer );
-                $paymentProfile = Mage::getModel('transarmor/payment')->getPaymentInfoById($paymentId);
-
-                // Return new model
-                return array(
-                    'payment_token' => $paymentProfile->getData('trans_id'),
-                    'creditcard_last_digits' => $paymentProfile->getData('last4'),
-                );
-
         }
     }
 
@@ -645,7 +689,7 @@ class SFC_Autoship_MysubscriptionsController extends Mage_Core_Controller_Front_
         else {
             $html = '';
             foreach ($errors as $error) {
-                $html .= '<li class="error">' . $error . '</li>';
+                $html .= '<li class="error">' . $this->__($error) . '</li>';
             }
 
             return $html;
@@ -663,7 +707,7 @@ class SFC_Autoship_MysubscriptionsController extends Mage_Core_Controller_Front_
         Mage::log($e->getMessage() . "\n" . $e->getTraceAsString());
         Mage::logException($e);
         // Output error message formatted for display
-        echo '<li class="error">' . $e->getMessage() . '</li>';
+        echo '<li class="error">' . $this->__($e->getMessage()) . '</li>';
     }
 
     /**
@@ -673,16 +717,16 @@ class SFC_Autoship_MysubscriptionsController extends Mage_Core_Controller_Front_
     {
         switch ($eCim->getResponse()->getMessageCode()) {
             case 'E00014':
-                return ('A required field was not entered for credit card!');
+                return $this->__('A required field was not entered for credit card!');
                 break;
             case 'E00039':
-                return ('Credit card number is already saved in your account!');
+                return $this->__('Credit card number is already saved in your account!');
                 break;
             case 'E00042':
-                return ('You have already saved the maximum number of credit cards!');
+                return $this->__('You have already saved the maximum number of credit cards!');
                 break;
             default:
-                return ('Failed to save credit card with gateway!');
+                return $this->__('Failed to save credit card with gateway!');
                 break;
         }
     }

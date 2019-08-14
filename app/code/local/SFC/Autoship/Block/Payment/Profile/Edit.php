@@ -44,11 +44,11 @@ class SFC_Autoship_Block_Payment_Profile_Edit extends Mage_Adminhtml_Block_Templ
     {
         if ($this->getIsNewProfile()) {
             // Creating a new profile
-            return ' Enter New Credit Card ';
+            return $this->helper('autoship')->__(' Enter New Credit Card ');
         }
         else {
             // Editing an existing profile
-            return ' Edit Saved Credit Card XXXX' . $this->getData('cim_profile')->getData('creditcard_last_digits');
+            return $this->helper('autoship')->__(' Edit Saved Credit Card XXXX' . $this->getData('cim_profile')->getData('creditcard_last_digits'));
         }
     }
 

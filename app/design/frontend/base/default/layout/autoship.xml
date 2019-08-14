@@ -25,7 +25,6 @@
 
 		<reference name="head">
 			<action method="addCss"><stylesheet>css/autoship.css</stylesheet></action>
-			<action method="addItem"><type>skin_js</type><name>js/autoship/jquery/jquery-1.10.1.min.js</name></action>
 			<action method="addItem"><type>skin_js</type><name>js/autoship/jquery/ui/jquery.ui.core.min.js</name></action>
 			<action method="addItem"><type>skin_js</type><name>js/autoship/jquery/ui/jquery.ui.datepicker.min.js</name></action>
 			<action method="addItem"><type>skin_css</type><name>js/autoship/jquery/ui/theme/jquery-ui.css</name></action>
@@ -251,4 +250,10 @@ Product view
         </reference>
     </checkout_onepage_index>
 
+    <!-- EE Only, ensure the gift card function is not hiding subscribe pro -->
+    <checkout_onepage_paymentmethod>
+        <reference name="giftcardaccount_scripts">
+            <action method="setTemplate"><template>autoship/giftcardaccount/onepage/payment/scripts.phtml</template></action>
+        </reference>
+    </checkout_onepage_paymentmethod>
 </layout>

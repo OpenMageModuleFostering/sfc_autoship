@@ -18,38 +18,56 @@
 ?>
 <?php if(Mage::getStoreConfig('autoship_general/general/enabled') == '1'): ?>
 <?php if($this->isProductAutoshipEligible()): ?>
-<div class="subscription-product">
+<?php if($this->isTrialProduct() || $this->getSubscriptionOptionMode() == 'subscription_only'): // Subscription Only Mode or Trial Product - Only Subscription Option Allowed ?>
+<div class="subscription-product product-options">
 <ul class="options-list">
 	<li>
-		<input type="radio" onclick="" class="radio" id="delivery-option-one-time" name="delivery-option" value="one-time-delivery"/>
-		<div class="radio-text">
-		<span class=label>
-			<label for="delivery-option-one-time">One Time Delivery</label>
-		</span>
-        <p><span class="price">Price: <?php echo $this->getOneTimePurchasePrice(true) ?></span></p>
-        </div>
-		<div class="clearer"></div>
-	</li>
-	<li>
-		<input type="radio" onclick="" class="radio" id="delivery-option-subscribe" name="delivery-option" value="subscribe" checked="checked"/>
-		<span class=label>
-		<div class="radio-text">
-			<label for="delivery-option-subscribe">Regular Delivery</label>
-		</span>
+		<input type="hidden" onclick="" class="radio" id="delivery-option-subscribe" name="delivery-option" value="subscribe" checked="checked"/>
         <p><span class="product-price"><?php echo $this->getDiscountText() ?></span></p>
-        <p>
-		<label for="delivery-interval">Delivery every:</label><br />
-        <select onchange="" id="delivery-interval" name="delivery-interval" class="">
-        	<?php foreach($this->getIntervals() as $interval): ?>
-        	<option value="<?php echo $interval ?>"><?php echo $interval ?></option>
-        	<?php endforeach; ?>
-        </select>
-        </p>
-    </div>
+        <label for="delivery-interval">Delivery every:
+            <select onchange="" id="delivery-interval" name="delivery-interval" class="">
+                <?php foreach($this->getIntervals() as $interval): ?>
+                    <option value="<?php echo $interval ?>" <?php if($interval == $this->getDefaultInterval()): ?> selected="selected"<?php endif; ?>><?php echo $interval ?></option>
+                <?php endforeach; ?>
+            </select>
+        </label>
     <div class="clearer"></div>
 	</li>
 </ul>
 </div>
+<?php else: // Standard mode - subscription or one-time purchase allowed ?>
+<div class="subscription-product product-options">
+<ul class="options-list">
+	<li>
+		<input type="radio" onclick="" class="radio validate-one-required-by-name change-container-classname" id="delivery-option-one-time" name="delivery-option" value="one-time-delivery"
+            <?php if ($this->getDefaultSubscriptionOption() == 'onetime_purchase'): ?> checked="checked"<?php endif; ?>
+        />
+		<span class="label">
+			<label for="delivery-option-one-time">One Time Delivery&nbsp;&mdash;&nbsp;
+			    <span class="price-notice"><?php echo $this->getOneTimePurchasePrice(true) ?></span>
+			</label>
+		</span>
+	</li>
+	<li>
+		<input type="radio" onclick="" class="radio validate-one-required-by-name change-container-classname" id="delivery-option-subscribe" name="delivery-option" value="subscribe"
+            <?php if ($this->getDefaultSubscriptionOption() != 'onetime_purchase'): ?> checked="checked"<?php endif; ?>
+		/>
+		<span class="label">
+			<label for="delivery-option-subscribe">Regular Delivery&nbsp;&mdash;&nbsp;
+			    <span class="price-notice"><?php echo $this->getDiscountText() ?></span>
+			</label>
+		</span>
+		<label for="delivery-interval">Delivery every:
+            <select onchange="" id="delivery-interval" name="delivery-interval" class="">
+            	<?php foreach($this->getIntervals() as $interval): ?>
+            	<option value="<?php echo $interval ?>" <?php if($interval == $this->getDefaultInterval()): ?> selected="selected"<?php endif; ?>><?php echo $interval ?></option>
+            	<?php endforeach; ?>
+            </select>
+        </label>
+	</li>
+</ul>
+</div>
+<?php endif; ?>
 <?php if(Mage::getStoreConfig('autoship_subscription/subscription/use_new_subscription_page') == '1'): ?>
 <script type="text/javascript">
 //<![CDATA[

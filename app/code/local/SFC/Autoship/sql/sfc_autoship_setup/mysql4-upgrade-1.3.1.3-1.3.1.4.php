@@ -21,12 +21,12 @@
 $installer = $this;
 $installer->startSetup();
 
-// Update subscription_enabled product attribute to have it only apply to simple, config and bundle products
+// Update subscription_enabled product attribute to have apply to all product types except grouped
 $installer->updateAttribute(
     'catalog_product',
     'subscription_enabled',
     'apply_to',
-    'simple,configurable,bundle'
+    'simple,configurable,bundle,virtual,downloadable'
 );
 
 $sql = <<<SQL

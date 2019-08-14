@@ -31,6 +31,12 @@ class SFC_Autoship_Block_Product_Subscribe extends SFC_Autoship_Block_Product_Vi
         return $this->getPlatformProduct()->getIntervals();
     }
 
+    public function getDefaultInterval()
+    {
+        // Lookup from product
+        return $this->getPlatformProduct()->getData('default_interval');
+    }
+
     /**
      * Return the discount text for display on product page
      *

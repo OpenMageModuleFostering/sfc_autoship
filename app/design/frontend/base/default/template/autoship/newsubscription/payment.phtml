@@ -22,14 +22,17 @@ $paymentProfile = $subscription->getPaymentProfile();
 ?>
 
 <div class="block-title">
-	<h2>Payment Method</h2>
+	<h2><?php echo $this->__("Payment Method") ?></h2>
 </div>
 
 <div class="box-padding">
     <?php if($paymentProfile->getCustomerCardnumber()): ?>
-    	<p>Credit card ending in <?php echo $paymentProfile->getCustomerCardnumber() ?>.  <a class="change" href="">(Change)</a></p>
+    	<p><?php echo $this->__("Credit card ending in") ?> <?php echo $paymentProfile->getCustomerCardnumber() ?>.  <a class="change" href=""><?php echo $this->__("(Change)") ?></a></p>
     <?php else: ?>
       <p>Haven't saved a credit card yet? <a class="change" href="">Add one now</a>.</p>
+        <p><?php
+            echo $this->__('Haven\'t saved a credit card yet? <a class="change" href="">Add one now</a>.');
+            ?></p>
     <?php endif; ?>
 
     <?php if ($this->useCouponCode()): ?>
@@ -48,7 +51,7 @@ $paymentProfile = $subscription->getPaymentProfile();
 
 	<div class="change" style="display:none;">
 		<div class="block-title">
-			<h2>Change Payment Method</h2>
+			<h2><?php echo $this->__("Change Payment Method") ?></h2>
 		</div>
 		<div class="block-content">
 			<?php echo $this->getChildHtml("payment") ?>

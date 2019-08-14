@@ -152,8 +152,8 @@ $subscription = $this->getSubscription();
             </fieldset>
         </li>
     </ul>
+    <p class="required"><?php echo $this->__('* Required Fields') ?></p>
     <div class="buttons-set" id="shipping-buttons-container-<?php echo $subscription->getSubscriptionId() ?>">
-        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
         <button type="submit" title="<?php echo $this->__('Continue') ?>" class="button">
             <span><span><?php echo $this->__('Continue') ?></span></span></button>
     </div>

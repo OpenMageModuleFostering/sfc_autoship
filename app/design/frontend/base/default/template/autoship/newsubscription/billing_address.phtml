@@ -21,11 +21,11 @@ $billingAddress = $subscription->getBillingAddress();
 ?>
 
 <div class="block-title">
-	<h2>Billing Address</h2>
+	<h2><?php echo $this->__("Billing Address") ?></h2>
 </div>
 
 <div class="box-padding">
-	<p>Please select the address associated with your payment method: <a class="change" href="">(Change)</a></p>
+	<p><?php echo $this->__("Please select the address associated with your payment method:") ?> <a class="change" href=""><?php echo $this->__("(Change)") ?></a></p>
 
 	<address>
 	<?php echo $billingAddress->getFirstname() ?> <?php echo $billingAddress->getLastname() ?><br/>
@@ -42,7 +42,7 @@ $billingAddress = $subscription->getBillingAddress();
 
 	<div class="change">
 		<div class="block-title">
-			<h2>Change Billing Address</h2>
+			<h2><?php echo $this->__("Change Billing Address") ?></h2>
 		</div>
 		<div class="block-content">
     		<?php echo $this->getChildHtml("billing_address_select") ?>

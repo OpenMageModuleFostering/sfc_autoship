@@ -1,4 +1,4 @@
-<?php //00612
+<?php
 /**
  * Subscribe Pro - Subscriptions Management Extension
  *
@@ -15,326 +15,956 @@
  *
  */
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='/ioncube/ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if((@$__id[1])==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}@dl($__ln);}else{die('The file '.__FILE__." is corrupted. Ensure that you use binary mode when transferring files with FTP and disable the 'TAR smart cr/lf feature' if using WinZIP\n");}if(function_exists('_il_exec')){return _il_exec();}die('The file <b>'.__FILE__.'</b> has been encoded with the <a href="http://www.ioncube.com">ionCube PHP Encoder</a> and requires the free '.basename($__ln).' <a href="http://www.ioncube.com/loader_download/">ionCube PHP Loader</a> to be installed.');
+/**
+ * Helper class to assist with retrieving and manipulating subscriptions and associated data
+ */
+class SFC_Autoship_Helper_Platform extends Mage_Core_Helper_Abstract
+{
 
-?>
-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
+    // Define const to represent payment method codes
+    // These are necessary here so we aren't dependent on constants from modules which may or may not be installed.
+    const PAY_METHOD_CODE_SFC_CIM_10XX = 'authnettoken';
+    const PAY_METHOD_CODE_SFC_CIM = 'sfc_cim_core';
+    const PAY_METHOD_CODE_SUBSCRIBE_PRO_VAULT = 'subscribe_pro';
+    const PAY_METHOD_CODE_SFC_CYBERSOURCE = 'sfc_cybersource';
+    const PAY_METHOD_CODE_BRAINTREE = "braintree";
+
+    protected $_methodCodeMap = array();
+
+    protected $_accountConfig = null;
+
+    public function __construct()
+    {
+        // Map Mage payment method code to platform gateway
+        $this->_methodCodeMap = array(
+            self::PAY_METHOD_CODE_SFC_CIM_10XX => 'Authorize.Net CIM',
+            self::PAY_METHOD_CODE_SFC_CIM => 'Authorize.Net CIM',
+            self::PAY_METHOD_CODE_SUBSCRIBE_PRO_VAULT => 'Subscribe Pro Vault',
+            self::PAY_METHOD_CODE_SFC_CYBERSOURCE => 'CyberSource'
+        );
+    }
+
+    /**
+     * Retrieve subscription product profile info from platform (eligible intervals, min & max qty, discount, etc)
+     * Creates product on platform if it doesn't exist.
+     *
+     * @param Mage_Catalog_Model_Product $product Magento product object
+     * @return SFC_Autoship_Model_Platform_Product Platform product data structure
+     */
+    public function getPlatformProduct(Mage_Catalog_Model_Product $product)
+    {
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+
+        // Lookup whether product enabled / disabled
+        $isProductEnabled = Mage::helper('autoship/product')->isAvailableForSubscription($product, $apiHelper->getConfigStore(), true);
+        if (!$isProductEnabled) {
+            $platformProduct = Mage::getModel('autoship/platform_product');
+            $platformProduct->setData('enabled', false);
+            return $platformProduct;
+        }
+
+        // Do API query by SKU for product info
+        $response = $apiHelper->fetchProducts(array('sku' => $product->getSku()));
+        //print_r($response);die;
+        // Check response
+        if ($response['code'] != 200) {
+            // API Error
+            Mage::throwException($this->__('API error!'));
+        }
+        // Check that we found product info
+        $result = $response['result'];
+        $platformProducts = $result['products'];
+        if (!is_array($platformProducts) || count($platformProducts) != 1) {
+            Mage::throwException($this->__('Product not found on Subscribe Pro platform!'));
+        }
+        // Map platform product data to Mage model object
+        $platformProductData = $platformProducts[0];
+        $platformProduct = Mage::getModel('autoship/platform_product');
+        $platformProduct->addData($platformProductData);
+        // Force enabled = true
+        // We are no longer honoring the is_subscription_enabled field from the platform
+        $platformProduct->setData('enabled', true);
+
+        // Return product
+        return $platformProduct;
+    }
+
+    /**
+     * Handle catalog_product_save_after Event and update product profile in DB and on platform
+     *
+     * @param Mage_Catalog_Model_Product $product Magento product object
+     */
+    public function handleOnSaveProduct(Mage_Catalog_Model_Product $product)
+    {
+        Mage::log('SFC_Autoship_Helper_Platform::handleOnSaveProduct', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+        Mage::log('Product SKU: ' . $product->getSku(), Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+
+        /** @var SFC_Autoship_Helper_Product $productHelper */
+        $productHelper = Mage::helper('autoship/product');
+
+        // Get website ids for websites product is assigned to
+        $productWebsites = $product->getWebsiteIds();
+
+        // Iterate all websites / stores
+        $websites = Mage::app()->getWebsites(false);
+        /** @var Mage_Core_Model_Website $website */
+        foreach ($websites as $website) {
+            Mage::log('Website ID: ' . $website->getId() . ' code: ' . $website->getCode(), Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+            $store = $website->getDefaultStore();
+            if (!$store instanceof Mage_Core_Model_Store) {
+                Mage::log('No default store for website!', Zend_Log::ERR, SFC_Autoship_Helper_Data::LOG_FILE);
+                continue;
+            }
+            Mage::log('Website default store code: ' . $store->getCode(), Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+            Mage::log('Subscription features enabled: ' . Mage::getStoreConfig('autoship_general/general/enabled', $store),
+                Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+            // Check configuration for this store
+            if (Mage::getStoreConfig('autoship_general/general/enabled', $store) == '1') {
+                // Check if product is assigned to website
+                $productAssignedToWebsite = in_array($website->getId(), $productWebsites);
+                Mage::log('Product is assigned to website: ' . $productAssignedToWebsite, Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+                if ($productAssignedToWebsite) {
+                    // Lookup whether product enabled / disabled
+                    $isProductEnabled = $productHelper->isAvailableForSubscription($product, $store, false);
+                    Mage::log('Is product enabled for subscription: ' . $isProductEnabled, Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+                    // If enabled, update product on platform
+                    if ($isProductEnabled) {
+                        // Create / update product on platform
+                        $this->updateProductOnPlatform($store, $product);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Update the product on the platform for a given store
+     *
+     * @param Mage_Core_Model_Store $store
+     * @param Mage_Catalog_Model_Product $product Magento product object
+     */
+    protected function updateProductOnPlatform(Mage_Core_Model_Store $store, Mage_Catalog_Model_Product $product)
+    {
+        Mage::log('SFC_Autoship_Helper_Platform::updateProductOnPlatform', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+
+        // Get ref to core session object
+        /** @var Mage_Core_Model_Session $coreSession */
+        $coreSession = Mage::getSingleton('core/session');
+
+        // Reload product for this specific store
+        /** @var Mage_Catalog_Model_Product $product */
+        $product = Mage::getModel('catalog/product')->setData('store_id', $store->getId())->load($product->getId());
+
+        // Don't allow grouped product to be enabled for subscription
+        // Otherwise don't check product types or check for options here
+        if ($product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_GROUPED) {
+            return;
+        }
+
+        // Update product on platform
+        // Try to update platform
+        try {
+            // Create / update product on platform
+            $this->createOrUpdateProductImpl($product, array(), $store);
+        }
+        catch (Exception $e) {
+            Mage::log('Failed to update product on platform with error: ' . $e->getMessage());
+            $coreSession->addError($this->__('Failed to update product on platform!'));
+        }
+    }
+
+    /**
+     * Create or update product info on the platform
+     *
+     * @param Mage_Catalog_Model_Product $product Magento product object
+     * @param array|null $data Subscription product settings to set on the platform
+     * @return int Id of newly created or updated product on platform
+     */
+    public function createOrUpdateProduct(Mage_Catalog_Model_Product $product, array $data = array())
+    {
+        // Create or Update via API
+        $platformProductData = $this->createOrUpdateProductImpl($product, $data);
+        // Grab id of product on platform
+        $platformProductId = $platformProductData['id'];
+
+        // Return id of updated product on platform
+        return $platformProductId;
+    }
+
+    /**
+     * Create or update product info on the platform
+     *
+     * @param Mage_Catalog_Model_Product $product Magento product object
+     * @param array $data Subscription product settings to set on the platform
+     * @param null $store
+     * @return array Platform product data structure
+     */
+    protected function createOrUpdateProductImpl(Mage_Catalog_Model_Product $product, array $data = array(), $store = null)
+    {
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+        // Set store on api helper
+        if($store != null) {
+            $apiHelper->setConfigStore($store);
+        }
+
+        // Lookup whether product enabled / disabled
+        $isProductEnabled = Mage::helper('autoship/product')->isAvailableForSubscription($product, $store, false);
+        // Prepare new platform product info
+        $newPlatformProductData = array(
+            'sku' => $product->getSku(),
+            'name' => $product->getName(),
+            'is_subscription_enabled' => $isProductEnabled,
+            'price' => $product->getPrice(),
+        );
+        // Save optional fields if there were pass in the profile
+        if(isset($data['min_qty']) && strlen($data['min_qty'])) {
+            $newPlatformProductData['min_qty'] = $data['min_qty'];
+        }
+        if(isset($data['max_qty']) && strlen($data['max_qty'])) {
+            $newPlatformProductData['max_qty'] = $data['max_qty'];
+        }
+        if(isset($data['discount']) && strlen($data['discount'])) {
+            $newPlatformProductData['discount'] = $data['discount'];
+        }
+        if(isset($data['is_discount_percentage']) && strlen($data['is_discount_percentage'])) {
+            $newPlatformProductData['is_discount_percentage'] = $data['is_discount_percentage'];
+        }
+        // Save intervals if they were passed in the profile
+        if(isset($data['product_intervals']) && strlen($data['product_intervals'])) {
+            // Convert intervals to array
+            $intervalsArray = explode(',', trim($data['product_intervals'], ' ,'));
+            $newPlatformProductData['intervals'] = $intervalsArray;
+        }
+
+        // Do API query by SKU for product info
+        $response = $apiHelper->fetchProducts(array('sku' => $product->getSku()));
+        // Check response
+        if ($response['code'] != 200) {
+            // API Error
+            Mage::throwException($this->__('API error!'));
+        }
+        // Check that we found product info
+        $result = $response['result'];
+        $platformProducts = $result['products'];
+        if (is_array($platformProducts) && count($platformProducts) == 1) {
+            // Found product, lets update
+            $platformProduct = $platformProducts[0];
+            // Merge new platform data into fetched data
+            $platformProduct = array_merge($platformProduct, $newPlatformProductData);
+            // Call API
+            $response = $apiHelper->updateProduct($platformProduct['id'], $platformProduct);
+            // Check response for HTTP status code
+            if ($response['code'] != 201) {
+                Mage::throwException($this->__('Failed to update product on platform!'));
+            }
+
+            // Return product
+            return $platformProduct;
+        }
+        else {
+            if (!is_array($platformProducts) || !count($platformProducts)) {
+                // Didn't find product matching SKU
+                // Lets add this product to API
+                $response = $apiHelper->postProduct($newPlatformProductData);
+                // Check response
+                if ($response['code'] != 201) {
+                    // API Error
+                    Mage::throwException('API error!');
+                }
+                $result = $response['result'];
+                $platformProducts = $result['products'];
+                // Check that we have exactly 1 product
+                if (!is_array($platformProducts) || count($platformProducts) != 1) {
+                    Mage::throwException($this->__('Failed to create product on platform!'));
+                }
+                // Now get product data
+                $platformProduct = $platformProducts[0];
+                if (!is_array($platformProduct) || !isset($platformProduct['id'])) {
+                    Mage::throwException($this->__('Failed to read response from platform while creating product!'));
+                }
+
+                // Return product
+                return $platformProduct;
+            }
+            else {
+                // This shouldn't happen
+                Mage::throwException($this->__('Failed querying API for product SKU: ' . $product->getSku()));
+            }
+        }
+    }
+
+    /**
+     * Create a new subscription on the platform
+     *
+     * @param SFC_Autoship_Model_Subscription $subscription Magento subscription model object
+     * @return int Platform Subscription Id of the newly created or updated subscription record
+     */
+    public function createSubscription(SFC_Autoship_Model_Subscription $subscription)
+    {
+        // Get API Helper
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+
+        //Get subscription in platform format
+        $platformSubscription = $this->convertMagentoSubscriptionToPlatform($subscription);
+
+        // Call API
+        $response = $apiHelper->postSubscription($platformSubscription);
+        // Check response for HTTP status code
+        if ($response['code'] != 201) {
+            Mage::throwException($this->__('Failed to create subscription on platform!'));
+        }
+        // Parse subscription id out of response
+        $result = $response['result'];
+        $subscriptions = $result['subscriptions'];
+        // Check that we have exactly 1 subscription
+        if (!is_array($subscriptions) || count($subscriptions) != 1) {
+            Mage::throwException($this->__('Failed to create subscription on platform!'));
+        }
+        // Now get customer_id of created subscription
+        $subscription = $subscriptions[0];
+        if (!is_array($subscription) || !isset($subscription['id'])) {
+            Mage::throwException($this->__('Failed to read response from platform while creating subscription!'));
+        }
+
+        // Return customer id
+        return $subscription['id'];
+    }
+
+    /**
+     * Create or update a customer on the platform
+     *
+     * @param Mage_Customer_Model_Customer @customer Magento customer - method will create or update this customer record on the platform
+     * @return int Platform Customer Id of the newly created or updated customer record
+     */
+    public function createOrUpdateCustomer(Mage_Customer_Model_Customer $customer)
+    {
+        // Get API Helper
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+
+        // Query for current customer
+        $response = $apiHelper->fetchCustomers(
+            array(
+                'email' => $customer->getData('email'),
+            ));
+        // Check response for HTTP status code
+        if ($response['code'] != 200) {
+            Mage::throwException('Failed to find ');
+        }
+        // Parse customer id out of response
+        $result = $response['result'];
+        $platformCustomers = $result['customers'];
+        // Check that we have found exactly 1 customer
+        if (!is_array($platformCustomers)) {
+            Mage::throwException($this->__('Failed to read response from platform while querying for customer!'));
+        }
+        if (count($platformCustomers) > 1) {
+            Mage::throwException($this->__('Found more than 1 matching customer on platform!'));
+        }
+        if (count($platformCustomers) == 1) {
+            // Found customer, now lets update him
+            // Get id of found customer
+            $platformCustomer = $platformCustomers[0];
+            if (!is_array($platformCustomer) || !isset($platformCustomer['id'])) {
+                Mage::throwException($this->__('Failed to read response from platform while querying for customer!'));
+            }
+
+            // Update this customer
+            return $this->updateCustomer($platformCustomer['id'], $customer);
+        }
+        else {
+            // Didn't find existing customer, lets create him
+            return $this->createCustomer($customer);
+        }
+    }
+
+    /**
+     * Get a customer by email, return false if the customer doesn't exist
+     * @param $email
+     * @return mixed bool|array
+     * @throws Mage_Core_Exception
+     */
+    public function getCustomer($email)
+    {
+        // Get API Helper
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+
+        // Query for current customer
+        $response = $apiHelper->fetchCustomers(
+            array(
+                'email' => $email
+            ));
+        // Check response for HTTP status code
+        if ($response['code'] != 200) {
+            Mage::log('SFC_Autoship_Helper_Platform::getCustomer Customer does not exist on platform with email: ' . $email, Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+            return false;
+        }
+        // Parse customer id out of response
+        $result = $response['result'];
+        $platformCustomers = $result['customers'];
+        // Check that we have found exactly 1 customer
+        if (!is_array($platformCustomers)) {
+            Mage::throwException($this->__('Failed to read response from platform while querying for customer!'));
+        }
+        if (count($platformCustomers) > 1) {
+            Mage::throwException($this->__('Found more than 1 matching customer on platform!'));
+        }
+        if (count($platformCustomers) == 1) {
+            Mage::log('SFC_Autoship_Helper_Platform::getCustomer Customer exists on platform with email: ' . $email, Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+            // Found customer, now lets update him
+            // Get id of found customer
+            $platformCustomer = $platformCustomers[0];
+            if (!is_array($platformCustomer) || !isset($platformCustomer['id'])) {
+                Mage::throwException($this->__('Failed to read response from platform while querying for customer!'));
+            }
+            return $platformCustomer;
+        }
+        return false;
+    }
+
+    /**
+     * Create a new customer on the platform
+     *
+     * @param Mage_Customer_Model_Customer @customer Magento customer - method will create this customer record on the platform
+     * @return int Platform Customer Id of the newly created customer record
+     */
+    public function createCustomer(Mage_Customer_Model_Customer $customer)
+    {
+        // Get API Helper
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+
+        // Build an array of data representing the customer
+        // Get platform customer data structure
+        $platformCustomer = $this->convertMagentoCustomerToPlatform($customer);
+        // Call API
+        $response = $apiHelper->postCustomer($platformCustomer);
+        // Check response for HTTP status code
+        if ($response['code'] != 201) {
+            Mage::throwException($this->__('Failed to create customer on platform!'));
+        }
+        // Parse customer id out of response
+        $result = $response['result'];
+        $platformCustomers = $result['customers'];
+        // Check that we have exactly 1 customer
+        if (!is_array($platformCustomers) || count($platformCustomers) != 1) {
+            Mage::throwException($this->__('Failed to create customer on platform!'));
+        }
+        // Now get customer_id of created customer
+        $platformCustomer = $platformCustomers[0];
+        if (!is_array($platformCustomer) || !isset($platformCustomer['id'])) {
+            Mage::throwException($this->__('Failed to read response from platform while creating customer!'));
+        }
+
+        // Return customer id
+        return $platformCustomer['id'];
+    }
+
+    /**
+     * Update an existing customer on the platform
+     *
+     * @param int $platformCustomerId Id of the current customer record on the platform
+     * @param Mage_Customer_Model_Customer $customer Magento customer - this method will update the customer record on the platform with this data
+     * @return int Platform Customer Id of the update customer record
+     */
+    public function updateCustomer($platformCustomerId, Mage_Customer_Model_Customer $customer)
+    {
+        // Get API Helper
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+
+        // Get platform customer data structure
+        $platformCustomer = $this->convertMagentoCustomerToPlatform($customer);
+        // Call API
+        $response = $apiHelper->updateCustomer($platformCustomerId, $platformCustomer);
+        // Check response for HTTP status code
+        if ($response['code'] != 201) {
+            Mage::throwException($this->__('Failed to update customer on platform!'));
+        }
+        // Parse customer id out of response
+        $result = $response['result'];
+        $platformCustomer = $result['customer'];
+        // Now get customer_id of created customer
+        if (!is_array($platformCustomer) || !isset($platformCustomer['id'])) {
+            Mage::throwException($this->__('Failed to read response from platform while updating customer!'));
+        }
+
+        // Return customer id
+        return $platformCustomer['id'];
+    }
+
+    protected function convertMagentoCustomerToPlatform(Mage_Customer_Model_Customer $customer)
+    {
+        // Build an array of data representing the customer
+        $platformCustomer = array(
+            'magento_customer_id' => $customer->getId(),
+            'email' => $customer->getData('email'),
+            'first_name' => $customer->getData('firstname'),
+            'middle_name' => $customer->getData('middlename'),
+            'last_name' => $customer->getData('lastname'),
+        );
+        try {
+            if (class_exists('SFC_AuthnetToken_Model_Cim') || class_exists('SFC_CimCore_Model_Cim')) {
+                if (strlen($customer->getData('cim_customer_profile_id')) > 0) {
+                    $platformCustomer['external_vault_customer_token'] = $customer->getData('cim_customer_profile_id');
+                }
+            }
+        } Catch (Exception $e) {
+            //When in dev mode 'class_exists' will throw an exception if the class can't be found
+        }
+
+        return $platformCustomer;
+    }
+
+    /**
+     * Gets subscriptions from the platform, into an array, filtered by $params
+     *
+     * @param Mage_Customer_Model_Customer $customer Customer for which to get subscriptions
+     * @param array $params Array of parameter => value pairs to filter the collection of subscriptions
+     * @return array Returns an array of SFC_Autoship_Model_Subscription model objects
+     */
+    public function getSubscriptions(Mage_Customer_Model_Customer $customer, $params = array())
+    {
+        // Check params is an array
+        if (!is_array($params)) {
+            Mage::throwException('Invalid parameters specified!');
+        }
+        // Add customer filter to params
+        $params['magento_customer_id'] = $customer->getId();
+
+        // Call All method
+        return $this->getAllSubscriptions($params);
+    }
+
+    /**
+     * Gets subscriptions from the platform, into an array, filtered by $params
+     *
+     * @param array $params Array of parameter => value pairs to filter the collection of subscriptions
+     * @return array Returns an array of SFC_Autoship_Model_Subscription model objects
+     */
+    public function getAllSubscriptions($params = array())
+    {
+        // Get API Helper
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+
+        // Check params is an array
+        if (!is_array($params)) {
+            Mage::throwException('Invalid parameters specified!');
+        }
+        // Get subscriptions using API
+        $response = $apiHelper->fetchSubscriptions($params);
+        // Check response for HTTP status code
+        if ($response['code'] != 200) {
+            Mage::throwException($this->__('Failed to query for subscriptions!'));
+        }
+        // Parse subscriptions out of response
+        $result = $response['result'];
+        $platformSubscriptions = $result['subscriptions'];
+        // Iterate subscriptions and build subscription model objects
+        $subscriptions = array();
+        foreach ($platformSubscriptions as $platformSubscription) {
+            // Convert platform subscription to Magento model and save in array
+            $subscription = $this->convertPlatformSubscriptionToMagento($platformSubscription);
+            if(isset($params['magento_customer_id'])) {
+                $subscription['customer_id'] = $params['magento_customer_id'];
+            }
+            $subscriptions[] = $subscription;
+        }
+
+        // Return array of subscriptions
+        return $subscriptions;
+    }
+
+    /**
+     * Get a subscription by id
+     *
+     * @param int $subscriptionId Unique id of subscription on platform
+     * @return \SFC_Autoship_Model_Subscription Return the subscription model
+     */
+    public function getSubscription($subscriptionId)
+    {
+        // Get API Helper
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+        // Call delete on API
+        $response = $apiHelper->fetchSubscription($subscriptionId);
+        // Check response for HTTP status code
+        if ($response['code'] != 200) {
+            Mage::throwException($this->__('Failed to GET subscription!'));
+        }
+        // Parse subscription from result
+        $result = $response['result'];
+        if (!isset($result['subscription']) || !is_array($result['subscription'])) {
+            Mage::throwException($this->__('Failed to parse GET subscription response!'));
+        }
+        $platformSubscription = $result['subscription'];
+        // Assume subscription is for current customer
+        /** @var Mage_Customer_Model_Session $customerSession */
+        $customerSession = Mage::getSingleton('customer/session');
+        $customer = $customerSession->getCustomer();
+        // Convert subscription to Mage model
+        $subscription = $this->convertPlatformSubscriptionToMagento($platformSubscription, $customer);
+
+        // Return subscription
+        return $subscription;
+    }
+
+    /**
+     * Update an existing subscription on the platform
+     *
+     * @param int $platformSubscriptionId Id of the current subscription record on the platform
+     * @param SFC_Autoship_Model_Subscription $subscription Mage subscription model object
+     * @return int Platform subscription Id of the update subscription record
+     */
+    public function updateSubscription($platformSubscriptionId, SFC_Autoship_Model_Subscription $subscription)
+    {
+        // Get API Helper
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+
+        //Get subscription in platform format
+        $platformSubscription = $this->convertMagentoSubscriptionToPlatform($subscription, $platformSubscriptionId);
+
+        // Call API
+        $response = $apiHelper->updateSubscription($platformSubscriptionId, $platformSubscription);
+        // Check response for HTTP status code
+        if ($response['code'] != 201) {
+            Mage::throwException($this->__('Failed to update subscription on platform!'));
+        }
+        // Parse customer id out of response
+        $result = $response['result'];
+        $platformSubscription = $result['subscription'];
+        // Now get customer_id of created subscription
+        if (!is_array($platformSubscription) || !isset($platformSubscription['id'])) {
+            Mage::throwException($this->__('Failed to read response from platform while updating subscription!'));
+        }
+
+        // Return customer id
+        return $platformSubscription['id'];
+    }
+
+    /**
+     * Transform a Subscription model into an array that can be read by the platform
+     * @param SFC_Autoship_Model_Subscription $subscription
+     * @param null $platformSubscriptionId
+     * @return array
+     */
+    public function convertMagentoSubscriptionToPlatform(SFC_Autoship_Model_Subscription $subscription, $platformSubscriptionId = null)
+    {
+        // Get API Helper
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+
+        if (!$subscription->getData('platform_customer_id')) {
+            // Get customer
+            $customer = $subscription->getCustomer();
+            // Create or update the customer
+            $platformCustomerId = $this->createOrUpdateCustomer($customer);
+            $subscription->setData('platform_customer_id', $platformCustomerId);
+        }
+
+        if (!$subscription->getData('product_sku')) {
+            $sku = Mage::getModel('catalog/product')->load($subscription->getData('product_id'))->getSku();
+            $subscription->setData('product_sku', $sku);
+        }
+
+        $platformSubscription = array(
+            'customer_id' => $subscription->getData('platform_customer_id'),
+            'subscription_products' => array(
+                array(
+                    'product_sku' => $subscription->getData('product_sku'),
+                    'qty' => $subscription->getData('qty')
+                )
+            ),
+            'next_order_date' => substr($subscription->getData('next_order_date'), 0, 10),
+            'interval' => $subscription->getData('interval'),
+            'magento_shipping_address_id' => $subscription->getData('shipping_address_id'),
+            'magento_shipping_method_code' => $subscription->getData('shipping_method'),
+            'coupon_code' => $subscription->getData('coupon_code'),
+            'skip_first_order' => $subscription->getData('skip_first_order'),
+            'send_customer_notification' => $subscription->getData('send_customer_notification'),
+            'magento_store_code' => $subscription->getData('magento_store_code')
+        );
+
+        // If expiration date set, set on platform
+        if($subscription->hasData('expiration_date')) {
+            $platformSubscription['expiration_date'] = $subscription->getData('expiration_date');
+        }
+
+        //If subscription is using fixed price
+        if ($subscription->hasData('use_fixed_price')) {
+            $platformSubscription['use_fixed_price'] = $subscription->getData('use_fixed_price');
+        }
+
+        //Set fixed price
+        if ($subscription->hasData('fixed_price')) {
+            $platformSubscription['fixed_price'] = $subscription->getData('fixed_price');
+        }
+
+        // If status is set, update
+        if($subscription->hasData('status')) {
+            $platformSubscription['status'] = $subscription->getData('status');
+        }
+
+        $options = $subscription->getData('magento_product_options');
+        if (is_array($options) && count($options)) {
+            $platformSubscription['subscription_products'][0]['magento_product_options'] = $options;
+        }
+
+        $additionalOptions = $subscription->getData('magento_additional_options');
+        if (is_array($additionalOptions) && count($additionalOptions)) {
+            $platformSubscription['subscription_products'][0]['magento_additional_options'] = $additionalOptions;
+        }
+
+        // Add payment details
+        // New, multi-gateway aware method
+        $platformSubscription['payment_profile'] = array(
+            'billing_address' => array(
+                'magento_address_id' => $subscription->getData('billing_address_id'),
+                'first_name' => $subscription->getData('billing_first_name'),
+                'last_name' => $subscription->getData('billing_last_name'),
+            ),
+            'gateway' => array(
+                'name' => $this->_methodCodeMap[$subscription->getData('payment_method_code')],
+            ),
+            'payment_token' => $subscription->getData('payment_token'),
+            'creditcard_last_digits' => substr($subscription->getData('customer_cardnumber'), -4),
+        );
+
+        return $platformSubscription;
+    }
+
+    /**
+     * Delete a subscription
+     *
+     * @param int $subscriptionId Unique id of subscription on platform
+     */
+    public function deleteSubscription($subscriptionId)
+    {
+        // Get API Helper
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+        // Call delete on API
+        $response = $apiHelper->deleteSubscription($subscriptionId);
+        // Check response for HTTP status code
+        if ($response['code'] != 204) {
+            Mage::throwException($this->__('Failed to delete subscription!'));
+        }
+    }
+
+    /**
+     * Cancel a subscription
+     *
+     * @param int $subscriptionId Unique id of subscription on platform
+     */
+    public function cancelSubscription($subscriptionId)
+    {
+        // Get API Helper
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+        // Call delete on API
+        $response = $apiHelper->cancelSubscription($subscriptionId);
+        // Check response for HTTP status code
+        if ($response['code'] != 204) {
+            Mage::throwException($this->__('Failed to cancel subscription!'));
+        }
+    }
+
+    /**
+     * Pause a subscription
+     *
+     * @param int $subscriptionId Unique id of subscription on platform
+     */
+    public function pauseSubscription($subscriptionId)
+    {
+        // Get API Helper
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+        // Call delete on API
+        $response = $apiHelper->pauseSubscription($subscriptionId);
+        // Check response for HTTP status code
+        if ($response['code'] != 204) {
+            Mage::throwException($this->__('Failed to pause subscription!'));
+        }
+    }
+
+    /**
+     * Restart a subscription
+     *
+     * @param int $subscriptionId Unique id of subscription on platform
+     */
+    public function restartSubscription($subscriptionId)
+    {
+        // Get API Helper
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+        // Call delete on API
+        $response = $apiHelper->restartSubscription($subscriptionId);
+        // Check response for HTTP status code
+        if ($response['code'] != 204) {
+            Mage::throwException($this->__('Failed to restart subscription!'));
+        }
+    }
+
+    /**
+     * Skip next delivery on a subscription
+     *
+     * @param int $subscriptionId Unique id of subscription on platform
+     */
+    public function skipSubscription($subscriptionId)
+    {
+        // Get API Helper
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+        // Call delete on API
+        $response = $apiHelper->skipSubscription($subscriptionId);
+        // Check response for HTTP status code
+        if ($response['code'] != 204) {
+            Mage::throwException($this->__('Failed to skip next delivery on subscription!'));
+        }
+    }
+
+    public function getAccountConfig()
+    {
+        if($this->_accountConfig == null) {
+            // Get API Helper
+            /** @var SFC_Autoship_Helper_Api $apiHelper */
+            $apiHelper = Mage::helper('autoship/api');
+
+            // Query for current customer
+            $response = $apiHelper->fetchConfig();
+            // Check response for HTTP status code
+            if ($response['code'] != 200) {
+                Mage::throwException($this->__('Failed to find account configuration!'));
+            }
+            // Get config data out of response structure
+            $config = $response['result']['config'];
+            $this->_accountConfig = $config;
+        }
+
+        return $this->_accountConfig;
+    }
+
+    public function getConfiguredPaymentMethodCode()
+    {
+        // Get account configuration from platform
+        $accountConfig = $this->getAccountConfig();
+        if (isset($accountConfig['magento_payment_method'])) {
+            return $accountConfig['magento_payment_method'];
+        }
+        else {
+            return '';
+        }
+    }
+
+    public function getConfiguredGateway()
+    {
+        // Get account configuration from platform
+        $accountConfig = $this->getAccountConfig();
+        if (isset($accountConfig['payment_gateway'])) {
+            return $accountConfig['payment_gateway'];
+        }
+        else {
+            return '';
+        }
+    }
+
+    /**
+     * Converts subscription data from platform to Magento model object
+     *
+     * @param array $platformSubscription Subscription data returned from platform
+     * @param Mage_Customer_Model_Customer|null $customer
+     * @return SFC_Autoship_Model_Subscription Magento subscription model object
+     */
+    protected function convertPlatformSubscriptionToMagento(array $platformSubscription, Mage_Customer_Model_Customer $customer = null)
+    {
+        // Get API Helper
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+
+        /** @var SFC_Autoship_Model_Subscription $subscription */
+        $subscription = Mage::getModel('autoship/subscription');
+
+        //First set the subscription id
+        $subscription->setData('subscription_id', $platformSubscription['id']);
+
+        //Iterate over all scalar (top-level) values returned by the platform helper, and set them on the subscription
+        //Exclude values where the subscription key is not the magento model key
+        $_mappedFields = array('id', 'customer_id', 'magento_shipping_address_id', 'magento_shipping_method_code');
+        foreach($platformSubscription as $k => $v) {
+            if (is_scalar($v) && !in_array($k, $_mappedFields)) {
+                $subscription->setData($k, $v);
+            }
+        }
+
+        $platformProducts = $platformSubscription['subscription_products'];
+        $platformProduct = $platformProducts[0];
+        /** @var Mage_Catalog_Model_Product $productModel */
+        $productModel = Mage::getModel('catalog/product');
+        $productId = $productModel->getIdBySku($platformProduct['product_sku']);
+        if (isset($platformProduct['id'])) {
+            $subscription->setData('platform_product_id', $platformProduct['id']);
+        } else {
+            $subscription->setData('platform_product_id', null);
+        }
+        $subscription->setData('product_sku', $platformProduct['product_sku']);
+        $subscription->setData('product_id', $productId);
+        $subscription->setData('qty', $platformProduct['qty']);
+
+        $subscription->setData('platform_customer_id', $platformSubscription['customer_id']);
+        if($customer != null) {
+            $subscription->setData('customer_id', $customer->getId());
+        }
+
+        if (isset($platformSubscription['payment_profile']['billing_address']['magento_address_id'])) {
+            $subscription->setData('billing_address_id', $platformSubscription['payment_profile']['billing_address']['magento_address_id']);
+        }
+        $subscription->setData('billing_first_name', $platformSubscription['payment_profile']['billing_address']['first_name']);
+        $subscription->setData('billing_last_name', $platformSubscription['payment_profile']['billing_address']['last_name']);
+        if (isset($platformSubscription['magento_shipping_address_id'])) {
+            $subscription->setData('shipping_address_id', $platformSubscription['magento_shipping_address_id']);
+        }
+        $subscription->setData('shipping_method', $platformSubscription['magento_shipping_method_code']);
+
+        // Save generic pay profile
+        $subscription->setData('payment_profile', $platformSubscription['payment_profile']);
+        // Handle payment gateway specific setting
+        $subscription->setData('payment_method_code', $this->getConfiguredPaymentMethodCode());
+        $subscription->setData('payment_token', $platformSubscription['payment_profile']['payment_token']);
+        $subscription->setData('creditcard_last_digits', $platformSubscription['payment_profile']['creditcard_last_digits']);
+        $subscription->setData('customer_cardnumber', $platformSubscription['payment_profile']['creditcard_last_digits']);
+
+        return $subscription;
+    }
+
+    /**
+     * @param $code
+     */
+    public function getReport($code)
+    {
+        // Get API Helper
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+
+        $response = $apiHelper->fetchReport($code);
+
+        if ($response['code'] !== 200) {
+            Mage::log('SFC_Autoship_Helper_Platform::getReport Report does not exist on platform with code: ' . $code, Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+        }
+
+        $result = $response['result'];
+
+        if (!$result) {
+            Mage::log('SFC_Autoship_Helper_Platform::getReport Report has no result, with code: ' . $code, Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+            Mage::throwException($this->__('Failed to read result for report with code %s', $code));
+        }
+
+        return $result;
+    }
+
+}

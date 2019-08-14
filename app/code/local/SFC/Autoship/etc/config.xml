@@ -19,7 +19,7 @@
 <config>
     <modules>
         <SFC_Autoship>
-            <version>1.3.1.14</version>
+            <version>1.3.2.6</version>
         </SFC_Autoship>
     </modules>
     <global>
@@ -49,8 +49,12 @@
                     <onepage_payment_methods>SFC_Autoship_Block_Checkout_Onepage_Payment_Methods</onepage_payment_methods>
                 </rewrite>
             </checkout>
-
-
+            <adminhtml>
+                <rewrite>
+                    <sales_order_create_billing_method_form>SFC_Autoship_Block_Adminhtml_Sales_Order_Create_Billing_Method_Form</sales_order_create_billing_method_form>
+                    <customer_edit_tabs>SFC_Autoship_Block_Adminhtml_Customer_Edit_Tabs</customer_edit_tabs>
+                </rewrite>
+            </adminhtml>
         </blocks>
         <models>
             <autoship>
@@ -90,15 +94,13 @@
                     <cart_product_api>SFC_Autoship_Model_Checkout_Cart_Product_Api</cart_product_api>
                 </rewrite>
                 <rewrite>
-                    <cart_payment_api>SFC_Autoship_Model_Checkout_Cart_Payment_Api</cart_payment_api>
-                </rewrite>
-                <rewrite>
                     <cart_api>SFC_Autoship_Model_Checkout_Cart_Api</cart_api>
                 </rewrite>
             </checkout>
             <sales>
                 <rewrite>
                     <quote_address>SFC_Autoship_Model_Quote_Address</quote_address>
+                    <quote_item>SFC_Autoship_Model_Sales_Quote_Item</quote_item>
                 </rewrite>
             </sales>
             <salesrule>
@@ -170,6 +172,24 @@
                     </subscription_checkout_cart_update_items_after>
                 </observers>
             </checkout_cart_update_items_after>
+            <adminhtml_sales_order_create_process_data>
+                <observers>
+                    <subscription_adminhtml_sales_order_create_process_data>
+                        <type>singleton</type>
+                        <class>autoship/observer</class>
+                        <method>onAdminhtmlSalesOrderCreateProcessData</method>
+                    </subscription_adminhtml_sales_order_create_process_data>
+                </observers>
+            </adminhtml_sales_order_create_process_data>
+            <sales_convert_order_item_to_quote_item>
+                <observers>
+                    <subscription_sales_convert_order_item_to_quote_item>
+                        <type>singleton</type>
+                        <class>autoship/observer</class>
+                        <method>onSalesConvertOrderItemToQuoteItem</method>
+                    </subscription_sales_convert_order_item_to_quote_item>
+                </observers>
+            </sales_convert_order_item_to_quote_item>
             <sales_convert_quote_item_to_order_item>
                 <observers>
                     <subscription_sales_convert_quote_item_to_order_item>
@@ -214,6 +234,15 @@
                     </checkout_allow_guest>
                 </observers>
             </checkout_allow_guest>
+            <customer_save_after>
+                <observers>
+                    <subscription_customer_save_after>
+                        <type>singleton</type>
+                        <class>autoship/observer</class>
+                        <method>onCustomerSave</method>
+                    </subscription_customer_save_after>
+                </observers>
+            </customer_save_after>
         </events>
 
     </global>
@@ -245,13 +274,13 @@
     <!-- Admin panel routers -->
     <admin>
         <routers>
-            <autoship_admin>
-                <use>admin</use>
+            <adminhtml>
                 <args>
-                    <module>SFC_Autoship</module>
-                    <frontName>subscriptions_admin</frontName>
+                    <modules>
+                        <SFC_Autoship after="Mage_Adminhtml">SFC_Autoship_Adminhtml</SFC_Autoship>
+                    </modules>
                 </args>
-            </autoship_admin>
+            </adminhtml>
         </routers>
     </admin>
     <!-- Admin panel html changes -->

@@ -20,8 +20,35 @@
 <?php if(Mage::getStoreConfig('autoship_subscription/subscription/use_new_subscription_page') != '1'): ?>
 <?php $quoteItem = $this->getQuoteItem(); ?>
 <?php if ($this->isItemSubscriptionEligible()): ?>
-    <div class="subscription-product">
-    		<p><?php echo $this->__('Would you like to receive regular shipments of this item?') ?></p>
+<?php if($this->isTrialProduct() || $this->getSubscriptionOptionMode() == 'subscription_only'): // Subscription Only Mode or Trial Product - Only Subscription Option Allowed ?>
+    <div class="subscription-product product-options">
+        <?php if ($this->isTrialProduct()): ?><p><?php echo $this->__('Trial Subscription') ?></p><?php endif; ?>
+        <ul class="options-list">
+            <li>
+                <input type="hidden"
+                       id="<?php echo $quoteItem->getId() ?>-delivery-option-subscribe"
+                       name="cart[<?php echo $quoteItem->getId() ?>][delivery-option]" value="subscribe"
+                    />
+
+                <label for="delivery-interval">Delivery every:
+                    <select
+                            onchange="this.form.submit();"
+                            id="<?php echo $quoteItem->getId() ?>-delivery-interval"
+                            name="cart[<?php echo $quoteItem->getId() ?>][delivery-interval]"
+                            class="">
+                        <?php foreach ($this->getIntervals() as $interval): ?>
+                            <option value="<?php echo $interval ?>" <?php if($interval == $this->getNewSubscriptionInterval()): ?>selected="selected"<?php endif; ?>>
+                                <?php echo $interval ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </label>
+            </li>
+        </ul>
+    </div>
+<?php else: // Standard version ?>
+    <div class="subscription-product product-options">
+        <p><?php echo $this->__('Would you like to receive regular shipments of this item?') ?></p>
         <ul class="options-list">
             <li>
                 <input type="radio" onclick="" class="radio"
@@ -31,13 +58,9 @@
                        value="one-time-delivery"
                        <?php if (!$this->isItemFlaggedToCreateNewSubscription()): ?>checked="checked"<?php endif; ?>
                     />
-
-                <div class="radio-text">
-		            <span class=label>
-			            <label for="delivery-option-one-time">One Time Delivery</label>
-		            </span>
-                </div>
-                <div class="clearer"></div>
+	            <span class="label">
+		            <label for="delivery-option-one-time"><?php echo $this->__("One Time Delivery") ?></label>
+	            </span>
             </li>
             <li>
                 <input type="radio" onclick="" class="radio"
@@ -46,30 +69,27 @@
                        name="cart[<?php echo $quoteItem->getId() ?>][delivery-option]" value="subscribe"
                        <?php if ($this->isItemFlaggedToCreateNewSubscription()): ?>checked="checked"<?php endif; ?>
                     />
+	            <span class="label">
+                    <label for="delivery-option-subscribe"><?php echo $this->__("Regular Delivery") ?></label>
+	            </span>
 
-                <div class="radio-text">
-		            <span class=label>
-                        <label for="delivery-option-subscribe">Regular Delivery</label>
-		            </span>
-
-                    <p>
-                        <label for="delivery-interval">Delivery every:</label><br/>
-                        <select onchange=""
-                                id="<?php echo $quoteItem->getId() ?>-delivery-interval"
-                                name="cart[<?php echo $quoteItem->getId() ?>][delivery-interval]"
-                                class="">
-                            <?php foreach ($this->getIntervals() as $interval): ?>
-                                <option value="<?php echo $interval ?>" <?php if($interval == $this->getNewSubscriptionInterval()): ?>selected="selected"<?php endif; ?>>
-                                    <?php echo $interval ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </p>
-                </div>
-                <div class="clearer"></div>
+                <label for="delivery-interval"><?php echo $this->__("Delivery every:") ?>
+                    <select
+                            onchange="this.form.submit();"
+                            id="<?php echo $quoteItem->getId() ?>-delivery-interval"
+                            name="cart[<?php echo $quoteItem->getId() ?>][delivery-interval]"
+                            class="">
+                        <?php foreach ($this->getIntervals() as $interval): ?>
+                            <option value="<?php echo $interval ?>" <?php if($interval == $this->getNewSubscriptionInterval()): ?>selected="selected"<?php endif; ?>>
+                                <?php echo $interval ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </label>
             </li>
         </ul>
     </div>
+<?php endif; ?>
 <?php endif; ?>
 <?php endif; ?>
 <?php endif; ?>

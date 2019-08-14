@@ -1,4 +1,4 @@
-<?php //00612
+<?php
 /**
  * Subscribe Pro - Subscriptions Management Extension
  *
@@ -13,255 +13,842 @@
  * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
  * @link      http://www.subscribepro.com/
  *
+ * @SuppressWarnings(PHPMD.LongVariable)
+ * @SuppressWarnings(PHPMD.TooManyMethods)
+ * @SuppressWarnings(PHPMD.TooManyFields)
  */
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='/ioncube/ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if((@$__id[1])==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}@dl($__ln);}else{die('The file '.__FILE__." is corrupted. Ensure that you use binary mode when transferring files with FTP and disable the 'TAR smart cr/lf feature' if using WinZIP\n");}if(function_exists('_il_exec')){return _il_exec();}die('The file <b>'.__FILE__.'</b> has been encoded with the <a href="http://www.ioncube.com">ionCube PHP Encoder</a> and requires the free '.basename($__ln).' <a href="http://www.ioncube.com/loader_download/">ionCube PHP Loader</a> to be installed.');
+class SFC_Autoship_Model_Payment_Method extends Mage_Payment_Model_Method_Cc
+{
+    const METHOD_CODE = 'subscribe_pro';
+    const METHOD_CODE_KEY_TOKEN = '_token_';
 
-?>
-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
-aR3jmFGn
+    /**
+     * Payment method code
+     */
+    protected $_code = self::METHOD_CODE;
+
+    /**
+     * Form block type
+     */
+    protected $_formBlockType = 'autoship/payment_form_cc';
+    protected $_formBlockTypeSaved = 'autoship/payment_form_cc_saved';
+
+    /**
+     * Info block type
+     */
+    protected $_infoBlockType = 'autoship/payment_info_cc';
+
+    /**
+     * Availability options
+     */
+    protected $_isGateway = true;
+    protected $_canAuthorize = true;
+    protected $_canCapture = true;
+    protected $_canCapturePartial = true;
+    protected $_canRefund = true;
+    protected $_canRefundInvoicePartial = true;
+    protected $_canVoid = true;
+    protected $_canUseInternal = true;
+    protected $_canUseCheckout = true;
+    protected $_canUseForMultishipping = true;
+    protected $_canSaveCc = false;
+    protected $_canFetchTransactionInfo = true;
+
+    /**
+     * Members to hold saved card instance data     *
+     */
+    protected $_savedPaymentProfile = null;
+
+    /**
+     * Turn this method instance into a method representing once particular saved card / profile
+     */
+    public function setSavedPaymentProfile(SFC_Autoship_Model_Payment_Profile $paymentProfile)
+    {
+        $this->_savedPaymentProfile = $paymentProfile;
+    }
+
+    /**
+     * @return SFC_Autoship_Model_Payment_Profile
+     */
+    public function getSavedPaymentProfile()
+    {
+        return $this->_savedPaymentProfile;
+    }
+
+    /**
+     * Retrieve payment method title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        // If this is a saved card instance, title is saved card last digits
+        if ($this->_savedPaymentProfile instanceof SFC_Autoship_Model_Payment_Profile) {
+            return Mage::helper('autoship')->__('Use my Saved Credit Card (%s)', $this->_savedPaymentProfile->getData('creditcard_last_digits'));
+        }
+        else {
+            return $this->getConfigData('title');
+        }
+    }
+
+    /**
+     * Retrieve payment method code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        if (empty($this->_code)) {
+            Mage::throwException(Mage::helper('payment')->__('Cannot retrieve the payment method code.'));
+        }
+        if ($this->_savedPaymentProfile instanceof SFC_Autoship_Model_Payment_Profile) {
+            return self::METHOD_CODE . self::METHOD_CODE_KEY_TOKEN . $this->_savedPaymentProfile->getData('payment_token');
+        }
+        else {
+            return $this->_code;
+        }
+    }
+
+    /**
+     * Retrieve block type for method form generation
+     *
+     * @return string
+     */
+    public function getFormBlockType()
+    {
+        if ($this->_savedPaymentProfile instanceof SFC_Autoship_Model_Payment_Profile) {
+            return $this->_formBlockTypeSaved;
+        }
+        else {
+            return $this->_formBlockType;
+        }
+    }
+
+    /**
+     * Retrieve information from payment configuration
+     *
+     * @param string $field
+     * @param int|string|null|Mage_Core_Model_Store $storeId
+     *
+     * @return mixed
+     */
+    public function getConfigData($field, $storeId = null)
+    {
+        if (null === $storeId) {
+            $storeId = $this->getStore();
+        }
+        $path = 'payment/' . self::METHOD_CODE . '/' . $field;
+
+        return Mage::getStoreConfig($path, $storeId);
+    }
+
+    /**
+     * Assign data to info model instance
+     *
+     * @param   mixed $data
+     * @return  $this
+     */
+    public function assignData($data)
+    {
+        // Get Mage_Payment_Model_Info instance from quote
+        $info = $this->getInfoInstance();
+
+        //Clear out additional information that may have been set previously in the session
+        $info->setAdditionalInformation(array());
+
+        // Call parent assignData
+        parent::assignData($data);
+
+        // Check config and cc number
+        if ($this->getConfigData('use_transparent_redirect') != '1' && isset($data['cc_number']) && strlen($data['cc_number']) && strpos($data['cc_number'], 'XXXX') === false) {
+            // Get quote
+            /** @var Mage_Sales_Model_Quote $quote */
+            $quote = $info->getQuote();
+            // In this case, we aren't using transparent redirect, nor using an existing token, someone has passed in full CC number, create new token
+            $this->createNewPaymentToken($quote, $data);
+        }
+
+        // Customer entering new card
+        // Save basic fields in additional info
+        if (isset($data['save_card'])) {
+            $info->setAdditionalInformation('save_card', $data['save_card']);
+        }
+        if (isset($data['is_new_card'])) {
+            $info->setAdditionalInformation('is_new_card', $data['is_new_card']);
+        }
+        if (isset($data['payment_token'])) {
+            $info->setAdditionalInformation('payment_token', $data['payment_token']);
+        }
+        if (isset($data['cc_number'])) {
+            $info->setAdditionalInformation('obscured_cc_number', $data['cc_number']);
+        }
+        if (isset($data['third_party_token'])) {
+            $info->setAdditionalInformation('is_third_party', true);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Check whether payment method can be used
+     *
+     * @param Mage_Sales_Model_Quote|null $quote
+     *
+     * @return bool
+     */
+    public function isAvailable($quote = null)
+    {
+        // If $quote object not populated, call parent method
+        if ($quote == null) {
+            // Call parent
+            return parent::isAvailable($quote);
+        }
+        // Check the checkout method selected and look for guest checkout
+        if ($quote != null && $quote->getCheckoutMethod() == Mage_Checkout_Model_Type_Onepage::METHOD_GUEST) {
+            // Check configuration settings
+            if (Mage::getStoreConfig('payment/' . self::METHOD_CODE . '/allow_guest_checkout', $quote->getStore()) == '1') {
+                // Guest checkout option is enabled, call parent method to see if payment method is available
+                return parent::isAvailable($quote);
+            }
+            else {
+                // return No for guest checkout situation when guest checkout option disabled
+                return false;
+            }
+        }
+
+        // If all else fails, call the parent method
+        return parent::isAvailable($quote);
+    }
+
+    /**
+     * Check whether payment method is applicable to quote
+     * Purposed to allow use in controllers some logic that was implemented in blocks only before
+     *
+     * @param Mage_Sales_Model_Quote $quote
+     * @param int|null $checksBitMask
+     * @return bool
+     */
+    public function isApplicableToQuote($quote, $checksBitMask)
+    {
+        /** @var SFC_Autoship_Helper_Quote $quoteHelper */
+        $quoteHelper = Mage::helper('autoship/quote');
+
+        if ($quoteHelper->hasProductsToCreateNewSubscription()) {
+            //Remove the check for zero dollar checkout on this method, as its code is not 'free' but it does support zero dollar checkout
+            if ($checksBitMask) {
+                $checksBitMask = $checksBitMask & ~self::CHECK_ZERO_TOTAL;
+            }
+        } else {
+            if ($this->getConfigData('active_non_subscription') != '1') {
+                return false;
+            }
+        }
+        return parent::isApplicableToQuote($quote, $checksBitMask);
+    }
+
+    public function hasVerification()
+    {
+        // Always ignore verification code in admin ordering
+        if (Mage::app()->getStore()->isAdmin()
+            || ($this->getSavedPaymentProfile() instanceof SFC_Autoship_Model_Payment_Profile
+                && $this->getSavedPaymentProfile()->isThirdParty())) {
+            return false;
+        }
+        else {
+            return parent::hasVerification();
+        }
+    }
+
+    /**
+     * Validate payment method information object
+     * @return $this
+     * @throws SFC_Autoship_Helper_PaymentError_Exception
+     */
+    public function validate()
+    {
+        //Don't validate if we're in the API
+        if (Mage::app()->getFrontController()->getRequest()->getModuleName() == 'api') {
+            return true;
+        }
+
+        foreach($this->_getValidateFields($this->getInfoInstance()) as $field) {
+            if (!$this->_validateField($field, $this->getInfoInstance())) {
+                throw new SFC_Autoship_Helper_PaymentError_Exception(Mage::helper("autoship")->__('Payment form field: \'' . $field . '\' is missing from POST!'));
+            }
+        }
+        //We are letting vault do any additional validation
+        return true;
+    }
+
+    /**
+     * Determine which fields should be validated
+     * @param Mage_Payment_Model_Info $infoInstance
+     * @return array
+     */
+    protected function _getValidateFields(Mage_Payment_Model_Info $infoInstance)
+    {
+        if ($infoInstance->getAdditionalInformation('is_third_party')) {
+            //If third party we'll only be validating the cc & token
+            $_required_keys = array('cc_number', 'additional_information/payment_token');
+        } else {
+            //Otherwise validate all fields provided
+            $_required_keys = array('cc_number', 'cc_exp_month', 'cc_exp_year', 'additional_information/payment_token');
+            if ($this->hasVerification()) {
+                $_required_keys[] = 'cc_cid';
+            }
+        }
+        return $_required_keys;
+    }
+
+    /**
+     * Validate a field on the info instance.
+     * @param $field
+     * @param Mage_Payment_Model_Info $infoInstance
+     * @return mixed
+     */
+    protected function _validateField($field, Mage_Payment_Model_Info $infoInstance)
+    {
+        $method = 'getData';
+        if (preg_match('/^additional_information\//', $field)) {
+            $method = 'getAdditionalInformation';
+            $field = preg_replace('/^additional_information\//', '', $field);
+        }
+        return $infoInstance->{$method}($field);
+    }
+
+    /**
+     * Send authorize request to gateway
+     *
+     * @param Mage_Payment_Model_Info|\Varien_Object $payment
+     * @param  float $amount
+     * @return $this
+     */
+    public function authorize(Varien_Object $payment, $amount)
+    {
+        // Log
+        Mage::log('====== SFC_Autoship_Model_Payment_Method::authorize called ======', Zend_Log::INFO,
+            SFC_Autoship_Helper_Data::LOG_FILE);
+
+        /** @var SFC_Autoship_Helper_Vault $vaultHelper */
+        $vaultHelper = Mage::helper('autoship/vault');
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+
+        // Get order, etc from $payment
+        /** @var Mage_Sales_Model_Order $order */
+        $order = $payment->getOrder();
+        /** @var Mage_Customer_Model_Customer $customer */
+        $customer = $order->getCustomer();
+
+        // Set website / store for config on API helper
+        $store = Mage::app()->getWebsite($customer->getData('website_id'))->getDefaultStore();
+        $apiHelper->setConfigStore($store);
+        // Check if we should do profile transaction or one-time transaction
+        if ($payment->getAdditionalInformation('save_card') == '1' || $payment->getAdditionalInformation('is_new_card') != '1') {
+            // We are using existing pay profile or storing new one
+            // Get payment profile
+            $paymentProfile = $this->_createOrFetchPaymentProfile(
+                $payment,
+                $order->getBillingAddress(),
+                $payment->getData('cc_exp_month'),
+                $payment->getData('cc_exp_year'));
+            // Create transaction
+            if ($amount > 0.00) {
+                //Authorize if positive amount
+                $platformTransaction = $vaultHelper->authorize(
+                    $paymentProfile,
+                    $amount,
+                    $order->getData('base_currency_code'),
+                    array(
+                        'email' => $order->getCustomerEmail(),
+                        'order_id' => $order->getIncrementId(),
+                        'ip' => $order->getRemoteIp(),
+                    )
+                );
+            } else {
+                //Otherwise verify
+                Mage::log('====== SFC_Autoship_Model_Payment_Method::authorize called, but only verifying due to $0.00! ======', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+                $platformTransaction = $vaultHelper->verify(
+                    $paymentProfile,
+                    $order->getData('base_currency_code'),
+                    array(
+                        'email' => $order->getCustomerEmail(),
+                        'order_id' => $order->getIncrementId(),
+                        'ip' => $order->getRemoteIp(),
+                    )
+                );
+            }
+        }
+        else {
+
+            //Don't allow $0.00 for a one-time purchase, should use the 'free' method
+            if ($amount <= 0) {
+                Mage::throwException(Mage::helper('autoship')->__('Invalid amount for authorization.'));
+            }
+
+            // Create one-time transaction
+            $platformTransaction = $vaultHelper->authorizeOneTime(
+                $payment->getAdditionalInformation('payment_token'),
+                $amount,
+                array(
+                    'email' => $order->getCustomerEmail(),
+                    'order_id' => $order->getIncrementId(),
+                    'ip' => $order->getRemoteIp(),
+                ),
+                $order->getData('base_currency_code'),
+                $order->getBillingAddress(),
+                $payment->getData('cc_exp_month'),
+                $payment->getData('cc_exp_year')
+            );
+            // Save cc type in $payment
+            $ccType = $vaultHelper->mapSubscribeProCardTypeToMagento($platformTransaction['creditcard_type'], false);
+            if (strlen($ccType)) {
+                $payment->setCcType($ccType);
+            }
+        }
+
+        // Save transaction details in $payment
+        $payment
+            ->setIsTransactionClosed(0)
+            ->setCcTransId($platformTransaction['id'])
+            ->setTransactionId($platformTransaction['id'])
+            ->setAdditionalInformation('transaction_token', $platformTransaction['token'])
+            ->setAdditionalInformation('gateway_transaction_id', $platformTransaction['gateway_transaction_id'])
+            ->setAdditionalInformation('transaction_type', $platformTransaction['type'])
+        ;
+        // Save AVS and CVV results when available
+        if ($payment instanceof Mage_Sales_Model_Order_Payment) {
+            if (isset($platformTransaction['avs_code'])) {
+                $payment->setCcAvsStatus($platformTransaction['avs_code']);
+            }
+            if (isset($platformTransaction['cvv_code'])) {
+                $payment->setCcCidStatus($platformTransaction['cvv_code']);
+            }
+        }
+        /*
+        // Create transaction
+        // Magento seems to be creating this transaction already
+        // $payment->addTransaction(Mage_Sales_Model_Order_Payment_Transaction::TYPE_AUTH);
+        */
+
+        return $this;
+    }
+
+    /**
+     * Send capture request to gateway
+     *
+     * @param Mage_Payment_Model_Info|\Varien_Object $payment
+     * @param float $amount
+     * @return $this
+     */
+    public function capture(Varien_Object $payment, $amount)
+    {
+        // Log
+        Mage::log('====== SFC_Autoship_Model_Payment_Method::capture called ======', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+
+        /** @var SFC_Autoship_Helper_Vault $vaultHelper */
+        $vaultHelper = Mage::helper('autoship/vault');
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+
+        // Check if we're doing an auth n capture transaction or if we are just capturing and already auth'd transaction
+        // Look for a value in cc_trans_id and also that the saved payment_action was 'authorize'
+        if (strlen($payment->getData('cc_trans_id')) > 0 && $payment->getAdditionalInformation('transaction_type') == 'Authorization') {
+
+            if ($amount <= 0) {
+                //Don't allow prior auth capture for $0.00 transaction?
+                Mage::throwException(Mage::helper('autoship')->__('Invalid amount for capture.'));
+            }
+
+            /*
+             * We are doing PriorAuthCapture here...
+             */
+
+            // Get order, etc from $payment
+            /** @var Mage_Sales_Model_Order $order */
+            $order = $payment->getOrder();
+
+            // Set website / store for config on API helper
+            $store = Mage::app()->getStore($payment->getOrder()->getStoreId());
+            $apiHelper->setConfigStore($store);
+
+            // Use API to create a new prior auth-capture transaction
+            $platformTransaction = $vaultHelper->capture($payment->getCcTransId(), $amount, $order->getData('base_currency_code'));
+
+            // Save transaction details in $payment
+            $payment
+                ->setIsTransactionClosed(0)
+                ->setParentTransactionId($payment->getData('cc_trans_id'))
+                ->setTransactionId($platformTransaction['id'])
+//                ->setParentTransactionId($payment->getData('cc_trans_id'))
+//                ->setCcTransId($platformTransaction['id'])
+//                ->setTransactionId($platformTransaction['id'])
+//                ->setAdditionalInformation('transaction_token', $platformTransaction['token'])
+//                ->setAdditionalInformation('gateway_transaction_id', $platformTransaction['gateway_transaction_id'])
+//                ->setAdditionalInformation('transaction_type', $platformTransaction['type'])
+            ;
+            // Save AVS and CVV results when available
+            if ($payment instanceof Mage_Sales_Model_Order_Payment) {
+                if (isset($platformTransaction['avs_code'])) {
+                    $payment->setCcAvsStatus($platformTransaction['avs_code']);
+                }
+                if (isset($platformTransaction['cvv_code'])) {
+                    $payment->setCcCidStatus($platformTransaction['cvv_code']);
+                }
+            }
+            // Create transaction
+            $payment->addTransaction(Mage_Sales_Model_Order_Payment_Transaction::TYPE_CAPTURE);
+        }
+        else {
+            /*
+             * We are doing AuthCapture (also known as purchase) transaction here...
+             */
+
+            // Get order, etc from $payment
+            /** @var Mage_Sales_Model_Order $order */
+            $order = $payment->getOrder();
+            /** @var Mage_Customer_Model_Customer $customer */
+            $customer = $order->getCustomer();
+
+            // Set website / store for config on API helper
+            $store = Mage::app()->getWebsite($customer->getData('website_id'))->getDefaultStore();
+            $apiHelper->setConfigStore($store);
+            // Check if we should do profile transaction or one-time transaction
+            if ($payment->getAdditionalInformation('save_card') == '1' || $payment->getAdditionalInformation('is_new_card') != '1') {
+                // We are using existing pay profile or storing new one
+                // Get payment profile
+                $paymentProfile = $this->_createOrFetchPaymentProfile(
+                    $payment,
+                    $order->getBillingAddress(),
+                    $payment->getData('cc_exp_month'),
+                    $payment->getData('cc_exp_year'));
+                // Create transaction
+                if ($amount > 0) {
+                    //Capture if positive amount
+                    $platformTransaction = $vaultHelper->purchase(
+                        $paymentProfile,
+                        $amount,
+                        $order->getData('base_currency_code'),
+                        array(
+                            'email' => $order->getCustomerEmail(),
+                            'order_id' => $order->getIncrementId(),
+                            'ip' => $order->getRemoteIp(),
+                        )
+                    );
+                } else {
+                    //Otherwise just verify the card
+                    Mage::log('====== SFC_Autoship_Model_Payment_Method::capture called, but only verifying due to $0.00! ======', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+                    $platformTransaction = $vaultHelper->verify(
+                        $paymentProfile,
+                        $order->getData('base_currency_code'),
+                        array(
+                            'email' => $order->getCustomerEmail(),
+                            'order_id' => $order->getIncrementId(),
+                            'ip' => $order->getRemoteIp(),
+                        )
+                    );
+                }
+            }
+            else {
+                if ($amount <= 0) {
+                    //Don't allow $0.00 auth for one-time purchase, should use 'free' method
+                    Mage::throwException(Mage::helper('autoship')->__('Invalid amount for capture.'));
+                }
+                // Create one-time purchase transaction
+                $platformTransaction = $vaultHelper->purchaseOneTime(
+                    $payment->getAdditionalInformation('payment_token'),
+                    $amount,
+                    $order->getData('base_currency_code'),
+                    array(
+                        'email' => $order->getCustomerEmail(),
+                        'order_id' => $order->getIncrementId(),
+                        'ip' => $order->getRemoteIp(),
+                    ),
+                    $order->getBillingAddress(),
+                    $payment->getData('cc_exp_month'),
+                    $payment->getData('cc_exp_year')
+                );
+                // Save cc type in $payment
+                $ccType = $vaultHelper->mapSubscribeProCardTypeToMagento($platformTransaction['creditcard_type'], false);
+                if (strlen($ccType)) {
+                    $payment->setCcType($ccType);
+                }
+            }
+
+            // Save transaction details in $payment
+            $payment
+                ->setIsTransactionClosed(0)
+                ->setCcTransId($platformTransaction['id'])
+                ->setTransactionId($platformTransaction['id'])
+                ->setAdditionalInformation('transaction_token', $platformTransaction['token'])
+                ->setAdditionalInformation('gateway_transaction_id', $platformTransaction['gateway_transaction_id'])
+                ->setAdditionalInformation('transaction_type', $platformTransaction['type'])
+            ;
+            // Save AVS and CVV results when available
+            if ($payment instanceof Mage_Sales_Model_Order_Payment) {
+                if (isset($platformTransaction['avs_code'])) {
+                    $payment->setCcAvsStatus($platformTransaction['avs_code']);
+                }
+                if (isset($platformTransaction['cvv_code'])) {
+                    $payment->setCcCidStatus($platformTransaction['cvv_code']);
+                }
+            }
+            // Create transaction
+            $payment->addTransaction(Mage_Sales_Model_Order_Payment_Transaction::TYPE_CAPTURE);
+
+        }
+
+        return $this;
+    }
+
+    /**
+     * Void the payment through gateway
+     *
+     * @param Mage_Payment_Model_Info|\Varien_Object $payment
+     * @return $this
+     */
+    public function void(Varien_Object $payment)
+    {
+        // Log
+        Mage::log('====== SFC_Autoship_Model_Payment_Method::void called ======', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+
+        /** @var SFC_Autoship_Helper_Vault $vaultHelper */
+        $vaultHelper = Mage::helper('autoship/vault');
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+
+        // Set website / store for config on API helper
+        $store = Mage::app()->getStore($payment->getOrder()->getStoreId());
+        $apiHelper->setConfigStore($store);
+
+        // Use API to create a new prior auth-capture transaction
+        $platformTransaction = $vaultHelper->void($payment->getCcTransId());
+
+        // Save transaction details in $payment
+        // Field cc_trans_id in payment should hold the single authorize trans id and then the single capture trans id
+        // (or just the single auth n capture trans id)
+        $payment
+            ->setIsTransactionClosed(1)
+            ->setShouldCloseParentTransaction(1)
+            ->setParentTransactionId($payment->getData('cc_trans_id'))
+            ->setTransactionId($platformTransaction['id']);
+        // Create transaction
+        $payment->addTransaction(Mage_Sales_Model_Order_Payment_Transaction::TYPE_VOID);
+        // This seems to be necessary to keep 1.5.1.x and 1.10.1.x from duplicating the void transaction
+        $payment->setSkipTransactionCreation(true);
+
+        return $this;
+    }
+
+    /**
+     * Cancel the payment through gateway
+     *
+     * @param Mage_Payment_Model_Info|\Varien_Object $payment
+     * @return $this
+     */
+    public function cancel(Varien_Object $payment)
+    {
+        // Log
+        Mage::log('====== SFC_Autoship_Model_Payment_Method::cancel called ======', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+
+        return $this->void($payment);
+    }
+
+    /**
+     * Refund the amount with transaction id
+     *
+     * @param Mage_Payment_Model_Info|\Varien_Object $payment
+     * @param float $requestedAmount
+     * @return $this
+     */
+    public function refund(Varien_Object $payment, $requestedAmount)
+    {
+        // Log
+        Mage::log('====== SFC_Autoship_Model_Payment_Method::refund called ======', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+
+        /** @var SFC_Autoship_Helper_Vault $vaultHelper */
+        $vaultHelper = Mage::helper('autoship/vault');
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+
+        // Set website / store for config on API helper
+        $store = Mage::app()->getStore($payment->getOrder()->getStoreId());
+        $apiHelper->setConfigStore($store);
+
+        // Get order, etc from $payment
+        /** @var Mage_Sales_Model_Order $order */
+        $order = $payment->getOrder();
+
+        // Use API to create a new prior auth-capture transaction
+        $platformTransaction = $vaultHelper->credit($payment->getCcTransId(), $requestedAmount, $order->getData('base_currency_code'));
+
+        /**
+         * Duplicate logic from standard Authorize.net payment method:
+         * This means that we should close the parent transaction if we have refunded the full amount of original transaction
+         */
+        $shouldCloseRefundTransaction = 0;
+        if ($this->_formatAmount($payment->getAmountPaid() - $payment->getAmountRefunded()) == $this->_formatAmount($requestedAmount)) {
+            $shouldCloseRefundTransaction = 1;
+        }
+
+        // Save transaction details in $payment
+        // Field cc_trans_id in payment should hold the single original (purchase or capture) trans id
+        // (or just the single auth n capture trans id)
+        $payment
+            ->setIsTransactionClosed(1)
+            ->setShouldCloseParentTransaction($shouldCloseRefundTransaction)
+            ->setParentTransactionId($payment->getData('cc_trans_id'))
+            ->setTransactionId($platformTransaction['id']);
+        // This seems to be necessary to keep 1.5.1.x and 1.10.1.x from causing "transaction already closed" error on 1.5.1.x and 1.10.1.x
+        $payment->setSkipTransactionCreation(true);
+        // Create transaction
+        $payment->addTransaction(Mage_Sales_Model_Order_Payment_Transaction::TYPE_REFUND);
+
+        return $this;
+    }
+
+
+    protected function createNewPaymentToken(Mage_Sales_Model_Quote $quote, $data)
+    {
+
+        /** @var SFC_Autoship_Helper_Vault $vaultHelper */
+        $vaultHelper = Mage::helper('autoship/vault');
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+        // Set website / store for config on API helper
+        $apiHelper->setConfigStore($quote->getStore());
+        // Call api to create new payment token
+        $paymentToken = $vaultHelper->createPaymentToken(
+            $quote->getBillingAddress(),
+            $data['cc_number'],
+            $data['cc_exp_month'],
+            $data['cc_exp_year'],
+            $data['cc_cid']
+        );
+        // Now obfuscate card number and store token
+        $data['cc_number'] = $paymentToken['first_six_digits'] . 'XXXXXX' . $paymentToken['last_four_digits'];
+        $data['cc_cid'] = 'XXX';
+        $data['payment_token'] = $paymentToken['token'];
+    }
+
+    /**
+     * @param Varien_Object $payment
+     * @param \Mage_Customer_Model_Address_Abstract $billingAddress
+     * @param $expMonth
+     * @param $expYear
+     * @return array|SFC_Autoship_Model_Payment_Profile
+     * @throws Exception
+     * @throws Mage_Core_Exception
+     * @throws SFC_Autoship_Helper_PaymentError_Exception
+     */
+    protected function _createOrFetchPaymentProfile(Varien_Object $payment, Mage_Customer_Model_Address_Abstract $billingAddress, $expMonth, $expYear)
+    {
+        // Log
+        Mage::log('_createOrFetchPaymentProfile()', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+
+        /** @var SFC_Autoship_Helper_Vault $vaultHelper */
+        $vaultHelper = Mage::helper('autoship/vault');
+        /** @var SFC_Autoship_Helper_Platform $platformHelper */
+        $platformHelper = Mage::helper('autoship/platform');
+
+        // Get order, etc from $payment
+        /** @var Mage_Sales_Model_Order $order */
+        $order = $payment->getOrder();
+        /** @var Mage_Customer_Model_Customer $customer */
+        $customer = $order->getCustomer();
+
+        try {
+            // Get payment token
+            $paymentToken = $payment->getAdditionalInformation('payment_token');
+            // Check if this is a new card
+            $isNewCard = $payment->getAdditionalInformation('is_new_card') == '1';
+            // Get token details
+            $paymentTokenDetails = $vaultHelper->getPaymentTokenDetails($paymentToken);
+            $paymentTokenStatus = $paymentTokenDetails['storage_state'];
+            // Check status of token and new card flag
+            if ($isNewCard) {
+                // This is a new card
+                if ($paymentTokenStatus == 'cached') {
+                    // This is a new card, its only cache at this point, store it
+                    // Create or update customer on platform
+                    $platformHelper->createOrUpdateCustomer($customer);
+                    // Store token as new pay profile
+                    $paymentProfile = $vaultHelper->storeToken($customer->getId(), $paymentToken, $billingAddress, $expMonth, $expYear);
+                }
+                else if ($paymentTokenStatus = 'retained') {
+                    // This is a new card, must have already been stored in a failed checkout type
+                    // Just try to fetch it
+                    /** @var SFC_Autoship_Model_Payment_Profile $paymentProfile */
+                    $paymentProfile = $vaultHelper->getPaymentProfileByToken($paymentToken);
+                    // Now update billing address & exp date
+                    $this->updatePaymentProfile($paymentProfile, $billingAddress, $expMonth, $expYear);
+                }
+                else {
+                    throw new SFC_Autoship_Helper_PaymentError_Exception(Mage::helper('autoship')->__('Credit card information has expired!  Please reenter card details.'));
+                }
+            }
+            else {
+                // This is an existing card, just fetch it
+                // Just try to fetch it
+                $paymentProfile = $vaultHelper->getPaymentProfileByToken($paymentToken);
+                if (!$paymentProfile->isThirdParty()) {
+                    // Third party profiles can't be updated
+                    // Now update billing address & exp date
+                    $this->updatePaymentProfile($paymentProfile, $billingAddress, $expMonth, $expYear);
+                }
+            }
+            if (!$paymentProfile->isThirdParty()) {
+                // Third party profiles won't necessarily have the card type set
+                // Update CC card type on payment record
+                // Save cc type in $payment
+                $ccType = $vaultHelper->mapSubscribeProCardTypeToMagento($paymentProfile->getData('creditcard_type'), false);
+                if (strlen($ccType)) {
+                    $payment->setCcType($ccType);
+                }
+            }
+
+            // Save payment profile id in additional info
+            $payment->setAdditionalInformation('payment_profile_id', $paymentProfile->getId());
+
+            // Finally return the profile
+            return $paymentProfile;
+        }
+        catch (SFC_Autoship_Helper_PaymentError_Exception $e) {
+            // Rethrow these exceptions as the message will be customer friendly
+            throw $e;
+        }
+        catch (Exception $e) {
+            // Throw new exception with generic message
+            Mage::throwException(Mage::helper('autoship')->__('Failed to store credit card for payment transaction!'));
+        }
+    }
+
+    protected function updatePaymentProfile(SFC_Autoship_Model_Payment_Profile $paymentProfile, Mage_Customer_Model_Address_Abstract $billingAddress, $expMonth, $expYear)
+    {
+        /** @var SFC_Autoship_Helper_Vault $vaultHelper */
+        $vaultHelper = Mage::helper('autoship/vault');
+
+        // Now update billing address & exp date
+        /** @var SFC_Autoship_Model_Payment_Profile_Address $paymentProfileBillingAddress */
+        $paymentProfileBillingAddress = $paymentProfile->getData('billing_address');
+        $paymentProfileBillingAddress->updateFromCustomerAddress($billingAddress);
+        $paymentProfile->setData('creditcard_month', $expMonth);
+        $paymentProfile->setData('creditcard_year', $expYear);
+        $vaultHelper->updatePaymentProfile($paymentProfile);
+    }
+
+    /**
+     * Round up and cast specified amount to float or string
+     *
+     * @param string|float $amount
+     * @param bool $asFloat
+     * @return string|float
+     */
+    protected function _formatAmount($amount, $asFloat = false)
+    {
+        $amount = sprintf('%.2F', $amount); // 'f' depends on locale, 'F' doesn't
+        return $asFloat ? (float)$amount : $amount;
+    }
+
+}

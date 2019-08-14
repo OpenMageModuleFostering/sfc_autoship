@@ -83,6 +83,48 @@ class SFC_Autoship_Block_Subscription_Abstract extends Mage_Core_Block_Template
         }
     }
 
+    public function getDefaultInterval()
+    {
+        // Lookup from product
+        return $this->getPlatformProduct()->getData('default_interval');
+    }
+
+    /**
+     * Is this product a trial subscription product?
+     *
+     * @return boolean
+     */
+    public function isTrialProduct()
+    {
+        $platformProduct = $this->getPlatformProduct();
+
+        return ($platformProduct->getData('is_trial_product'));
+    }
+
+    /**
+     * Subscription option mode
+     *
+     * @return string
+     */
+    public function getSubscriptionOptionMode()
+    {
+        $platformProduct = $this->getPlatformProduct();
+
+        return ($platformProduct->getData('subscription_option_mode'));
+    }
+
+    /**
+     * Default subscription option
+     *
+     * @return string
+     */
+    public function getDefaultSubscriptionOption()
+    {
+        $platformProduct = $this->getPlatformProduct();
+
+        return ($platformProduct->getData('default_subscription_option'));
+    }
+
     /**
      * Return the price for purchasing the current product as a one time pruchase, optionally format the returned price
      *

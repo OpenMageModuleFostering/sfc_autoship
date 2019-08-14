@@ -23,20 +23,20 @@ $product = $this->getProduct();
 <div class="subscription-actions">
     <?php if ($subscription->getStatus() == 'Active'): ?>
         <?php if ($this->getNextOrderDateMode() == SFC_Autoship_Model_System_Config_Source_Nextorderdatemode::MODE_MULTIPLE_DATES): ?>
-        <button type="button" title="<?php echo $this->__('Skip Next Delivery') ?>" class="button change skip">
+        <button type="button" title="<?php echo $this->__('Skip Next Delivery') ?>" class="button adjust skip">
             <span><span><?php echo $this->__('Skip Next Delivery') ?></span></span></button>
         <?php endif; ?>
         <div>
             <p><a href="<?php echo $this->getUrl('autoship/mysubscriptions/cancel/id/' . $subscription->getSubscriptionId(),
-                    array('_secure' => true)) ?>" class="change cancel"><?php echo $this->__('Cancel Subscription') ?></a></p>
+                    array('_secure' => true)) ?>" class="adjust cancel"><?php echo $this->__('Cancel Subscription') ?></a></p>
 
-            <p><a href="<?php echo $product->getProductUrl() ?>">Need more immediately?</a></p>
+            <p><a href="<?php echo $product->getProductUrl() ?>"><?php echo $this->__("Need more immediately?") ?></a></p>
 
             <p>&nbsp;</p>
 
             <?php if ($this->getNextOrderDateMode() == SFC_Autoship_Model_System_Config_Source_Nextorderdatemode::MODE_MULTIPLE_DATES): ?>
             <p><a href="<?php echo $subscription->getSubscriptionId() ?>-more-details-div"
-                  class="link more details">More Details...</a></p>
+                  class="link more details"><?php echo $this->__("More Details...") ?></a></p>
             <?php endif; ?>
         </div>
     <?php elseif ($subscription->getStatus() == 'Failed' || $subscription->getStatus() == 'Retry'): ?>
@@ -44,13 +44,13 @@ $product = $this->getProduct();
         <p><span class="status"><strong><?php echo $subscription->getStatus() ?></strong></span></p>
         <div>
             <p><a href="<?php echo $this->getUrl('autoship/mysubscriptions/restart/id/' . $subscription->getSubscriptionId(),
-                    array('_secure' => true)) ?>" class="change restart"><?php echo $this->__('Restart Subscription') ?></a></p>
+                    array('_secure' => true)) ?>" class="adjust restart"><?php echo $this->__('Restart Subscription') ?></a></p>
 
             <p>&nbsp;</p>
 
             <?php if ($this->getNextOrderDateMode() == SFC_Autoship_Model_System_Config_Source_Nextorderdatemode::MODE_MULTIPLE_DATES): ?>
                 <p><a href="<?php echo $subscription->getSubscriptionId() ?>-more-details-div"
-                      class="link more details">More Details...</a></p>
+                      class="link more details"><?php echo $this->__("More Details...") ?></a></p>
             <?php endif; ?>
         </div>
     <?php else: ?>
@@ -58,9 +58,9 @@ $product = $this->getProduct();
         <p><span class="status"><strong><?php echo $subscription->getStatus() ?></strong></span></p>
     <?php endif; ?>
 </div>
-<div class="change skip-delivery" style="display:none;">
+<div class="adjust skip-delivery" style="display:none;">
     <div class="block-title">
-        <h2>Skip Delivery?</h2>
+        <h2><?php echo $this->__("Skip Delivery?") ?></h2>
     </div>
     <div class="block-content">
         <p>Skipping delivery on <?php echo $subscription->getNextOrderDateText() ?>.</p>
@@ -76,12 +76,12 @@ $product = $this->getProduct();
         </div>
     </div>
 </div>
-<div class="change cancel" style="display:none;">
+<div class="adjust cancel" style="display:none;">
     <div class="block-title">
-        <h2>Cancel Subscription?</h2>
+        <h2><?php echo $this->__("Cancel Subscription?") ?></h2>
     </div>
     <div class="block-content">
-        <p>Are you sure you want to cancel your subscription?</p>
+        <p><?php echo $this->__("Are you sure you want to cancel your subscription?") ?></p>
 
         <div class="buttons-set">
             <button type="button" title="<?php echo $this->__('Yes') ?>"
@@ -94,12 +94,12 @@ $product = $this->getProduct();
         </div>
     </div>
 </div>
-<div class="change restart" style="display:none;">
+<div class="adjust restart" style="display:none;">
     <div class="block-title">
-        <h2>Restart Subscription?</h2>
+        <h2><?php echo $this->__("Restart Subscription?") ?></h2>
     </div>
     <div class="block-content">
-        <p>Are you sure you want to restart your subscription?</p>
+        <p><?php echo $this->__("Are you sure you want to restart your subscription?") ?></p>
 
         <div class="buttons-set">
             <button type="button" title="<?php echo $this->__('Yes') ?>"

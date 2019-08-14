@@ -15,7 +15,7 @@
  *
  */
 
-class SFC_Autoship_Adminhtml_TestconnectionbuttonController extends Mage_Adminhtml_Controller_Action
+class SFC_Autoship_Adminhtml_SptestconnectionbuttonController extends Mage_Adminhtml_Controller_Action
 {
 
     public function testAction()

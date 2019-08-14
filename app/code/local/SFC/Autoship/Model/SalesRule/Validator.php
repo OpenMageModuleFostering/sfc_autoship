@@ -1,4 +1,4 @@
-<?php //00612
+<?php
 /**
  * Subscribe Pro - Subscriptions Management Extension
  *
@@ -15,93 +15,227 @@
  *
  */
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='/ioncube/ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if((@$__id[1])==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}@dl($__ln);}else{die('The file '.__FILE__." is corrupted. Ensure that you use binary mode when transferring files with FTP and disable the 'TAR smart cr/lf feature' if using WinZIP\n");}if(function_exists('_il_exec')){return _il_exec();}die('The file <b>'.__FILE__.'</b> has been encoded with the <a href="http://www.ioncube.com">ionCube PHP Encoder</a> and requires the free '.basename($__ln).' <a href="http://www.ioncube.com/loader_download/">ionCube PHP Loader</a> to be installed.');
+/**
+ * Special code to make us compatible with Mexbs_Tieredcoupon module
+ */
+if (file_exists(realpath(dirname(__FILE__)) . '/../../../Mexbs/Tieredcoupon/Model/SalesRule/Validator.php') &&
+    class_exists('Mexbs_Tieredcoupon_Model_SalesRule_Validator'))
+{
+    class SFC_Autoship_Model_SalesRule_Validator_Base extends Mexbs_Tieredcoupon_Model_SalesRule_Validator
+    {
+    }
+}
+else
+{
+    class SFC_Autoship_Model_SalesRule_Validator_Base extends Mage_SalesRule_Model_Validator
+    {
+    }
+}
 
-?>
-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
-HXRTcW==
+class SFC_Autoship_Model_SalesRule_Validator extends SFC_Autoship_Model_SalesRule_Validator_Base
+{
+    /**
+     * Quote item discount calculation process
+     *
+     * @param   Mage_Sales_Model_Quote_Item_Abstract $quoteItem
+     * @return  Mage_SalesRule_Model_Validator
+     */
+    public function process(Mage_Sales_Model_Quote_Item_Abstract $quoteItem)
+    {
+        // Get quote & address & Store
+        $quote = $quoteItem->getQuote();
+        $address = $this->_getAddress($quoteItem);
+        $store = $quoteItem->getStore();
+
+        // Check config to see if extension functionality is enabled
+        if (Mage::getStoreConfig('autoship_general/general/enabled', $store) != '1') {
+            return parent::process($quoteItem);
+        }
+
+        // Save appliedRuleIds before calling parent method
+        $appliedRuleIds = array(
+            'quoteItem' => $quoteItem->getAppliedRuleIds(),
+            'quote' => $quote->getAppliedRuleIds(),
+            'address' => $address->getAppliedRuleIds(),
+        );
+        // Save discountDescriptionArray
+        $discountDescriptionArray = $address->getDiscountDescriptionArray();
+
+        // Call parent method to process shopping cart price rules
+        parent::process($quoteItem);
+
+        // Check if item is part of a subscription or a subscription that is about to be created
+        $partOfSubscription = $this->_isItemPartOfSubscription($quoteItem, $store);
+
+        if($partOfSubscription) {
+
+            // Get platform helper
+            /** @var SFC_Autoship_Helper_Platform $platformHelper */
+            $platformHelper = Mage::helper('autoship/platform');
+            /** @var SFC_Autoship_Helper_Api $apiHelper */
+            $apiHelper = Mage::helper('autoship/api');
+            $apiHelper->setConfigStore($store);
+
+            // Lookup product profile, including current settings and discount
+            $product = Mage::helper('autoship/quote')->getRelevantProductFromQuoteItem($quoteItem);
+            $platformProduct = $platformHelper->getPlatformProduct($product);
+
+            // Get configuration setting for apply_discount_to_catalog_price
+            $applyDiscountToCatalogPrice = Mage::getStoreConfig('autoship_subscription/discount/apply_discount_to_catalog_price', $store);
+
+            // Get item price for comparison with product price
+            $itemPrice = $this->_getComparableItemPrice($quoteItem);
+            // Calculate subscription discount for item
+            if($platformProduct->getData('is_discount_percentage')) {
+                // Percent discount
+                // Call _getDiscountableItemPrice so we factor in tax if necessary
+                $subscriptionDiscount = $platformProduct->getData('discount') * $this->_getDiscountableItemPrice($quoteItem) * $quoteItem->getQty();
+            }
+            else {
+                // Fixed price discount
+                $subscriptionDiscount = $platformProduct->getData('discount') * $quoteItem->getQty();
+            }
+
+            $productPrice = $product->getPrice();
+            // Check to see if product price is discounted (by catalog price rules or special price)
+            $catalogDiscountApplied = ($itemPrice < $productPrice);
+            // Get already applied discount
+            $alreadyAppliedDiscount = $quoteItem->getDiscountAmount();
+
+            // Apply our subscription discount if all our biz logic is satisfied
+            // Flag to check if any biz logic matched
+            $applyOnlySubscriptionDiscount = false;
+            $combineSubscriptionDiscount = false;
+            // Check if catalog price already discounted and check config setting
+            if(!$catalogDiscountApplied || $applyDiscountToCatalogPrice) {
+                // Check the cart rule combine type config setting
+                switch(Mage::getStoreConfig('autoship_subscription/discount/cartrule_combine_type', $store)) {
+                    case SFC_Autoship_Model_System_Config_Source_Cartrulediscountcombinetype::TYPE_APPLY_GREATEST:
+                        // Check which is greater
+                        if($subscriptionDiscount >= $alreadyAppliedDiscount) {
+                            $applyOnlySubscriptionDiscount = true;
+                        }
+                        break;
+                    case SFC_Autoship_Model_System_Config_Source_Cartrulediscountcombinetype::TYPE_APPLY_LEAST:
+                        // Check which is less
+                        if($subscriptionDiscount <= $alreadyAppliedDiscount) {
+                            $applyOnlySubscriptionDiscount = true;
+                        }
+                        break;
+                    case SFC_Autoship_Model_System_Config_Source_Cartrulediscountcombinetype::TYPE_APPLY_CART_DISCOUNT:
+                        // Check if any cart rules were applied
+                        // If any cart rules applied, go with cart rules, otherwise go with subscription discount
+                        if($alreadyAppliedDiscount == 0) {
+                            // Apply sub discount only if no other rules matched
+                            $applyOnlySubscriptionDiscount = true;
+                        }
+                        break;
+                    case SFC_Autoship_Model_System_Config_Source_Cartrulediscountcombinetype::TYPE_APPLY_SUBSCRIPTION:
+                        $applyOnlySubscriptionDiscount = true;
+                        break;
+                    case SFC_Autoship_Model_System_Config_Source_Cartrulediscountcombinetype::TYPE_COMBINE_SUBSCRIPTION:
+                        $combineSubscriptionDiscount = true;
+                        break;
+                }
+            }
+
+            // Apply only subscription discount
+            if ($applyOnlySubscriptionDiscount) {
+                // Now lets apply subscription discount
+                $quoteItem->setDiscountAmount($subscriptionDiscount);
+                $quoteItem->setBaseDiscountAmount($subscriptionDiscount);
+
+                // If we are applying subscription discount, wipe out "appliedRuleIds" and descriptions added by shopping cart price rules
+                $quoteItem->setAppliedRuleIds($appliedRuleIds['quoteItem']);
+                $address->setAppliedRuleIds($appliedRuleIds['address']);
+                $quote->setAppliedRuleIds($appliedRuleIds['quote']);
+
+                // Since we applied subscription discount, wipe out any discount descriptions from shopping cart price rules and add in our own
+                $discountDescriptionArray['subscription'] = Mage::helper('autoship')->__('Subscription');
+                $address->setDiscountDescriptionArray($discountDescriptionArray);
+            }
+            // Combine subscription discount with already applied discounts
+            else if ($combineSubscriptionDiscount) {
+                $newDiscountAmount = $quoteItem->getDiscountAmount() + $subscriptionDiscount;
+                $newBaseDiscountAmount = $quoteItem->getBaseDiscountAmount() + $subscriptionDiscount;
+                $quoteItem->setDiscountAmount($newDiscountAmount);
+                $quoteItem->setBaseDiscountAmount($newBaseDiscountAmount);
+
+                // Since we applied subscription discount, add in our discount description
+                $discountDescriptionArray = $address->getDiscountDescriptionArray();
+                $discountDescriptionArray['subscription'] = Mage::helper('autoship')->__('Subscription');
+                $address->setDiscountDescriptionArray($discountDescriptionArray);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Determine if an item is part of a subscription purchase
+     * @param Mage_Sales_Model_Quote_Item_Abstract $baseItem
+     * @param $store
+     * @return bool
+     */
+    protected function _isItemPartOfSubscription(Mage_Sales_Model_Quote_Item_Abstract $baseItem, $store)
+    {
+        if ($baseItem->getParentItem() && $baseItem->getParentItem()->isChildrenCalculated()) {
+            $quoteItem = $baseItem->getParentItem();
+        } else {
+            $quoteItem = $baseItem;
+        }
+        return ($quoteItem->getData('item_fulfils_subscription')
+            ||
+            (
+                $quoteItem->getData('create_new_subscription_at_checkout')
+                &&
+                (Mage::getStoreConfig('autoship_subscription/subscription/use_new_subscription_page', $store) != '1')
+            )
+        );
+    }
+
+    /**
+     * Return the total item price on which the discount can be applied.
+     * If the config setting allows for it, take the item price including tax, versus w/o tax
+     * @param Mage_Sales_Model_Quote_Item_Abstract $quoteItem
+     * @return float
+     */
+    protected function _getDiscountableItemPrice(Mage_Sales_Model_Quote_Item_Abstract $quoteItem)
+    {
+        if (Mage::helper("tax")->priceIncludesTax() && Mage::helper("tax")->discountTax()) {
+            /**
+             * If the settings are such that item prices include tax,
+             * magento doesn't factor tax into _getItemPrice.
+             *
+             * However, if item prices DON'T include tax but Apply Discounts to Taxes is set to yes,
+             * _getItemPrice appears to return the value with tax
+             */
+            return Mage::app()->getStore()->convertPrice($quoteItem->getPriceInclTax());
+        }
+        return $this->_getItemPrice($quoteItem);
+    }
+
+    /**
+     * Get the item price for comparison with the product
+     * @param Mage_Sales_Model_Quote_Item_Abstract $quoteItem
+     * @return float
+     */
+    protected function _getComparableItemPrice(Mage_Sales_Model_Quote_Item_Abstract $quoteItem)
+    {
+        if (Mage::helper("tax")->priceIncludesTax()) {
+            /**
+             * If Magento is set such that product prices include tax,
+             * _getItemPrice returns the item *without* tax
+             */
+            return Mage::app()->getStore()->convertPrice($quoteItem->getPriceInclTax());
+        } elseif (Mage::helper("tax")->discountTax()) {
+            /**
+             * If product price doesn't  include tax but we've set Magento to apply discounts to tax,
+             * the result of _getItemPrice actually *includes* the tax - but for comparison to the product we remove it
+             */
+            return Mage::app()->getStore()->convertPrice($quoteItem->getCalculationPrice());
+        }
+        return $this->_getItemPrice($quoteItem);
+    }
+
+}

@@ -64,17 +64,8 @@ class SFC_Autoship_Block_Checkout_Onepage_Payment_Methods extends SFC_Autoship_B
             // Check if quote has any subscriptions in it
             if(!$quoteHelper->hasProductsToCreateNewSubscription()) {
                 // Quote has no subscriptions,
-                // Check config setting for subscribe pro vault pay method
-                if (0 === strpos($method->getCode(), SFC_Autoship_Helper_Platform::PAY_METHOD_CODE_SUBSCRIBE_PRO_VAULT) &&
-                    $method->getConfigData('active_non_subscription') != '1'
-                ) {
-                    // This is SP vault pay method and "Enabled for Non-Subscription" is set to No
-                    return false;
-                }
-                else {
-                    // Go through normal qualification process for payment methods
-                    return parent::_canUseMethod($method);
-                }
+                // Go through normal qualification process for payment methods
+                return parent::_canUseMethod($method);
             }
             else {
                 // Quote has subscriptions, only allow payment methods compatible with subscriptions

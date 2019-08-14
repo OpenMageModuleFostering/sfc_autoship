@@ -66,24 +66,21 @@ class SFC_Autoship_Model_Observer
         // Get data from $observer
         $product = $observer->getData('product');
 
-        // Check if this is a grouped product or simple
+        // Get product type
         $productType = $product->getTypeId();
 
         // Call helper to handle this event
         /** @var SFC_Autoship_Helper_Quote $quoteHelper */
         $quoteHelper = Mage::helper('autoship/quote');
         // Check product type
-        if ($productType == Mage_Catalog_Model_Product_Type::TYPE_SIMPLE) {
-            $quoteHelper->onCheckoutCartAddProductComplete($product);
-        }
-        else if ($productType == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE) {
-            $quoteHelper->onCheckoutCartAddProductComplete($product);
-        }
-        else if ($productType == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE) {
-            $quoteHelper->onCheckoutCartAddProductComplete($product);
-        }
-        else if ($productType == Mage_Catalog_Model_Product_Type::TYPE_GROUPED) {
+        if ($productType == Mage_Catalog_Model_Product_Type::TYPE_GROUPED) {
             $quoteHelper->onCheckoutCartAddGroupedProductComplete($product);
+        }
+        //else if ($productType == Mage_Catalog_Model_Product_Type::TYPE_SIMPLE) {
+        //else if ($productType == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE) {
+        //else if ($productType == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE) {
+        else {
+            $quoteHelper->onCheckoutCartAddProductComplete($product);
         }
 
     }
@@ -232,18 +229,6 @@ class SFC_Autoship_Model_Observer
     public function onSalesQuoteAddressDiscountItem(Varien_Event_Observer $observer)
     {
         Mage::log('SFC_Autoship_Model_Observer::onSalesQuoteAddressDiscountItem', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
-
-        // When we enter this method (triggered by event):
-        // The discount is being calculated by Mage_SalesRule_Model_Quote_Discount class.
-        // In the case of parent products on the quote (the only ones we're concerned about as long as we only support simple products):
-        //      The discount has not yet been calculated using cart rule
-        //      The discount has not yet been applied to the address
-        // In the case of child product on the quote:
-        //      The discount has already been calculate on quote address item and set in these fields:
-        //          $item->getDiscountAmount();
-        //          $item->getBaseDiscountAmount();
-        //      The discount has not yet been applied to the address
-        //
     }
 
     /**
@@ -276,6 +261,155 @@ class SFC_Autoship_Model_Observer
         }
 
         return $this;
+    }
+
+    /**
+     * @param Varien_Event_Observer $observer
+     * @return $this
+     */
+    public function onAdminhtmlSalesOrderCreateProcessData(Varien_Event_Observer $observer)
+    {
+        /** @var Mage_Adminhtml_Model_Sales_Order_Create $orderCreateModel */
+        $orderCreateModel = $observer->getEvent()->getOrderCreateModel();
+
+        // Check config to see if extension functionality is enabled
+        if (Mage::getStoreConfig('autoship_general/general/enabled', $orderCreateModel->getQuote()->getStore()) != '1') {
+            return $this;
+        }
+
+        //If request has 'item' present, we have updated, added, or removed an item
+        if (Mage::app()->getRequest()->has('item')) {
+
+            //Update all quote item
+            Mage::helper("autoship/quote")->updateQuoteItems($orderCreateModel->getQuote(), Mage::app()->getRequest()->getPost('item'), true);
+
+            $action = Mage::app()->getRequest()->getActionName();
+
+            if (!Mage::app()->getRequest()->getPost('update_items') && !($action == 'save')) {
+
+                //Process all newly added items, so we can set their defaults
+                foreach (Mage::app()->getRequest()->getPost('item') as $productId => $config) {
+                    //Validation on the product id has already been done at this point
+                    $config['qty'] = isset($config['qty']) ? (float)$config['qty'] : 1;
+                    $product = Mage::getModel('catalog/product')
+                        ->setStore($orderCreateModel->getQuote()->getStore())
+                        ->setStoreId($orderCreateModel->getQuote()->getStore()->getId())
+                        ->load($productId);
+
+                    $cartProduct = $product;
+
+                    if ($cartProduct->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE) {
+                        //In order to ensure the custom options match from product<-->quote item, we run it through prepareForCartAdvanced
+                        $cartCandidates = $product->getTypeInstance(true)
+                            ->prepareForCartAdvanced(new Varien_Object($config), $product, null);
+
+                        if (sizeof($cartCandidates) < 1) {
+                            Mage::throwException("Unable to add bundle product with sku: " . $product->getSku() . ' to cart');
+                        }
+
+                        /** @var Mage_Catalog_Model_Product $candidate */
+                        foreach($cartCandidates as $candidate) {
+                            //Ensure we get the bundled product
+                            if ($candidate->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE) {
+                                $cartProduct = $candidate;
+                                break;
+                            }
+                        }
+                    }
+
+                    //Different logic for grouped
+                    if ($cartProduct->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_GROUPED) {
+                        Mage::helper("autoship/quote")->onCheckoutCartAddGroupedProductComplete($cartProduct, $config);
+                    } else {
+                        Mage::helper("autoship/quote")->onCheckoutCartAddProductComplete($cartProduct, $config);
+                    }
+                }
+            }
+
+            //Recollect
+            $orderCreateModel->recollectCart();
+
+        }
+
+        return $this;
+    }
+
+    /**
+     * When a customer is saved, check if they exist on the platform. If so, update the platform with their data
+     * @param $obs
+     * @return $this
+     */
+    public function onCustomerSave($obs)
+    {
+        /** @var Mage_Customer_Model_Customer $customer */
+        $customer = $obs->getCustomer();
+        //Make sure the customer isn't brand new and actually has an original email
+        if (!$customer->isObjectNew()
+            && $customer->getOrigData('email')
+            && $customer->dataHasChangedFor('email')) {
+
+            /** @var SFC_Autoship_Helper_Platform $platformHelper */
+            $platformHelper = Mage::helper("autoship/platform");
+
+            /** @var SFC_Autoship_Helper_Api $apiHelper */
+            $apiHelper = Mage::helper("autoship/api");
+
+            //Update config store to match store customer is associated to?
+            $apiHelper->setConfigStore($customer->getStore());
+
+            $platformCustomer = $platformHelper->getCustomer($customer->getOrigData('email'));
+            if ($platformCustomer) {
+                Mage::log('SFC_Autoship_Model_Observer::onCustomerSave Customer with email: ' . $customer->getEmail() . ' was changed, updating platform', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+                $platformHelper->updateCustomer($platformCustomer['id'], $customer);
+            } else {
+                Mage::log('SFC_Autoship_Model_Observer::onCustomerSave Customer with email: ' . $customer->getEmail() . ' was changed, but does not exist on platform', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * When re-ordering via admin, ensure we don't copy another subscription's id over
+     * @see Mage_Adminhtml_Model_Sales_Order_Create::initFromOrderItem
+     * @param $observer
+     */
+    public function onSalesConvertOrderItemToQuoteItem($observer)
+    {
+        /** @var Mage_Sales_Model_Quote_Item $item */
+        $item = $observer->getQuoteItem();
+
+        // For bundled product, only 1 item will be passed to the observer
+        // This item *might* be the bundled product or it might not be
+        // If it's not, go ahead and grab the bundled product from the parent
+        // Seems to be a bug in magento, @see Mage_Adminhtml_Model_Sales_Order_Create::initFromOrderItem
+        if ($item->getParentItem() && $item->getParentItem()->getProduct()->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE) {
+            $item = $item->getParentItem();
+        }
+        /** @var SFC_Autoship_Helper_Product $productHelper */
+        $productHelper = Mage::helper('autoship/product');
+
+        $product = $item->getProduct();
+
+        // Check if product is enabled, otherwise don't bother updating the custom options
+        if (!$productHelper->isAvailableForSubscription($product, $item->getQuote()->getStore())) {
+            return;
+        }
+
+        //Remove the subscription, so re-ordering doesn't result in 2 subscription ids
+        $item->removeOption('additional_options');
+        $item->setSubscriptionId(null)->save();
+
+        //Set basic config
+        $config = array(
+            'qty' => $item->getQty()
+        );
+
+        //Different logic for grouped
+        if ($product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_GROUPED) {
+            Mage::helper("autoship/quote")->onCheckoutCartAddGroupedProductComplete($product, $config);
+        } else {
+            Mage::helper("autoship/quote")->onCheckoutCartAddProductComplete($product, $config);
+        }
     }
 
 }

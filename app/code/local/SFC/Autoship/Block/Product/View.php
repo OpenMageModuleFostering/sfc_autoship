@@ -68,6 +68,42 @@ class SFC_Autoship_Block_Product_View extends Mage_Catalog_Block_Product_View
     }
 
     /**
+     * Is this product a trial subscription product?
+     *
+     * @return boolean
+     */
+    public function isTrialProduct()
+    {
+        $platformProduct = $this->getPlatformProduct();
+
+        return ($platformProduct->getData('is_trial_product'));
+    }
+
+    /**
+     * Subscription option mode
+     *
+     * @return string
+     */
+    public function getSubscriptionOptionMode()
+    {
+        $platformProduct = $this->getPlatformProduct();
+
+        return ($platformProduct->getData('subscription_option_mode'));
+    }
+
+    /**
+     * Default subscription option
+     *
+     * @return string
+     */
+    public function getDefaultSubscriptionOption()
+    {
+        $platformProduct = $this->getPlatformProduct();
+
+        return ($platformProduct->getData('default_subscription_option'));
+    }
+
+    /**
      * Return the price for purchasing the current product as a one time purchase, optionally format the returned price
      *
      * @param bool $formatted True to return the price formatted, false to return the raw price number
@@ -90,4 +126,23 @@ class SFC_Autoship_Block_Product_View extends Mage_Catalog_Block_Product_View
         return Mage::helper('autoship/subscription')->getSubscriptionPrice($this->getPlatformProduct(), $this->getProduct(), $this->getProductDefaultQty($this->getProduct()), $formatted);
     }
 
+    /**
+     * Gets minimal sales quantity
+     *
+     * @param Mage_Catalog_Model_Product $product
+     * @return int|null
+     */
+    public function getMinimalQty($product)
+    {
+        $mageDefault = parent::getMinimalQty($product);
+        $platformProduct = $this->getPlatformProduct();
+        if ($platformProduct->getData('subscription_option_mode') == 'subscription_only') {
+            if ($platformProduct->getData('min_qty')) {
+                return (!is_null($mageDefault) && $mageDefault > $platformProduct->getData('min_qty'))
+                    ? $mageDefault
+                    : $platformProduct->getData('min_qty');
+            }
+        }
+        return $mageDefault;
+    }
 }

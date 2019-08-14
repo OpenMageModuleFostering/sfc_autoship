@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<config>
+    <api>
+        <resources>
+            <sp_cart translate="title" module="autoship">
+                <title>autoship</title>
+                <model>autoship/api_cart_api</model>
+                <acl>autoship/sp_cart</acl>
+                <methods>
+                    <set_addresses translate="title" module="autoship">
+                        <title>Set Addresses</title>
+                        <method>setAddresses</method>
+                        <acl>autoship/sp_cart/set_addresses</acl>
+                    </set_addresses>
+                    <set_customer translate="title" module="autoship">
+                        <title>Set Customer</title>
+                        <method>setCustomer</method>
+                        <acl>autoship/sp_cart/set_customer</acl>
+                    </set_customer>
+                </methods>
+                <faults module="autoship">
+                    <sp_cart_address_format>
+                        <code>94101</code >
+                        <message>Address data was not formatted properly.</message>
+                    </sp_cart_address_format>
+                    <sp_cart_address_mode>
+                        <code>94102</code >
+                        <message>Address mode is not valid.</message>
+                    </sp_cart_address_mode>
+                    <sp_cart_address_save>
+                        <code>94103</code >
+                        <message>There was an error saving addresses for the quote.</message>
+                    </sp_cart_address_save>
+                    <sp_cart_address_country_code>
+                        <code>94104</code >
+                        <message>Country code didn't match a known 2 or 3 digit ISO country code.</message>
+                    </sp_cart_address_country_code>
+                    <sp_cart_address_validation>
+                        <code>94105</code>
+                        <message>Address didn't pass Magento validation.</message>
+                    </sp_cart_address_validation>
+                    <sp_cart_customer_format>
+                        <code>95101</code >
+                        <message>Customer data was not formatted properly.</message>
+                    </sp_cart_customer_format>
+                    <sp_cart_customer_not_found>
+                        <code>95102</code >
+                        <message>Customer was not found.</message>
+                    </sp_cart_customer_not_found>
+                    <sp_cart_customer_not_set>
+                        <code>95103</code >
+                        <message>Failed to set customer on quote.</message>
+                    </sp_cart_customer_not_set>
+                </faults>
+            </sp_cart>
+        </resources>
+        <acl>
+            <resources>
+                <autoship translate="title" module="autoship">
+                    <title>autoship</title>
+                    <sort_order>1</sort_order>
+                    <sp_cart translate="title" module="autoship">
+                        <title>Subscribe Pro Cart</title>
+                        <sort_order>2000</sort_order>
+                        <set_addresses translate="title" module="autoship">
+                            <title>Set Addresses</title>
+                        </set_addresses>
+                        <set_customer translate="title" module="autoship">
+                            <title>Set Customer</title>
+                        </set_customer>
+                    </sp_cart>
+                </autoship>
+            </resources>
+        </acl>
+    </api>
+</config>

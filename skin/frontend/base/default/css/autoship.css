@@ -102,7 +102,7 @@
 	margin: 0 !important;
 }
 
-.subscription div.change { padding: 20px; background-color: #ffffff; }
+.subscription div.adjust { padding: 20px; background-color: #ffffff; }
 
 
 /* My Subscriptions page */
@@ -110,38 +110,52 @@
 #all-subscriptions-details .delivery_date { margin: 2px 0 12px -6px; border: none; padding: 0; background: none; font-size: 22px; font-weight: bold; text-align: center; width: 96px; }
 #all-subscriptions-details .input-box .ui-datepicker-trigger { margin-top: 6px; cursor: pointer; }
 
+#mysubscriptions .clearer {clear:both;}
 .active-subscriptions-links { padding-bottom: 18px; }
 
 .subscription-block:first-child { margin-top: 0px; border-top: none; padding-top: 0px; }
-.subscription-block { margin-top: 18px; border-bottom: 1px solid #cfcfcf; padding-bottom: 18px; }
+.subscription-block { margin-top: 18px; border-bottom: 1px solid #cfcfcf; padding-bottom: 18px; overflow: auto;}
 .subscription-block p, .subscription-block h2 { padding-bottom: 6px; }
 
-.subscription-info { float: left; width: 200px; padding-right: 10px; }
-.subscription-product { float: left; width: 340px; padding-right: 10px; }
-.subscription-actions { float: right; width: 144px; }
+.subscription-info { float: left; width: 30%; padding-right: 10px; }
+.subscription-product { float: left; width: 48%; padding-right: 10px; }
+.subscription-actions { float: left; width: 22%; }
 .subscription-more-details { padding-top: 10px; }
 .subscription-shipping-address { float: left; padding-right: 40px; }
 .subscription-billing-address { float: left; padding-right: 40px; }
 .subscription-payment { float: left; padding-right: 40px; }
 
+@media only screen and (max-width: 480px) {
+	.subscription-info,.subscription-product,.subscription-actions {
+		float:none;
+		width:100%;
+		padding: 10px;
+		background:#eee;
+		overflow:auto;
+	}
+}
+
 .subscription-info .next-order-date { font-size: 22px; }
 .subscription-actions .status { font-size: 18px; }
 
-.subscription-product .product-image img { float: left; margin-right: 12px; border: 1px solid #cfcfcf; padding: 6px; background: #ffffff; }
-.subscription-product .product-name a { color: #c73615; text-decoration: none; }
+.subscription-product .product-image { float: left; margin-right: 12px; border: 1px solid #cfcfcf; padding: 6px; background: #ffffff; }
+.subscription-product .product-name a { color: #3399cc; text-decoration: none; }
 .subscription-product .product-original-price { font-size: 11px; color: #989696; text-decoration: line-through; }
-.subscription-product .product-price { font-size: 14px; color: #c73615; font-weight: bold; }
+.subscription-product .product-price { font-size: 14px; color: #3399cc; font-weight: bold; }
 
-.subscription-actions .button { padding-bottom: 6px; }
+.subscription-actions .button { padding-bottom: 6px; white-space: normal; }
 .subscription-actions .button span span { width: 116px; }
 
-.subscription-block .input-box input.delivery_date { margin: 2px 0 12px -6px; border: none; padding: 0; background: none; font-size: 22px; font-weight: bold; text-align: center; width: 96px; }
-.subscription-block .input-box .ui-datepicker-trigger { margin-top: 6px; cursor: pointer; }
+.subscription-block .input-box input.delivery_date { margin: 2px 0 12px -6px; border: none; padding: 0; background: none; font-size: 22px; font-weight: bold; text-align: center; width: 105px; }
+.subscription-block .input-box .ui-datepicker-trigger { margin: 5px 0 1px 6px; cursor: pointer; display: inline;}
 
-.subscription-block .change .buttons-set button.button { float: none; margin-left: 0; }
+.subscription-block .adjust .buttons-set button.button { float: none; margin-left: 0; }
 
 /* Subscription Product page */
-.subscription-product .options-list li { padding-bottom: 18px; }
+.subscription-product.product-options { padding:0; border:none; margin: 0 0 15px;}
+.subscription-product .price-notice {color: #3399cc;}
+.subscription-product.product-options ul.options-list label {width:auto;}
+.subscription-product .options-list li { padding-bottom: 10px; }
 .subscription-product .options-list .radio { font-size: 14px !important; }
 .subscription-product .options-list .radio, .subscription-product .options-list .radio-text { float: left; margin-right: 9px; }
 .subscription-product .options-list .price { font-weight: bold; }
@@ -204,7 +218,7 @@
 .new-subscription .change .new-cc-form-list input.input-text, .subscription-lightbox-background .change .new-cc-form-list textarea { width: auto; }
 .new-subscription .change .new-cc-form-list .input-box { float: left; }
 
-.active-subscriptions div.change {
+.active-subscriptions div.adjust {
 	position: absolute;
   z-index: 999;
   display: none;
@@ -213,36 +227,36 @@
 	box-shadow: 0px 5px 20px 0px #e6e6e6;
 	background: #ffffff url(../images/autoship/bkg_block.gif) repeat-x center bottom;
 }
-.active-subscriptions .change .block-title {
+.active-subscriptions .adjust .block-title {
 	padding: 5px 12px;
 	border-bottom: 1px solid #d9d9d9;
 	background: url(../images/autoship/bkg_thead.gif) repeat-x;
 }
-.active-subscriptions .change .block-title h2 {
+.active-subscriptions .adjust .block-title h2 {
 	text-transform: uppercase;
 	font-size: 11px;
 	padding-bottom: 0;
 }
-.active-subscriptions .change .block-content { padding: 20px; }
+.active-subscriptions .adjust .block-content { padding: 20px; }
 
-.active-subscriptions .change .next-order-date { font-size: 22px; }
+.active-subscriptions .adjust .next-order-date { font-size: 22px; }
 
 .active-subscriptions .change .form-list select { width: 300px; }
-.active-subscriptions .change .form-list input.input-text, .subscription-lightbox-background .change .form-list textarea { width: 294px }
-.active-subscriptions .change .buttons-set { padding: 0 15px 0 0 }
-.active-subscriptions .change .form-list .input-box { float: right; margin-right: 3px; padding-right: 20px; }
-.active-subscriptions .change p.required { width: auto; }
+.active-subscriptions .adjust .form-list input.input-text, .subscription-lightbox-background .adjust .form-list textarea {  }
+.active-subscriptions .adjust .buttons-set { padding: 0 15px 0 0 }
+.active-subscriptions .adjust .form-list .input-box {  }
+.active-subscriptions .adjust p.required { width: auto; }
 
-.active-subscriptions .change .messages { margin-top: 0; }
-.active-subscriptions .change label { font-size: 12px; font-weight: bold; }
-.active-subscriptions .change dt { padding-bottom: 6px; }
+.active-subscriptions .adjust .messages { margin-top: 0; }
+.active-subscriptions .adjust label { font-size: 12px; font-weight: bold; }
+.active-subscriptions .adjust dt { padding-bottom: 6px; }
 
-.active-subscriptions .change .new-cc-form-list label { width: 160px; }
-.active-subscriptions .change .new-cc-form-list select { width: auto; margin-right: 4px; }
-.active-subscriptions .change .new-cc-form-list input.input-text, .subscription-lightbox-background .change .new-cc-form-list textarea { width: auto; }
-.active-subscriptions .change .new-cc-form-list .input-box { float: left; }
+.active-subscriptions .adjust .new-cc-form-list label { width: 160px; }
+.active-subscriptions .adjust .new-cc-form-list select { width: auto; margin-right: 4px; }
+.active-subscriptions .adjust .new-cc-form-list input.input-text, .subscription-lightbox-background .adjust .new-cc-form-list textarea { width: auto; }
+.active-subscriptions .adjust .new-cc-form-list .input-box { float: left; }
 
-#all-subscriptions-details div.change {
+#all-subscriptions-details div.adjust {
     position: absolute;
     z-index: 999;
     display: none;
@@ -251,34 +265,34 @@
     box-shadow: 0px 5px 20px 0px #e6e6e6;
     background: #ffffff url(../images/autoship/bkg_block.gif) repeat-x center bottom;
 }
-#all-subscriptions-details .change .block-title {
+#all-subscriptions-details .adjust .block-title {
     padding: 5px 12px;
     border-bottom: 1px solid #d9d9d9;
     background: url(../images/autoship/bkg_thead.gif) repeat-x;
 }
-#all-subscriptions-details .change .block-title h2 {
+#all-subscriptions-details .adjust .block-title h2 {
     text-transform: uppercase;
     font-size: 11px;
     padding-bottom: 0;
 }
-#all-subscriptions-details .change .block-content { padding: 20px; }
+#all-subscriptions-details .adjust .block-content { padding: 20px; }
 
-#all-subscriptions-details .change .next-order-date { font-size: 22px; }
+#all-subscriptions-details .adjust .next-order-date { font-size: 22px; }
 
-#all-subscriptions-details .change .form-list select { width: 300px; }
-#all-subscriptions-details .change .form-list input.input-text, .subscription-lightbox-background .change .form-list textarea { width: 294px }
-#all-subscriptions-details .change .buttons-set { padding: 0 15px 0 0 }
-#all-subscriptions-details .change .form-list .input-box { float: right; margin-right: 3px; padding-right: 20px; }
-#all-subscriptions-details .change p.required { width: auto; }
+#all-subscriptions-details .adjust .form-list select { width: 300px; }
+#all-subscriptions-details .adjust .form-list input.input-text, .subscription-lightbox-background .adjust .form-list textarea { width: 294px }
+#all-subscriptions-details .adjust .buttons-set { padding: 0 15px 0 0 }
+#all-subscriptions-details .adjust .form-list .input-box { float: right; margin-right: 3px; padding-right: 20px; }
+#all-subscriptions-details .adjust p.required { width: auto; }
 
-#all-subscriptions-details .change .messages { margin-top: 0; }
-#all-subscriptions-details .change label { font-size: 12px; font-weight: bold; }
-#all-subscriptions-details .change dt { padding-bottom: 6px; }
+#all-subscriptions-details .adjust .messages { margin-top: 0; }
+#all-subscriptions-details .adjust label { font-size: 12px; font-weight: bold; }
+#all-subscriptions-details .adjust dt { padding-bottom: 6px; }
 
-#all-subscriptions-details .change .new-cc-form-list label { width: 160px; }
-#all-subscriptions-details .change .new-cc-form-list select { width: auto; margin-right: 4px; }
-#all-subscriptions-details .change .new-cc-form-list input.input-text, .subscription-lightbox-background .change .new-cc-form-list textarea { width: auto; }
-#all-subscriptions-details .change .new-cc-form-list .input-box { float: left; }
+#all-subscriptions-details .adjust .new-cc-form-list label { width: 160px; }
+#all-subscriptions-details .adjust .new-cc-form-list select { width: auto; margin-right: 4px; }
+#all-subscriptions-details .adjust .new-cc-form-list input.input-text, .subscription-lightbox-background .adjust .new-cc-form-list textarea { width: auto; }
+#all-subscriptions-details .adjust .new-cc-form-list .input-box { float: left; }
 
 /* Cart page */
 
@@ -288,3 +302,5 @@
 .cart .subscription-product .options-list .radio, .cart .subscription-product .options-list .radio-text { line-height: 18px; }
 .cart .subscription-product .options-list .radio { cursor: pointer; }
 .cart .subscription-product .options-list p { margin: 0; }
+.cart .subscription-product .options-list label { background-color: transparent; }
+.cart .subscription-product .options-list { background-color: #f4f4f4; }

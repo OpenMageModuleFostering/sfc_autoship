@@ -26,7 +26,16 @@ class SFC_Autoship_Block_Adminhtml_Customer_Paymentprofiles_Edit extends Mage_Ad
         $this->_objectId = 'id';
         $this->_blockGroup = 'autoship';
         $this->_controller = 'adminhtml_customer_paymentprofiles';
-        $this->_updateButton('save', 'label', Mage::helper('autoship')->__('Save Card'));
+        // Get payment profile from registry
+        /** @var SFC_Autoship_Model_Payment_Profile $model */
+        $model = Mage::registry('paymentprofile_data');
+        if ($model && $model->getId()) {
+            if (!$model->isThirdParty()) {
+                $this->_updateButton('save', 'label', Mage::helper('autoship')->__('Save Card'));
+            } else {
+                $this->_removeButton('save');
+            }
+        }
         $this->_removeButton('delete');
         $this->_removeButton('reset');
     }

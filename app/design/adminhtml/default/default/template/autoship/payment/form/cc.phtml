@@ -14,6 +14,7 @@
  * @link      http://www.subscribepro.com/
  *
  */
+/** @var SFC_Autoship_Block_Payment_Form_CC $this */
 ?>
 <?php $_code = $this->getMethodCode() ?>
 <ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
@@ -53,7 +54,7 @@
                 <input type="text" title="<?php echo $this->__('Card Verification Number') ?>"
                        class="input-text"
                        id="<?php echo $_code ?>_cc_cid"
-                       name="payment[cc_cid]" />
+                       name="payment[cc_cid]" value="<?php echo $this->getCvv() ?>" />
             </div>
         </div>
     </li>
@@ -65,7 +66,7 @@
                     <input type='hidden' value='0' name='payment[save_card]'/>
                     <input type="checkbox" title="<?php echo $this->__('Save Card') ?>" class="checkbox"
                            id="<?php echo $_code ?>_save_card" name="payment[save_card]"
-                           value="1" <?php if($this->getAdditionalInfo('save_card')): ?>checked<?php endif; ?> />
+                           value="1" <?php if($this->getSaveCard()): ?>checked<?php endif; ?> />
                 </div>
             </div>
         </li>

@@ -30,7 +30,7 @@ $productId = $this->getProduct()->getId();
 
                         <div class="radio-text">
                     		<span class=label>
-			                    <label for="delivery-option-one-time">One Time Delivery</label>
+			                    <label for="delivery-option-one-time"><?php echo $this->__("One Time Delivery") ?></label>
 		                    </span>
 
                             <p><span class="price">Price: <?php echo $this->getOneTimePurchasePrice(true) ?></span></p>
@@ -42,16 +42,16 @@ $productId = $this->getProduct()->getId();
                             <input type="radio" onclick="" class="radio" id="delivery-option-subscribe" name="delivery-option[<?php echo $productId ?>]"
                                value="subscribe" checked="checked"/>
 		                        <span class=label>
-                                    <label for="delivery-option-subscribe">Regular Delivery</label>
+                                    <label for="delivery-option-subscribe"><?php echo $this->__("Regular Delivery") ?></label>
 		                        </span>
 
                                 <p><span class="product-price"><?php echo $this->getDiscountText() ?></span></p>
 
                                 <p>
-                                    <label for="delivery-interval">Delivery every:</label><br/>
+                                    <label for="delivery-interval"><?php echo $this->__("Delivery every:") ?></label><br/>
                                     <select onchange="" id="delivery-interval" name="delivery-interval[<?php echo $productId ?>]" class="">
                                         <?php foreach ($this->getIntervals() as $interval): ?>
-                                            <option value="<?php echo $interval ?>"><?php echo $interval ?></option>
+                                            <option value="<?php echo $interval ?>" <?php if($interval == $this->getDefaultInterval()): ?> selected="selected"<?php endif; ?>><?php echo $interval ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </p>

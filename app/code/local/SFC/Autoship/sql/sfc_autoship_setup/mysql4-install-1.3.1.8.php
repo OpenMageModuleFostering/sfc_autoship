@@ -38,7 +38,7 @@ if (!$installer->getAttributeId('catalog_product', 'subscription_enabled')) {
         'global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_WEBSITE,
         'visible' => true,
         'required' => false,
-        'apply_to' => 'simple,bundle,configurable',
+        'apply_to' => 'simple,bundle,configurable,virtual,downloadable',
         'user_defined' => false,
         'searchable' => false,
         'filterable' => false,

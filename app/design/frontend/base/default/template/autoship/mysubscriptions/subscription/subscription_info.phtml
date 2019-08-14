@@ -25,7 +25,7 @@ $intervals = $this->getIntervals();
 <div class="subscription-info">
     <form class="interval" action="<?php echo Mage::getUrl('autoship/mysubscriptions/change', array('_secure' => true)) ?>">
         <?php if ($this->getNextOrderDateMode() == SFC_Autoship_Model_System_Config_Source_Nextorderdatemode::MODE_MULTIPLE_DATES): ?>
-            <p>Next Ship Date:</p>
+            <p><?php echo $this->__("Next Ship Date:") ?></p>
             <?php if ($subscription->getStatus() == 'Active' && $subscription->getNextOrderDate() >= date('Y-m-d', strtotime('+2 days'))
             ): ?>
                 <?php // Only allow change of next ship date if its more than 2 days in the future ?>
@@ -41,7 +41,7 @@ $intervals = $this->getIntervals();
                 <p><span class="next-order-date"><strong><?php echo $subscription->getNextOrderDateText() ?></strong></span></p>
             <?php
             else: ?>
-                <p><span class="next-order-date"><strong><?php echo 'n/a' ?></strong></span></p>
+                <p><span class="next-order-date"><strong><?php echo $this->__('n/a') ?></strong></span></p>
             <?php endif; ?>
         <?php endif; ?>
         <?php if ($subscription->getStatus() == 'Active' || $subscription->getStatus() == 'Failed' || $subscription->getStatus() == 'Retry'): ?>
@@ -61,7 +61,7 @@ $intervals = $this->getIntervals();
                         <option value="<?php echo $qty ?>" selected="selected"><?php echo $qty ?></option>
                     <?php endif; ?>
                 </select>
-                unit(s) every
+                <?php echo $this->__("unit(s) every") ?>
                 <select id="delivery_interval_<?php echo $subscription->getSubscriptionId() ?>"
                         name="delivery_interval" class="delivery_interval" title="Delivery Interval">
                     <?php foreach ($intervals as $interval): ?>
@@ -76,8 +76,8 @@ $intervals = $this->getIntervals();
 <?php if ($this->getNextOrderDateMode() == SFC_Autoship_Model_System_Config_Source_Nextorderdatemode::MODE_MULTIPLE_DATES): ?>
 <script type="text/javascript">
     //<![CDATA[
-    $j(function () {
-        $j("#delivery_date_<?php echo $subscription->getSubscriptionId() ?>").datepicker({
+    jQuery(function () {
+        jQuery("#delivery_date_<?php echo $subscription->getSubscriptionId() ?>").datepicker({
             minDate: 2,
             showOn: "button",
             buttonImage: "<?php echo $this->getSkinUrl('images/autoship/calendar_icon.png')?>",
@@ -85,7 +85,7 @@ $intervals = $this->getIntervals();
             buttonText: "Click to change date.",
             dateFormat: "mm/dd/y",
             onSelect: function () {
-                var form = $j(this).closest("form");
+                var form = jQuery(this).closest("form");
                 updateMySubscription(form);
             }
         })

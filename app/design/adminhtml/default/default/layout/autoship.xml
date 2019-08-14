@@ -28,15 +28,23 @@
         <reference name="js">
             <block type="autoship/adminhtml_sales_order_create_jsonp" name="jsonp" template="autoship/sales/create_order/jsonp.phtml" after="-"/>
         </reference>
+        <reference name="order_item_extra_info">
+            <block type="autoship/adminhtml_sales_order_create_product_subscription" name="autoship_subscribe_widget"
+                   template="autoship/sales/create_order/product/subscription.phtml" />
+        </reference>
     </adminhtml_sales_order_create_index>
+
+    <adminhtml_sales_order_create_load_block_items>
+        <reference name="order_item_extra_info">
+            <block type="autoship/adminhtml_sales_order_create_product_subscription" name="autoship_subscribe_widget"
+                   template="autoship/sales/create_order/product/subscription.phtml" />
+        </reference>
+    </adminhtml_sales_order_create_load_block_items>
 
     <!-- Saved Credit Cards tab in ADMIN > CUSTOMER > EDIT > GRID -->
     <adminhtml_customer_edit>
         <reference name="customer_edit_tabs">
-            <action method="addTab">
-                <name>paymentprofile</name>
-                <block>autoship/adminhtml_customer_paymentprofiles_paymentprofile</block>
-            </action>
+            <action method="addPaymentProfilesTab" />
         </reference>
     </adminhtml_customer_edit>
 

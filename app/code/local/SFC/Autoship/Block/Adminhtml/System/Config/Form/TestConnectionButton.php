@@ -46,7 +46,7 @@ class SFC_Autoship_Block_Adminhtml_System_Config_Form_TestConnectionButton exten
     public function getAjaxCheckUrl()
     {
         return Mage::helper('adminhtml')->getUrl(
-            'autoship_admin/adminhtml_testconnectionbutton/test',
+            'adminhtml/sptestconnectionbutton/test',
             array(
                 'website' => $this->getRequest()->getParam('website'),
             ));

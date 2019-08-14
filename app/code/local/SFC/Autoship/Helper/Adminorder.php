@@ -1,4 +1,4 @@
-<?php //00612
+<?php
 /**
  * Subscribe Pro - Subscriptions Management Extension
  *
@@ -15,109 +15,228 @@
  *
  */
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='/ioncube/ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if((@$__id[1])==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}@dl($__ln);}else{die('The file '.__FILE__." is corrupted. Ensure that you use binary mode when transferring files with FTP and disable the 'TAR smart cr/lf feature' if using WinZIP\n");}if(function_exists('_il_exec')){return _il_exec();}die('The file <b>'.__FILE__.'</b> has been encoded with the <a href="http://www.ioncube.com">ionCube PHP Encoder</a> and requires the free '.basename($__ln).' <a href="http://www.ioncube.com/loader_download/">ionCube PHP Loader</a> to be installed.');
+/**
+ * Helper class - Access with Mage::helper('autoship/adminorder')
+ *
+ * Based on code from Mage_Adminhtml_Sales_Order_CreateController which calls Mage_Adminhtml_Model_Sales_Order_Create a lot
+ * With inspiration from {@link http://inchoo.net/ecommerce/magento/programmatically-create-order-in-magento/ Inchoo's Programmatically Creating and Order}
+ *
+ */
+class SFC_Autoship_Helper_Adminorder extends Mage_Core_Helper_Abstract
+{
+    /**
+     * Instance vars to hold details about quote / order
+     */
+    private $_storeId = '1';
+    private $_groupId = '1';
+    private $_paymentData;
+    private $_orderData;
+    private $_productQtys;
+    private $_customer;
+    private $_billingAddressId;
+    private $_shippingAddressId;
 
-?>
-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
-kjYHk/POMcLeCDg2SfoYZUTLWW==
+    /**
+     * Set details for quote / order creation.
+     * Only SFC Authorize.NET CIM payment method is supported at this time
+     * @param Mage_Customer_Model_Customer $customer
+     * @param $storeId
+     * @param $productQtys
+     * @param $billingAddressId
+     * @param $shippingAddressId
+     * @param $cimPaymentProfileId
+     * @param $shippingMethod
+     */
+    public function setOrderDetails(Mage_Customer_Model_Customer $customer, $storeId, $productQtys, $billingAddressId,
+        $shippingAddressId, $cimPaymentProfileId, $shippingMethod)
+    {
+        // Save order info
+        $this->_storeId = $storeId;
+        $this->_customer = $customer;
+        $this->_billingAddressId = $billingAddressId;
+        $this->_shippingAddressId = $shippingAddressId;
+
+        // Save products array
+        $this->_productQtys = $productQtys;
+
+        // Build array of order data
+        $this->_orderData = array(
+            'currency' => 'USD',
+            'account' => array(
+                'group_id' => $this->_groupId,
+                'email' => $this->_customer->getEmail()
+            ),
+            'shipping_method' => $shippingMethod,
+        );
+        // Build array of payment data
+        // Only SFC Authorize.NET CIM payment method is supported at this time
+        $this->_paymentData = array(
+            'method' => SFC_AuthnetToken_Model_Cim::METHOD_CODE,
+            'cc_cid' => null,
+            'payment_profile_id' => $cimPaymentProfileId,
+            // TO DO: Lookup real cc last 4 digits
+            'saved_cc_last_4' => '1111'
+        );
+    }
+
+    /**
+     * Retrieve order create model
+     *
+     * @return  Mage_Adminhtml_Model_Sales_Order_Create
+     */
+    protected function _getOrderCreateModel()
+    {
+        return Mage::getSingleton('adminhtml/sales_order_create');
+    }
+
+    /**
+     * Retrieve session object
+     *
+     * @return Mage_Adminhtml_Model_Session_Quote
+     */
+    protected function _getSession()
+    {
+        return Mage::getSingleton('adminhtml/session_quote');
+    }
+
+    /**
+     * Initialize order creation session data
+     *
+     */
+    protected function _initSession($customerId, $storeId)
+    {
+        /* Get/identify customer */
+        $this->_getSession()->setCustomerId((int)$customerId);
+        /* Get/identify store */
+        $this->_getSession()->setStoreId((int)$storeId);
+
+        return $this;
+    }
+
+    /**
+     * Creates order from info in instance vars
+     */
+    public function createOrder()
+    {
+        try {
+            // Log
+            Mage::log('Initing quote session...', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+            // Init session (Mage_Adminhtml_Model_Session_Quote)
+            $this->_initSession($this->_customer->getId(), $this->_storeId);
+            // Log
+            Mage::log('Creating quote...', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+            // Create quote
+            $this->createQuote();
+            // Log
+            Mage::log('Setting payment method data...', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+            // Set payment data on quote
+            $this->_getOrderCreateModel()->setPaymentData($this->_paymentData);
+            $this->_getOrderCreateModel()->getQuote()->getPayment()->addData($this->_paymentData);
+            // Set product options
+            // TO DO: Handle product options, configurable products, etc
+            /*
+            $item = $this->_getOrderCreateModel()->getQuote()->getItemByProduct($this->_product);
+            $item->addOption(new Varien_Object(
+            array(
+                'product' => $this->_product,
+                'code' => 'option_ids',
+                'value' => '5' // Option id goes here. If more options, then comma separate
+                )
+            ));
+            $item->addOption(new Varien_Object(
+            array(
+                'product' => $this->_product,
+                'code' => 'option_5',
+                'value' => 'Some value here'
+                )
+            ));
+            */
+            // Log
+            Mage::log('Placing order...', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+            // Adjust Mage config
+            Mage::app()->getStore()->setConfig(Mage_Sales_Model_Order::XML_PATH_EMAIL_ENABLED, '0');
+            $order = $this->_getOrderCreateModel()->createOrder();
+            // Clear the session object
+            $this->_getSession()->clear();
+            // Unregister 'rule_data'
+            // TO DO: Why do we need to do this manually?
+            Mage::unregister('rule_data');
+            // Log
+            Mage::log('New order created: ' . $order->getIncrementId(), Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+
+            // Return newly created order
+            return $order;
+        }
+        catch (Exception $e) {
+            // Unregister 'rule_data'
+            // TO DO: Why do we need to do this manually?
+            Mage::unregister('rule_data');
+            // Log
+            Mage::log('Error placing order!', Zend_Log::ERR, SFC_Autoship_Helper_Data::LOG_FILE);
+            Mage::log('Error message: ' . $e->getMessage(), Zend_Log::ERR, SFC_Autoship_Helper_Data::LOG_FILE);
+            // Rethrow exception
+            throw $e;
+        }
+    }
+
+    /**
+     * Creates quote from info in instance vars
+     */
+    protected function createQuote()
+    {
+        // Log
+        Mage::log('Setting quote data...', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+        $this->_getOrderCreateModel()->importPostData($this->_orderData);
+
+        // Log
+        Mage::log('Setting billing address...', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+        // Create and set billing address
+        $customerAddress = Mage::getModel('customer/address')->load($this->_billingAddressId);
+        $billingAddress = Mage::getModel('sales/quote_address');
+        $billingAddress
+            ->importCustomerAddress($customerAddress)
+            ->setSaveInAddressBook(0)
+            ->setAddressType(Mage_Sales_Model_Quote_Address::TYPE_BILLING);
+        // There is a bug in Mage_Adminhtml_Model_Sales_Order_Create::setBillingAddress
+        // Work around this bug by calling setBillingAddress() directly on the quote object
+        $this->_getOrderCreateModel()->getQuote()->setBillingAddress($billingAddress);
+
+        // Log
+        Mage::log('Setting shipping address...', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+        $customerAddress = Mage::getModel('customer/address')->load($this->_shippingAddressId);
+        $shippingAddress = Mage::getModel('sales/quote_address');
+        $shippingAddress
+            ->importCustomerAddress($customerAddress)
+            ->setSameAsBilling(0)
+            ->setSaveInAddressBook(0)
+            ->setAddressType(Mage_Sales_Model_Quote_Address::TYPE_SHIPPING);
+        $this->_getOrderCreateModel()->setShippingAddress($shippingAddress);
+
+        // Log
+        Mage::log('Adding products...', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+        // Just like adding products from Magento admin grid
+        $this->_getOrderCreateModel()->addProducts($this->_productQtys);
+        // Log
+        Mage::log('Collecting shipping rates...', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+        $this->_getOrderCreateModel()->collectShippingRates();
+        // Log
+        Mage::log('Setting payment data...', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+        // Setting payment data
+        $this->_getOrderCreateModel()->getQuote()->getPayment()->addData($this->_paymentData);
+
+        // Log
+        Mage::log('Saving quote...', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+        // Init rule data and save quote
+        $this->_getOrderCreateModel()
+            ->initRuleData()
+            ->saveQuote();
+
+        // Log
+        Mage::log('Setting payment data...', Zend_Log::INFO, SFC_Autoship_Helper_Data::LOG_FILE);
+        // Setting payment data (again)
+        $this->_getOrderCreateModel()->getQuote()->getPayment()->addData($this->_paymentData);
+
+        return $this;
+    }
+
+}

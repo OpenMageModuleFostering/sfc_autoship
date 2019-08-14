@@ -72,6 +72,42 @@ class SFC_Autoship_Block_Cart_Product_Subscription extends Mage_Core_Block_Templ
     }
 
     /**
+     * Is this product a trial subscription product?
+     *
+     * @return boolean
+     */
+    public function isTrialProduct()
+    {
+        $platformProduct = $this->getPlatformProduct();
+
+        return ($platformProduct->getData('is_trial_product'));
+    }
+
+    /**
+     * Subscription option mode
+     *
+     * @return string
+     */
+    public function getSubscriptionOptionMode()
+    {
+        $platformProduct = $this->getPlatformProduct();
+
+        return ($platformProduct->getData('subscription_option_mode'));
+    }
+
+    /**
+     * Default subscription option
+     *
+     * @return string
+     */
+    public function getDefaultSubscriptionOption()
+    {
+        $platformProduct = $this->getPlatformProduct();
+
+        return ($platformProduct->getData('default_subscription_option'));
+    }
+
+    /**
      * @return bool
      */
     public function isItemFlaggedToCreateNewSubscription()

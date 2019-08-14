@@ -21,11 +21,11 @@ $shippingAddress = $subscription->getShippingAddress();
 ?>
 
 <div class="block-title">
-	<h2>Shipping Address</h2>
+	<h2><?php echo $this->__("Shipping Address") ?></h2>
 </div>
 
 <div class="box-padding">
-	<p>Please select the address where your orders should be delivered: <a class="change" href="">(Change)</a></p>
+	<p><?php echo $this->__("Please select the address where your orders should be delivered:") ?> <a class="change" href=""><?php echo $this->__("(Change)") ?></a></p>
 
 	<address>
 	<?php echo $shippingAddress->getFirstname() ?> <?php echo $shippingAddress->getLastname() ?><br/>
@@ -42,7 +42,7 @@ $shippingAddress = $subscription->getShippingAddress();
 
 	<div class="change">
 		<div class="block-title">
-			<h2>Change Shipping Address</h2>
+			<h2><?php echo $this->__("Change Shipping Address") ?></h2>
 		</div>
 		<div class="block-content">
     		<?php echo $this->getChildHtml("shipping_address_select") ?>

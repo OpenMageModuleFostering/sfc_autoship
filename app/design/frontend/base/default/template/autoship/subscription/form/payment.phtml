@@ -30,7 +30,7 @@
 ?>
 <?php foreach ($savedCards as $card): ?>
 <dt>
-    	<?php $curMethodName = 'Use my Saved Card Ending in ' . $card['creditcard_last_digits']; ?>
+    	<?php $curMethodName = $this->__('Use my Saved Card Ending in %s', $card['creditcard_last_digits']); ?>
         <input
         	id="payment_token_<?php echo $card['payment_token'] ?>"
         	value="<?php echo $card['payment_token'] ?>"
@@ -40,7 +40,7 @@
         	class="radio"
         	<?php if($card['payment_token'] == $selectedCard['payment_token']): ?>checked="checked"<?php endif; ?> />
         <label for="payment_token_<?php echo $card['payment_token'] ?>">
-        	<?php echo $this->escapeHtml($curMethodName) ?><?php if (strlen($card['edit_url'])): ?> <a href="<?php echo $card['edit_url'] ?>">(Edit)</a><?php endif; ?>
+        	<?php echo $this->escapeHtml($curMethodName) ?><?php if (strlen($card['edit_url']) && (!isset($card['is_third_party']) || !$card['is_third_party'])): ?> <a href="<?php echo $card['edit_url'] ?>"><?php echo $this->__("(Edit)") ?></a><?php endif; ?>
         </label>
 </dt>
 <dd>

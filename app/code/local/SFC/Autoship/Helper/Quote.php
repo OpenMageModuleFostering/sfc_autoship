@@ -1,4 +1,4 @@
-<?php //00612
+<?php
 /**
  * Subscribe Pro - Subscriptions Management Extension
  *
@@ -15,256 +15,786 @@
  *
  */
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='/ioncube/ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if((@$__id[1])==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}@dl($__ln);}else{die('The file '.__FILE__." is corrupted. Ensure that you use binary mode when transferring files with FTP and disable the 'TAR smart cr/lf feature' if using WinZIP\n");}if(function_exists('_il_exec')){return _il_exec();}die('The file <b>'.__FILE__.'</b> has been encoded with the <a href="http://www.ioncube.com">ionCube PHP Encoder</a> and requires the free '.basename($__ln).' <a href="http://www.ioncube.com/loader_download/">ionCube PHP Loader</a> to be installed.');
+class SFC_Autoship_Helper_Quote extends Mage_Core_Helper_Abstract
+{
+    protected function _construct()
+    {
+    }
 
-?>
-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
+    public function getRelevantProductFromQuoteItem(Mage_Sales_Model_Quote_Item $quoteItem)
+    {
+        if ($quoteItem->getProductType() == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE) {
+            return $quoteItem->getOptionByCode('simple_product')->getProduct();
+        }
+        else {
+            return $quoteItem->getProduct();
+        }
+    }
+
+    public function getRelevantProductFromOrderItem(Mage_Sales_Model_Order_Item $quoteItem)
+    {
+        if ($quoteItem->getProductType() == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE) {
+            return $quoteItem->getOptionByCode('simple_product')->getProduct();
+        }
+        else {
+            return $quoteItem->getProduct();
+        }
+    }
+
+    public function addAdditionalOptionsToOrderItem(Mage_Sales_Model_Order_Item $orderItem)
+    {
+        if($orderItem->getData('item_fulfils_subscription')) {
+            // Get options
+            $options = $orderItem->getProductOptions();
+            // Get existing additional_options
+            if(isset($options['additional_options']) && is_array($options['additional_options'])) {
+                $additionalOptions = $options['additional_options'];
+            }
+            else {
+                $additionalOptions = array();
+            }
+            // Add our details
+            $additionalOptions[] = array(
+                'label' => $this->__('Product Subscription Id'),
+                'value' => $orderItem->getData('subscription_id'),
+            );
+            $additionalOptions[] = array(
+                'label' => $this->__('Subscription Interval'),
+                'value' => $orderItem->getData('subscription_interval'),
+            );
+            // Set new additional_options on order item
+            $options['additional_options'] = $additionalOptions;
+            $orderItem->setProductOptions($options);
+        }
+    }
+
+    /**
+     * Does current quote (passed in quote or current shopping cart in session) have any products which are flagged for subscription?
+     *
+     * @param Mage_Sales_Model_Quote $quote Quote to check.  If null, method will check quote from cart session
+     * @return bool
+     */
+    public function hasProductsToCreateNewSubscription(Mage_Sales_Model_Quote $quote = null)
+    {
+        // Get platform helper
+        /** @var SFC_Autoship_Helper_Product $productHelper */
+        $productHelper = Mage::helper('autoship/product');
+
+        // If passed in quote is empty, get quote from cart in session
+        if($quote == null) {
+            if (Mage::app()->getStore()->isAdmin()) {
+                $quote = Mage::getSingleton("adminhtml/session_quote")->getQuote();
+            } else {
+                // Get cart, quote and quote item
+                /** @var Mage_Checkout_Model_Cart $cart */
+                $cart = Mage::getSingleton('checkout/cart');
+                // Get quote
+                $quote = $cart->getQuote();
+            }
+        }
+        // Iterate items in quote
+        /** @var Mage_Sales_Model_Quote_Item $quoteItem */
+        foreach ($quote->getAllVisibleItems() as $quoteItem) {
+            // Get subscription product profile
+            $product = $this->getRelevantProductFromQuoteItem($quoteItem);
+            // Lookup whether product enabled / disabled for subscription
+            $isProductEnabled = $productHelper->isAvailableForSubscription($product, $quote->getStore());
+            // Check product profile, if this isn't a subscription product, ignore it
+            if ($isProductEnabled) {
+                // Check quote item flag which indicates we should create a new subscription for this product
+                if ($quoteItem->getData('create_new_subscription_at_checkout')) {
+                    return true;
+                }
+            }
+            /*
+            // We longer take the platform's enabled flag on product as authoritative
+            $platformProduct = $platformHelper->getPlatformProduct($product);
+            // Check product profile, if this isn't a subscription product, ignore it
+            if ($platformProduct->getData('enabled')) {
+                // Check quote item flag which indicates we should create a new subscription for this product
+                if ($quoteItem->getData('create_new_subscription_at_checkout')) {
+                    return true;
+                }
+            }
+            */
+        }
+
+        // Didn't find any, return false
+        return false;
+    }
+
+    public function hasSubscriptionReorderProduct(Mage_Sales_Model_Quote $quote = null)
+    {
+        // If passed in quote is empty, get quote from cart in session
+        if($quote == null) {
+            // Get cart, quote and quote item
+            /** @var Mage_Checkout_Model_Cart $cart */
+            $cart = Mage::getSingleton('checkout/cart');
+            // Get quote
+            $quote = $cart->getQuote();
+        }
+        // Iterate items in quote
+        /** @var Mage_Sales_Model_Quote_Item $quoteItem */
+        foreach ($quote->getAllVisibleItems() as $quoteItem) {
+            // Check quote item attributes
+            $itemFulfilsSubscription = $quoteItem->getData('item_fulfils_subscription');
+            $itemCreatesNewSubscription = $quoteItem->getData('create_new_subscription_at_checkout');
+            // Check quote item flag which indicates we should create a new subscription for this product
+            if ($itemFulfilsSubscription && !$itemCreatesNewSubscription) {
+                return true;
+            }
+        }
+
+        // Didn't find any, return false
+        return false;
+    }
+
+    /**
+     * @param Mage_Catalog_Model_Product $product
+     * @param null $params
+     */
+    public function onCheckoutCartAddProductComplete(Mage_Catalog_Model_Product $product, $params = null)
+    {
+        if (is_null($params)) {
+            // Get params from request
+            $request = Mage::app()->getRequest();
+            $params = $request->getParams();
+        }
+        // Filter delivery params
+        $deliveryOption = isset($params['delivery-option']) ? $params['delivery-option'] : '';
+        $deliveryInterval = isset($params['delivery-interval']) ? $params['delivery-interval'] : '';
+        $requestQty = isset($params['qty']) ? $params['qty'] : 1;
+
+        $this->updateProductInCart($product, $deliveryOption, $deliveryInterval);
+    }
+
+    /**
+     * @param Mage_Catalog_Model_Product $groupedProduct
+     * @param null $params
+     */
+    public function onCheckoutCartAddGroupedProductComplete(Mage_Catalog_Model_Product $groupedProduct, $params = null)
+    {
+        if (is_null($params)) {
+            // Get request info
+            // Get params from request
+            $request = Mage::app()->getRequest();
+            $params = $request->getParams();
+        }
+        $superGroupParam = isset($params['super_group']) ? $params['super_group'] : '';
+        $deliveryOptionParam = isset($params['delivery-option']) ? $params['delivery-option'] : '';
+        $deliveryIntervalParam = isset($params['delivery-interval']) ? $params['delivery-interval'] : '';
+
+        // Get product type instance
+        $typeInstance = $groupedProduct->getTypeInstance(true);
+        // Iterate through associated products and handle 1 at a time
+        /** @var Mage_Catalog_Model_Product $product */
+        foreach ($typeInstance->getAssociatedProducts($groupedProduct) as $product) {
+            // Check if product was added to the cart
+            if (isset($superGroupParam[$product->getId()])) {
+                // Check if quantity added was > 0
+                if ($superGroupParam[$product->getId()] > 0) {
+                    // Get params
+                    // Update cart
+                    if (Mage::app()->getStore()->isAdmin()) {
+                        //If in admin, there is no parent item, so transfer custom options
+                        $product->setCustomOptions(array(
+                            'product_type' => new Varien_Object(array(
+                                'value' => 'grouped',
+                                'code' => 'product_type'
+                            ))
+                        ));
+                    }
+                    $this->updateProductInCart(
+                        $product,
+                        is_array($deliveryOptionParam) ? $deliveryOptionParam[$product->getId()] : '',
+                        is_array($deliveryOptionParam) ? $deliveryIntervalParam[$product->getId()] : '');
+
+                }
+            }
+        }
+    }
+
+    /**
+     * @return Mage_Sales_Model_Quote
+     */
+    protected function _getQuote()
+    {
+        return Mage::app()->getStore()->isAdmin()
+            ? Mage::getSingleton("adminhtml/session_quote")->getQuote()
+            : Mage::getSingleton("checkout/cart")->getQuote();
+    }
+
+    /**
+     * @return Mage_Adminhtml_Model_Session_Quote|Mage_Checkout_Model_Session
+     */
+    protected function _getCheckoutSession()
+    {
+        return Mage::app()->getStore()->isAdmin()
+            ? Mage::getSingleton("adminhtml/session_quote")
+            : Mage::getSingleton("checkout/session");
+    }
+
+    protected function updateProductInCart($product, $deliveryOption, $deliveryInterval)
+    {
+        // Get platform helper
+        /** @var SFC_Autoship_Helper_Platform $platformHelper */
+        $platformHelper = Mage::helper('autoship/platform');
+        /** @var SFC_Autoship_Helper_Product $productHelper */
+        $productHelper = Mage::helper('autoship/product');
+
+        // Get quote
+        $quote = $this->_getQuote();
+
+        // Check if product is enabled
+        // In admin, if the product isn't available for subscription it won't have an ID yet
+        if (!$productHelper->isAvailableForSubscription($product, $quote->getStore())) {
+            return;
+        }
+
+        //Get quote item
+        $quoteItem = $quote->getItemByProduct($product);
+        if ($quoteItem == null || !strlen($quoteItem->getId())) {
+            // Not sure why this would ever happen, but just to be safe
+            // Return here in case the quote item hasn't been saved yet (*should* only happen if isn't enabled for subscription)
+            if (Mage::app()->getStore()->isAdmin() && !is_null($quoteItem)) {
+                return;
+            }
+            Mage::throwException($this->__('Cant find quote item which was added!'));
+        }
+
+        // Get subscription product profile
+        $platformProduct = $platformHelper->getPlatformProduct($product);
+
+        // Get new product qty from cart / quote
+        $quoteQty = $quoteItem->getQty();
+
+        // Apply default delivery option if none set
+        if (!strlen($deliveryOption)) {
+            if ($platformProduct->getData('subscription_option_mode') != 'subscription_only'
+                && $platformProduct->getData('default_subscription_option') == 'onetime_purchase'
+            ) {
+                $deliveryOption = 'one-time-delivery';
+            } else {
+                $deliveryOption = 'subscribe';
+            }
+        }
+
+        // Implement trial subscription functionality
+        if ($platformProduct->getData('is_trial_product')) {
+            // Force subscription delivery option
+            $deliveryOption = 'subscribe';
+            // Set trial price on quote item
+            $quoteItem->setCustomPrice($platformProduct->getData('trial_price'));
+            $quoteItem->setOriginalCustomPrice($platformProduct->getData('trial_price'));
+        }
+
+        // Only do error messages if added product is set for subscription
+        if ($deliveryOption == 'subscribe') {
+            // Check qty to max sure we're in min - max range for subscription
+            // Check the new quantity in the cart after addition
+            $removeItem = false;
+            if($quoteQty < $platformProduct->getData('min_qty')) {
+                $this->_getCheckoutSession()->addError(
+                    $this->__('Item %s requires minimum quantity of %s for subscription.',
+                        $product->getSku(),
+                        $platformProduct->getData('min_qty')
+                    ));
+                //If invalid qty and subscription only, remove the product
+                if ($platformProduct->getData('subscription_option_mode') == 'subscription_only') {
+                    $removeItem = true;
+                }
+            }
+            if($quoteQty > $platformProduct->getData('max_qty')) {
+                $this->_getCheckoutSession()->addError(
+                    $this->__('Item %s allows maximum quantity of %s for subscription.',
+                        $product->getSku(),
+                        $platformProduct->getData('max_qty')
+                    ));
+                //If invalid qty and subscription only, remove the product
+                if ($platformProduct->getData('subscription_option_mode') == 'subscription_only') {
+                    $removeItem = true;
+                }
+            }
+            //If we found a bug when adding the item (and it's admin) we have to remove it from cart
+            if ($removeItem) {
+                $product = $quoteItem->getProduct();
+                //We have to remove the item this way due to a bug in Magento
+                foreach($quote->getItemsCollection() as $key => $compItem) {
+                    if ($compItem->getId() == $quoteItem->getId()) {
+                        $quote->removeItem($key);
+                        $quoteItem->delete();
+                        break;
+                    }
+                }
+                $quote->setTotalsCollectedFlag(false);
+                $quote->save();
+                if (!Mage::app()->getStore()->isAdmin()) {
+                    Mage::app()->getResponse()->setRedirect($product->getProductUrl())->sendResponse();
+                    exit;
+                }
+                return;
+            }
+        }
+
+        // Set data on quote item
+        // Only set subscription option on quote item if we are in we meet all conditions
+        if($quoteQty >= $platformProduct->getData('min_qty') && $quoteQty <= $platformProduct->getData('max_qty')) {
+            $quoteItem->setData('create_new_subscription_at_checkout', ($deliveryOption == 'subscribe'));
+        }
+        else {
+            $quoteItem->setData('create_new_subscription_at_checkout', false);
+        }
+        // Apply default interval if no interval set
+        if (!strlen($deliveryInterval)) {
+            $deliveryInterval = $platformProduct->getData('default_interval');
+        }
+        if (!strlen($deliveryInterval)) {
+            // If no default interval, go for the 1st one in the list
+            if (count($intervals = $platformProduct->getData('intervals'))) {
+                $deliveryInterval = $intervals[0];
+            }
+        }
+        // Set interval on quote item regardless
+        $quoteItem->setData('new_subscription_interval', $deliveryInterval);
+        // Save quote item
+        $quoteItem->save();
+    }
+
+    /**
+     * @param Mage_Checkout_Model_Cart $cart
+     * @param array $data
+     */
+    public function onCheckoutCartUpdateItemsAfter(Mage_Checkout_Model_Cart $cart, $data)
+    {
+        $this->updateQuoteItems($cart->getQuote(), $data);
+    }
+
+    /**
+     * Update the items in a quote based on the incoming date
+     * @param Mage_Sales_Model_Quote $quote
+     * @param $data
+     * @return $this
+     */
+    public function updateQuoteItems(Mage_Sales_Model_Quote $quote, $data)
+    {
+        // Get platform helper
+        /** @var SFC_Autoship_Helper_Platform $platformHelper */
+        $platformHelper = Mage::helper('autoship/platform');
+        /** @var SFC_Autoship_Helper_Product $productHelper */
+        $productHelper = Mage::helper('autoship/product');
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+
+        $isAdmin = Mage::app()->getStore()->isAdmin();
+        $session = $this->_getCheckoutSession();
+
+        // Set store on api helper
+        $apiHelper->setConfigStore($quote->getStore());
+        // Iterate items in quote
+        /** @var Mage_Sales_Model_Quote_Item $quoteItem */
+        foreach ($quote->getAllVisibleItems() as $quoteItem) {
+            $hasError = false;
+            // Get corresponding data for this quote item
+            $itemDeliveryOption = isset($data[$quoteItem->getId()]['delivery-option']) ? $data[$quoteItem->getId()]['delivery-option'] : '';
+            $itemDeliveryInterval = isset($data[$quoteItem->getId()]['delivery-interval']) ? $data[$quoteItem->getId()]['delivery-interval'] : '';
+            // Get subscription product profile
+            $product = $this->getRelevantProductFromQuoteItem($quoteItem);
+            // Check if product is enabled for subscription
+            // Check product profile, if this isn't a subscription product, ignore it
+            if ($productHelper->isAvailableForSubscription($product, $quote->getStore())) {
+                // Get platform product
+                $platformProduct = $platformHelper->getPlatformProduct($product);
+                // Only do error messages if added product is set for subscription
+                if ($itemDeliveryOption == 'subscribe') {
+                    // Check qty to max sure we're in min - max range for subscription
+                    if($quoteItem->getQty() < $platformProduct->getData('min_qty')) {
+                        $session->addError(
+                            $this->__('Item %s requires minimum quantity of %s for subscription.',
+                                $product->getSku(),
+                                $platformProduct->getData('min_qty')
+                            ));
+                        $hasError = true;
+                    }
+                    if($quoteItem->getQty() > $platformProduct->getData('max_qty')) {
+                        $session->addError(
+                            $this->__('Item %s allows maximum quantity of %s for subscription.',
+                                $product->getSku(),
+                                $platformProduct->getData('max_qty')
+                            ));
+                        $hasError = true;
+                    }
+                }
+
+                // Set data on quote item
+                // Only set subscription option on quote item if we are in we meet all conditions
+                if($quoteItem->getQty() >= $platformProduct->getData('min_qty') && $quoteItem->getQty() <= $platformProduct->getData('max_qty')) {
+                    $quoteItem->setData('create_new_subscription_at_checkout', ($itemDeliveryOption == 'subscribe'));
+                }
+                else if ($platformProduct->getData('subscription_option_mode') != 'subscription_only') {
+                    $quoteItem->setData('create_new_subscription_at_checkout', false);
+                }
+                $quoteItem->setData('new_subscription_interval', $itemDeliveryInterval);
+                /*
+                 * We have to save the admin item if there is no error for the below situation:
+                 * 1 item has an error and 1 does not
+                 * Without saving the one that does not, all items will revert to "no subscription"
+                 */
+                if ($isAdmin) {
+                    if ($hasError && $quoteItem->getOrigData('create_new_subscription_at_checkout')
+                        && $platformProduct->getData('subscription_option_mode') == 'subscription_only'
+                    ) {
+                        //If this product can only be subscription, and an invalid qty was requested, revert the quantity
+                        $quoteItem->setQty($quoteItem->getOrigData('qty'));
+                        $buyRequest = $quoteItem->getBuyRequest();
+                        $buyRequest->setData('qty', $quoteItem->getOrigData('qty'));
+                        $optionValue = @serialize($buyRequest->getData());
+                        $quoteItem->getOptionByCode('info_buyRequest')->setData('value', $optionValue)->save();
+                        $quoteItem->save();
+                    } else if (!$hasError) {
+                        //Otherwise if there's no error make an update
+                        $quoteItem->save();
+                    }
+                }
+//                if (!$hasError && $isAdmin) {
+//                    $quoteItem->save();
+//                }
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * @param Mage_Sales_Model_Quote_Item $quoteItem
+     * @param Mage_Sales_Model_Order_Item $orderItem
+     */
+    public function onSalesConvertQuoteItemToOrderItem(Mage_Sales_Model_Quote_Item $quoteItem, Mage_Sales_Model_Order_Item $orderItem)
+    {
+        // Map additional options from quote item (from the buy request) to order item
+        // TODO:    It would be ideal if we can get the additional_options from buy request into additional_options option field in
+        //          the quote item at time quote item is created
+        $buyRequest = unserialize($quoteItem->getOptionByCode('info_buyRequest')->getValue());
+        if (isset($buyRequest['additional_options']) && count($buyRequest['additional_options'])) {
+            $additionalOptions = $buyRequest['additional_options'];
+            $options = $orderItem->getProductOptions();
+            $options['additional_options'] = $additionalOptions;
+            $orderItem->setProductOptions($options);
+        }
+        // Set fields / attributes from quote on to order item
+        $orderItem->setData('item_fulfils_subscription', $quoteItem->getData('item_fulfils_subscription'));
+        $orderItem->setData('subscription_id', $quoteItem->getData('subscription_id'));
+        $orderItem->setData('subscription_interval', $quoteItem->getData('subscription_interval'));
+        // If this item fulfils a subscription, update additional_information
+        if($quoteItem->getData('item_fulfils_subscription')) {
+            $this->addAdditionalOptionsToOrderItem($orderItem);
+        }
+    }
+
+    /**
+     * @param Mage_Sales_Model_Order $order
+     * @param Mage_Sales_Model_Quote $quote
+     */
+    public function onSalesConvertOrderToQuote(Mage_Sales_Model_Order $order, Mage_Sales_Model_Quote $quote)
+    {
+        // Check for subscribe pro vault pay method
+        if (0 === strpos($order->getPayment()->getMethod(), SFC_Autoship_Helper_Platform::PAY_METHOD_CODE_SUBSCRIBE_PRO_VAULT)) {
+            // Quote was using SP vault pay method
+            // Reset payment data fields on order
+            $quote->getPayment()->setData('cc_type', '');
+            $quote->getPayment()->setData('cc_number', '');
+            $quote->getPayment()->setData('cc_exp_month', '');
+            $quote->getPayment()->setData('cc_exp_year', '');
+            $quote->getPayment()->setAdditionalInformation('save_card', '');
+            $quote->getPayment()->setAdditionalInformation('is_new_card', '');
+            $quote->getPayment()->setAdditionalInformation('payment_token', '');
+            $quote->getPayment()->setAdditionalInformation('obscured_cc_number', '');
+        }
+    }
+
+    /**
+     * @param Mage_Sales_Model_Quote $quote
+     * @return array
+     */
+    public function onCheckoutSubmitAllAfter(Mage_Sales_Model_Quote $quote)
+    {
+        // Create subscriptions
+        $createdSubscriptions = $this->createSubscriptionsFromQuote($quote);
+        // Check result
+        if(count($createdSubscriptions)) {
+            // At least 1 subscription was created, set flag to display message on thank you page
+            Mage::getSingleton('checkout/session')->setData('created_subscription_ids', array_keys($createdSubscriptions));
+        }
+    }
+
+    /**
+     * @param Mage_Sales_Model_Quote $quote
+     * @return array
+     */
+    protected function createSubscriptionsFromQuote(Mage_Sales_Model_Quote $quote)
+    {
+        /** @var SFC_Autoship_Helper_Product $productHelper */
+        $productHelper = Mage::helper('autoship/product');
+        /** @var SFC_Autoship_Helper_Api $apiHelper */
+        $apiHelper = Mage::helper('autoship/api');
+
+        // Set store on api helper
+        $apiHelper->setConfigStore($quote->getStore());
+
+        // Keep track of subscriptions created
+        $subscriptions = array();
+        // Maintain failed subscription count in session
+        Mage::getSingleton('checkout/session')->setData('failed_subscription_count', 0);
+        // Iterate shipping addresses
+        /** @var Mage_Sales_Model_Quote_Address $curAddress */
+        foreach ($quote->getAllShippingAddresses() as $curAddress) {
+            // Iterate items in address
+            /** @var Mage_Sales_Model_Quote_Item $quoteItem */
+            foreach ($curAddress->getAllItems() as $quoteItem) {
+                // Get subscription product profile
+                $product = $this->getRelevantProductFromQuoteItem($quoteItem);
+                // Check if product is enabled for subscription
+                // Check product profile, if this isn't a subscription product, ignore it
+                if ($productHelper->isAvailableForSubscription($product, $quote->getStore())) {
+                    // Check quote item flag which indicates we should create a new subscription for this product
+                    if ($quoteItem->getData('create_new_subscription_at_checkout')) {
+                        $subscription = $this->createSubscriptionAndUpdateQuoteItem($quoteItem, $curAddress);
+                        $subscriptions[] = $subscription;
+                    }
+                }
+            }
+        }
+        // Now iterate virtual products
+        // Iterate items
+        /** @var Mage_Sales_Model_Quote_Item $quoteItem */
+        foreach ($quote->getAllItems() as $quoteItem) {
+            if ($quoteItem->getProductType() == Mage_Catalog_Model_Product_Type::TYPE_VIRTUAL || $quoteItem->getProductType() == Mage_Downloadable_Model_Product_Type::TYPE_DOWNLOADABLE) {
+                // Get subscription product profile
+                $product = $this->getRelevantProductFromQuoteItem($quoteItem);
+                // Check if product is enabled for subscription
+                // Check product profile, if this isn't a subscription product, ignore it
+                if ($productHelper->isAvailableForSubscription($product, $quote->getStore())) {
+                    // Check quote item flag which indicates we should create a new subscription for this product
+                    if ($quoteItem->getData('create_new_subscription_at_checkout')) {
+                        // For virtual products, set billing address as shipping address
+                        $subscription = $this->createSubscriptionAndUpdateQuoteItem($quoteItem, $quote->getBillingAddress());
+                        $subscriptions[] = $subscription;
+                    }
+                }
+            }
+        }
+
+        // Return array of created subs
+        return $subscriptions;
+    }
+
+    private function createSubscriptionAndUpdateQuoteItem(Mage_Sales_Model_Quote_Item $quoteItem, Mage_Sales_Model_Quote_Address $shippingAddress)
+    {
+        // Get platform helper
+        /** @var SFC_Autoship_Helper_Platform $platformHelper */
+        $platformHelper = Mage::helper('autoship/platform');
+        try {
+            // Create subscription from this item
+            $subscription =
+                $this->createSubscriptionFromQuoteItem($quoteItem, $shippingAddress, $quoteItem->getData('new_subscription_interval'));
+
+            Mage::dispatchEvent('sfc_autoship_before_create_subscription_from_quote_item',
+                array('subscription' => $subscription, 'quote_item' => $quoteItem));
+
+            // Create subscription via API
+            $subscriptionId = $platformHelper->createSubscription($subscription);
+            // Save in array
+            $subscriptions[$subscriptionId] = $subscription;
+            // Save subscription id and flag on quote item
+            $quoteItem->setData('subscription_id', $subscriptionId);
+            $quoteItem->setData('subscription_interval', $subscription->getData('interval'));
+            $quoteItem->setData('item_fulfils_subscription', true);
+            $quoteItem->save();
+            // Lookup order item
+            /** @var Mage_Sales_Model_Order_Item $orderItem */
+            $orderItem = Mage::getModel('sales/order_item')->load($quoteItem->getId(), 'quote_item_id');
+            // Save subscription id and flag on order item
+            if(strlen($orderItem->getId())) {
+                $orderItem->setData('subscription_id', $subscriptionId);
+                $orderItem->setData('subscription_interval', $subscription->getData('interval'));
+                $orderItem->setData('item_fulfils_subscription', true);
+                $this->addAdditionalOptionsToOrderItem($orderItem);
+                $orderItem->save();
+            }
+
+            Mage::dispatchEvent('sfc_autoship_after_create_subscription_from_quote_item',
+                array('subscription' => $subscription, 'quote_item' => $quoteItem));
+
+            return $subscription;
+        }
+        catch(\Exception $e) {
+            // Increment failed subscription count
+            Mage::getSingleton('checkout/session')->setData(
+                'failed_subscription_count',
+                1 + Mage::getSingleton('checkout/session')->getData('failed_subscription_count')
+            );
+        }
+    }
+
+    /**
+     * @param Mage_Sales_Model_Quote_Item $quoteItem
+     * @param Mage_Sales_Model_Quote_Address $shippingAddress
+     * @param string $interval
+     * @return SFC_Autoship_Model_Subscription
+     */
+    protected function createSubscriptionFromQuoteItem(Mage_Sales_Model_Quote_Item $quoteItem, Mage_Sales_Model_Quote_Address $shippingAddress, $interval)
+    {
+        // Get quote
+        $quote = $quoteItem->getQuote();
+        // Get customer
+        $customer = $quote->getCustomer();
+
+        // Create default subscription
+        /** @var SFC_Autoship_Model_Subscription $subscription */
+        $subscription = Mage::getModel('autoship/subscription');
+        $subscription->setData('next_order_date', date('Y-m-d'));
+        $product = $this->getRelevantProductFromQuoteItem($quoteItem);
+        $subscription->setData('product_id', $product->getId());
+        $subscription->setData('customer_id', $customer->getId());
+        $subscription->setData('billing_address_id', $quote->getBillingAddress()->getCustomerAddressId());
+        $subscription->setData('billing_first_name', $quote->getBillingAddress()->getFirstname());
+        $subscription->setData('billing_last_name', $quote->getBillingAddress()->getLastname());
+        $subscription->setData('magento_store_code', $quote->getStore()->getCode());
+        // Workaround for Magento issue with Registering during checkout
+        // UGH Magento!
+        if(strlen($shippingAddress->getCustomerAddressId())) {
+            $subscription->setData('shipping_address_id', $shippingAddress->getCustomerAddressId());
+        }
+        else {
+            $subscription->setData('shipping_address_id', $quote->getBillingAddress()->getCustomerAddressId());
+        }
+        $subscription->setData('shipping_method', $shippingAddress->getData('shipping_method'));
+        $subscription->setData('qty', $quoteItem->getQty());
+        $subscription->setData('interval', $interval);
+        // Set skip first order flag, since we just placed an order for today
+        $subscription->setData('skip_first_order', true);
+        // Save coupon code on subscription, if config setting enabled
+        if(Mage::getStoreConfig('autoship_subscription/options/allow_coupon', $quote->getStore()) == 1) {
+            $subscription->setData('coupon_code', $quote->getCouponCode());
+        }
+
+        // Handle product options, save them to subscription
+        $this->addProductOptionsToSubscription($subscription, $quoteItem);
+
+        // Set payment details on subscription based on quote / order
+        $this->addPaymentInfoToSubscription($subscription, $quoteItem);
+
+        // Return the new subscription model
+        return $subscription;
+    }
+
+    protected function addProductOptionsToSubscription(SFC_Autoship_Model_Subscription $subscription, Mage_Sales_Model_Quote_Item $quoteItem)
+    {
+        // Create array to hold product options and then be stored in subscription
+        $productOptions = array();
+        // Get buy request object
+        $buyRequest = $quoteItem->getBuyRequest();
+        // If this is a bundle product
+        if ($quoteItem->getProductType() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE) {
+            // Get bundle options from buy request
+            $bundleOption = $buyRequest->getData('bundle_option');
+            $bundleOptionQty = $buyRequest->getData('bundle_option_qty');
+            if (is_array($bundleOption) && count($bundleOption)) {
+                // Save bundle options with subscription
+                $productOptions['bundle_option'] = $bundleOption;
+                $productOptions['bundle_option_qty'] = $bundleOptionQty;
+            }
+        }
+        // Save custom options
+        $customOptions = $buyRequest->getData('options');
+        if (is_array($customOptions) && count($customOptions)) {
+            $productOptions['options'] = $customOptions;
+        }
+        // Store all options with subscription
+        $subscription->setData('magento_product_options', $productOptions);
+    }
+
+    protected function addPaymentInfoToSubscription(SFC_Autoship_Model_Subscription $subscription, Mage_Sales_Model_Quote_Item $quoteItem)
+    {
+        // Get quote
+        $quote = $quoteItem->getQuote();
+        // Get payment info
+        $payment = $quote->getPayment();
+
+        // Get helper
+        /** @var SFC_Autoship_Helper_Platform $platformHelper */
+        $platformHelper = Mage::helper('autoship/platform');
+        // Lookup payment method code based on SP config
+        $configuredMethodCode = $platformHelper->getConfiguredPaymentMethodCode();
+
+        // Assert that quote / order was placed using compatible payment method
+        if(0 !== strpos($payment->getMethod(), $configuredMethodCode)) {
+            Mage::throwException($this->__('Cannot create subscription(s) unless compatible payment method is selected!'));
+        }
+
+        // Set method code / gateway on sub
+        $subscription->setData('payment_method_code', $configuredMethodCode);
+
+        // Check payment method code / type
+        switch ($configuredMethodCode) {
+
+            case SFC_Autoship_Helper_Platform::PAY_METHOD_CODE_SFC_CIM_10XX:
+            case SFC_Autoship_Helper_Platform::PAY_METHOD_CODE_SFC_CIM:
+                // Check that quote payment has payment_profile_id, otherwise get order payment
+                if(!strlen($payment->getAdditionalInformation('payment_profile_id'))) {
+                    // Lookup order corresponding to quote
+                    $order = Mage::getModel('sales/order')->getCollection()
+                        ->addFieldToFilter('quote_id', $quote->getId())
+                        ->getFirstItem();
+                    if(strlen($order->getId())) {
+                        $payment = $order->getPayment();
+                    }
+                }
+                // Set data on subscription
+                $subscription->setData('payment_token', $payment->getAdditionalInformation('payment_profile_id'));
+                $subscription->setData('customer_cardnumber', $payment->getAdditionalInformation('saved_cc_last_4'));
+                return;
+
+            case SFC_Autoship_Helper_Platform::PAY_METHOD_CODE_SUBSCRIBE_PRO_VAULT:
+                // Set data on subscription, just the payment token is enough for the SP platform to lookup the customer's payment profile
+                $subscription->setData('payment_token', $payment->getAdditionalInformation('payment_token'));
+                return;
+
+            case SFC_Autoship_Helper_Platform::PAY_METHOD_CODE_SFC_CYBERSOURCE:
+                // Check that quote payment has payment_profile_id, otherwise get order payment
+                if(!strlen($payment->getAdditionalInformation('payment_token'))) {
+                    // Lookup order corresponding to quote
+                    $order = Mage::getModel('sales/order')->getCollection()
+                        ->addFieldToFilter('quote_id', $quote->getId())
+                        ->getFirstItem();
+                    if(strlen($order->getId())) {
+                        $payment = $order->getPayment();
+                    }
+                }
+                // Set data on subscription
+                $subscription->setData('payment_token', $payment->getAdditionalInformation('payment_token'));
+                $subscription->setData('customer_cardnumber', $payment->getData('cc_last4'));
+                return;
+
+            case SFC_Autoship_Helper_Platform::PAY_METHOD_CODE_BRAINTREE:
+                return;
+
+            case SFC_Autoship_Helper_Platform::PAY_METHOD_CODE_PARADOX_TRANSARMOR:
+                // Lookup order corresponding to quote
+                /** @var Mage_Sales_Model_Order $order */
+                $order = Mage::getModel('sales/order')->getCollection()
+                    ->addFieldToFilter('quote_id', $quote->getId())
+                    ->getFirstItem();
+                if(!strlen($order->getId())) {
+                    Mage::throwException($this->__('Failed to find order corresponding to quote to create subscriptions for TransArmor quote!'));
+                }
+                /** @var Mage_Sales_Model_Order_Payment $payment */
+                $payment = $order->getPayment();
+                // Set data on subscription
+                $subscription->setData('payment_token', $payment->getAdditionalInformation('token'));
+                $subscription->setData('customer_cardnumber', $payment->getData('cc_last4'));
+                return;
+
+        }
+
+    }
+
+}

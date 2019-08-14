@@ -92,8 +92,6 @@ class SFC_Autoship_Block_Mysubscriptions_Subscription extends SFC_Autoship_Block
             default:
                 return '';
 
-            case SFC_Autoship_Helper_Platform::PAY_METHOD_CODE_PARADOX_TRANSARMOR:
-                return $this->getUrl('transarmor/manage/');
             case SFC_Autoship_Helper_Platform::PAY_METHOD_CODE_SFC_CIM_10XX:
                 return $this->getUrl('creditcards/index/new');
             case SFC_Autoship_Helper_Platform::PAY_METHOD_CODE_SFC_CIM:

@@ -22,36 +22,36 @@ $coreHelper = $this->helper('core');
 ?>
 
 <div class="block-title">
-	<h2>Estimated Order Summary</h2>
+	<h2><?php echo $this->__("Estimated Order Summary") ?></h2>
 </div>
 <ul class="messages"></ul>
 <div class="box-padding">
     <?php // If $summary is an array, it has totals, otherwise it's a string with error message ?>
 	<?php if (is_array($summary)): ?>
-	<p>The following are the estimated costs for each of your shipments:</p>
+	<p><?php echo $this->__("The following are the estimated costs for each of your shipments:") ?></p>
 	<div class="subscription-summary-table">
 		<table>
 			<tbody>
 				<tr>
-					<td class="a-right">Product Total</td>
+					<td class="a-right"><?php echo $this->__("Product Total") ?></td>
 					<td class="a-right"><?php echo $coreHelper->currency($summary['product_total'], true, false); ?></td>
 				</tr>
                 <tr>
-                    <td class="a-right">Subscription Discount</td>
+                    <td class="a-right"><?php echo $this->__("Subscription Discount") ?></td>
                     <td class="a-right"><?php echo $coreHelper->currency($summary['discount'], true, false); ?></td>
                 </tr>
                 <tr>
-                    <td class="a-right">Shipping</td>
+                    <td class="a-right"><?php echo $this->__("Shipping") ?></td>
                     <td class="a-right"><?php echo $coreHelper->currency($summary['shipping'], true, false); ?></td>
                 </tr>
 				<tr>
-					<td class="a-right">Tax</td>
+					<td class="a-right"><?php echo $this->__("Tax") ?></td>
 					<td class="a-right"><?php echo $coreHelper->currency($summary['tax'], true, false); ?></td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td class="a-right"><strong>Estimated Order Total</strong></td>
+					<td class="a-right"><strong><?php echo $this->__("Estimated Order Total") ?></strong></td>
 					<td class="a-right"><strong><span class="price"><?php echo $coreHelper->currency($summary['total'], true, false); ?></span></strong></td>
 				</tr>
 			</tfoot>

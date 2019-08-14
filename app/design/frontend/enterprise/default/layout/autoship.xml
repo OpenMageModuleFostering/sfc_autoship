@@ -251,4 +251,10 @@ Product view
         </reference>
     </checkout_onepage_index>
 
+    <!-- EE Only, ensure the gift card function is not hiding subscribe pro -->
+        <checkout_onepage_paymentmethod>
+            <reference name="giftcardaccount_scripts">
+                <action method="setTemplate"><template>autoship/giftcardaccount/onepage/payment/scripts.phtml</template></action>
+            </reference>
+        </checkout_onepage_paymentmethod>
 </layout>

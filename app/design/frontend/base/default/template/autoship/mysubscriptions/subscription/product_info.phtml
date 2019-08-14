@@ -31,9 +31,9 @@ $product = $this->getProduct();
     <h2 class="product-name"><a href="<?php echo $product->getProductUrl() ?>"
                                 title="<?php echo $_productNameStripped; ?>"><?php echo $product->getName() ?></a></h2>
 
-    <p><span class="product-original-price">One-Time Purchase Price: <?php echo $this->getOneTimePurchasePrice(true) ?></span><br/>
+    <p><span class="product-original-price"><?php echo $this->__("One-Time Purchase Price:") ?> <?php echo $this->getOneTimePurchasePrice(true) ?></span><br/>
         <span class="product-price"><?php echo $this->getSubscriptionPriceText() ?></span></p>
     <?php if (strlen($subscription->getCouponCode())): ?>
-        <p>Applied coupon code: <?php echo $subscription->getCouponCode() ?></p>
+        <p><?php echo $this->__("Applied coupon code:") ?> <?php echo $subscription->getCouponCode() ?></p>
     <?php endif; ?>
 </div>

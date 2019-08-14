@@ -16,7 +16,8 @@
  */
 ?>
 <?php $_code = $this->getMethodCode() ?>
-<?php $_paymentProfile = $this->getMethod()->getSavedPaymentProfile() ?>
+<?php /** @var SFC_Autoship_Model_Payment_Profile $_paymentProfile */
+    $_paymentProfile = $this->getMethod()->getSavedPaymentProfile() ?>
 <?php echo $this->getChildHtml() ?>
 <ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
     <input type="hidden" id="<?php echo $_code ?>_payment_token" name="payment[payment_token]"
@@ -27,42 +28,50 @@
            title="<?php echo $this->__('Obscured Card Number') ?>" value="<?php echo $this->getObscuredCardNumber() ?>"/>
     <input type="hidden" id="<?php echo $_code ?>_cc_type" name="payment[cc_type]" title="<?php echo $this->__('Card Type') ?>"
            value="<?php echo $this->getMagentoCardType() ?>"/>
-    <li id="<?php echo $_code ?>_cc_type_exp_div">
-        <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em><?php echo $this->__('Expiration Date') ?></label>
-
-        <div class="input-box">
-            <div class="v-fix">
-                <select id="<?php echo $_code ?>_expiration" name="payment[cc_exp_month]" class="month validate-cc-exp required-entry">
-                    <?php $_ccExpMonth = $_paymentProfile->getData('creditcard_month') ?>
-                    <?php foreach ($this->getCcMonths() as $k => $v): ?>
-                        <option value="<?php echo $k ? $k : '' ?>"<?php if ($k == $_ccExpMonth
-                        ): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
-                    <?php endforeach ?>
-                </select>
-            </div>
-            <div class="v-fix">
-                <?php $_ccExpYear = $_paymentProfile->getData('creditcard_year') ?>
-                <select id="<?php echo $_code ?>_expiration_yr" name="payment[cc_exp_year]" class="year required-entry">
-                    <?php foreach ($this->getCcYears() as $k => $v): ?>
-                        <option value="<?php echo $k ? $k : '' ?>"<?php if ($k == $_ccExpYear
-                        ): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
-                    <?php endforeach ?>
-                </select>
-            </div>
-        </div>
-    </li>
-    <?php if ($this->hasVerification()): ?>
-        <li id="<?php echo $_code ?>_cc_type_cvv_div">
-            <label for="<?php echo $_code ?>_cc_cid" class="required"><em>*</em><?php echo $this->__('Card Verification Number') ?>
-            </label>
+    <?php if (!$_paymentProfile->isThirdParty()) : ?>
+        <li id="<?php echo $_code ?>_cc_type_exp_div">
+            <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em><?php echo $this->__('Expiration Date') ?></label>
 
             <div class="input-box">
                 <div class="v-fix">
-                    <input type="text" title="<?php echo $this->__('Card Verification Number') ?>" class="input-text cvv required-entry"
-                           id="<?php echo $_code ?>_cc_cid" name="payment[cc_cid]" value=""/>
+                    <?php if ($_paymentProfile->isThirdParty()): ?>
+
+                    <?php else: ?>
+                    <select id="<?php echo $_code ?>_expiration" name="payment[cc_exp_month]" class="month validate-cc-exp required-entry">
+                        <?php $_ccExpMonth = $_paymentProfile->getData('creditcard_month') ?>
+                        <?php foreach ($this->getCcMonths() as $k => $v): ?>
+                            <option value="<?php echo $k ? $k : '' ?>"<?php if ($k == $_ccExpMonth
+                            ): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                        <?php endforeach ?>
+                    </select>
+                    <?php endif; ?>
                 </div>
-                <a href="#" class="cvv-what-is-this"><?php echo $this->__('What is this?') ?></a>
+                <div class="v-fix">
+                    <?php $_ccExpYear = $_paymentProfile->getData('creditcard_year') ?>
+                    <select id="<?php echo $_code ?>_expiration_yr" name="payment[cc_exp_year]" class="year required-entry">
+                        <?php foreach ($this->getCcYears() as $k => $v): ?>
+                            <option value="<?php echo $k ? $k : '' ?>"<?php if ($k == $_ccExpYear
+                            ): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
             </div>
         </li>
+        <?php if ($this->hasVerification($_paymentProfile)): ?>
+            <li id="<?php echo $_code ?>_cc_type_cvv_div">
+                <label for="<?php echo $_code ?>_cc_cid" class="required"><em>*</em><?php echo $this->__('Card Verification Number') ?>
+                </label>
+
+                <div class="input-box">
+                    <div class="v-fix">
+                        <input type="text" title="<?php echo $this->__('Card Verification Number') ?>" class="input-text cvv required-entry"
+                               id="<?php echo $_code ?>_cc_cid" name="payment[cc_cid]" value=""/>
+                    </div>
+                    <a href="#" class="cvv-what-is-this"><?php echo $this->__('What is this?') ?></a>
+                </div>
+            </li>
+        <?php endif; ?>
+    <?php else: ?>
+        <input type="hidden" name="payment[third_party_token]" value="1" />
     <?php endif; ?>
 </ul>

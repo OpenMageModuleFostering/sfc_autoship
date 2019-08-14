@@ -106,7 +106,7 @@ class SFC_Autoship_Block_Payment_Form_Cc extends Mage_Payment_Block_Form
     public function hasVerification()
     {
         if ($this->getMethod()) {
-            $configData = $this->getMethod()->getConfigData('useccv');
+            $configData = $this->getMethod()->getConfigData('useccv', $this->getQuote()->getStoreId());
             if (is_null($configData)) {
                 return true;
             }
@@ -119,7 +119,7 @@ class SFC_Autoship_Block_Payment_Form_Cc extends Mage_Payment_Block_Form
 
     public function useSaveCardCheckbox()
     {
-        $checkoutSaveCardCheckbox = (bool) $this->getMethod()->getConfigData('checkout_save_card_checkbox');
+        $checkoutSaveCardCheckbox = (bool) $this->getMethod()->getConfigData('checkout_save_card_checkbox', $this->getQuote()->getStoreId());
         $isGuestCheckout = ($this->getQuote()->getCheckoutMethod() == Mage_Sales_Model_Quote::CHECKOUT_METHOD_GUEST);
 
         return $checkoutSaveCardCheckbox && !$isGuestCheckout && !$this->forceSaveCard();
@@ -183,4 +183,19 @@ class SFC_Autoship_Block_Payment_Form_Cc extends Mage_Payment_Block_Form
         return $this->getQuote()->getBillingAddress();
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCvv()
+    {
+        return $this->getInfoData('cc_cid');
+    }
+
+    /**
+     * @return int
+     */
+    public function getSaveCard()
+    {
+        return intval($this->getInfoData('save_card'));
+    }
 }

@@ -325,7 +325,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <comment>NOTE: CVV field is always shown in Admin panel ordering interface.  This configuration setting turns the CVV field on and off for the customer-facing frontend features.</comment>
+                            <comment>NOTE: CVV field is always shown in Admin panel ordering interface.  This configuration setting turns the CVV field on and off for the customer-facing frontend features. Also, please note the CVV field will never be shown for third-party payment profiles.</comment>
                         </useccv>
                         <currency translate="label">
                             <label>Accepted Currency</label>

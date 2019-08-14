@@ -1,0 +1,102 @@
+<?php
+/**
+ * Subscribe Pro - Subscriptions Management Extension
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of SUBSCRIBE PRO INC.
+ *
+ * @category  SFC
+ * @package   SFC_Autoship
+ * @author    Garth Brantley <garth@subscribepro.com>
+ * @author    Dennis Rogers <dennis@storefrontconsulting.com>
+ * @copyright 2009-2014 SUBSCRIBE PRO INC. All Rights Reserved.
+ * @license   http://www.subscribepro.com/terms-of-service/ Subscribe Pro Terms of Service
+ * @link      http://www.subscribepro.com/
+ *
+ */
+/** @var $this SFC_Autoship_Block_Adminhtml_Sales_Order_Create_Product_Subscription */
+?>
+<?php
+if (!$this->isItemSubscriptionEligible()) {
+    return;
+}
+/** @var $_item Mage_Sales_Model_Quote_Item */
+$quoteItem = $this->getItem();
+?>
+<tr class="border">
+    <td class="first">
+
+        <div class="subscription-product product-options" data-subscription="<?php echo $quoteItem->getId() ?>">
+            <?php if ($this->isTrialProduct() || $this->getSubscriptionOptionMode() == 'subscription_only'): ?>
+                <p><?php echo $this->getDiscountText() ?></p>
+            <?php else: ?>
+                <p><?php echo $this->__('Would you like to receive regular shipments of this item?') ?></p>
+            <?php endif; ?>
+            <ul class="options-list">
+                <?php if ($this->isTrialProduct() || $this->getSubscriptionOptionMode() == 'subscription_only'): ?>
+                    <input type="hidden" onclick="" class="" data-subscription="<?php echo $quoteItem->getId() ?>"
+                           id="<?php echo $quoteItem->getId() ?>-delivery-option-subscribe"
+                           name="item[<?php echo $quoteItem->getId() ?>][delivery-option]" value="subscribe"/>
+                    <label for="delivery-interval" style="display:block; margin-top:12px;"><?php echo $this->__("Delivery every:") ?>
+                        <select
+                            id="<?php echo $quoteItem->getId() ?>-delivery-interval" data-subscription="<?php echo $quoteItem->getId() ?>"
+                            name="item[<?php echo $quoteItem->getId() ?>][delivery-interval]"
+                            class="">
+                            <?php foreach ($this->getIntervals() as $interval): ?>
+                                <option value="<?php echo $interval ?>" <?php if($interval == $this->getNewSubscriptionInterval()): ?>selected="selected"<?php endif; ?>>
+                                    <?php echo $interval ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </label>
+                <?php else: ?>
+                    <li>
+                        <input type="radio" onclick="" class="radio" data-subscription="<?php echo $quoteItem->getId() ?>"
+                               id="<?php echo $quoteItem->getId() ?>-delivery-option-one-time"
+                               name="item[<?php echo $quoteItem->getId() ?>][delivery-option]"
+                               value="one-time-delivery"
+                               <?php if (!$this->isItemFlaggedToCreateNewSubscription()): ?>checked="checked"<?php endif; ?>
+                            />
+                    <span class="label">
+                        <label for="<?php echo $quoteItem->getId() ?>-delivery-option-one-time"><?php echo $this->__("One Time Delivery") ?></label>
+                    </span>
+                    </li>
+                    <li>
+                        <input type="radio" onclick="" class="radio" data-subscription="<?php echo $quoteItem->getId() ?>"
+                               id="<?php echo $quoteItem->getId() ?>-delivery-option-subscribe"
+                               name="item[<?php echo $quoteItem->getId() ?>][delivery-option]" value="subscribe"
+                               <?php if ($this->isItemFlaggedToCreateNewSubscription()): ?>checked="checked"<?php endif; ?>
+                            />
+                    <span class="label">
+                        <label for="<?php echo $quoteItem->getId() ?>-delivery-option-subscribe"><?php echo $this->__("Regular Delivery") ?>
+                            (<?php echo $this->getDiscountText() ?>)</label>
+                    </span>
+
+                        <label for="delivery-interval" style="display:block; margin-top:12px;"><?php echo $this->__("Delivery every:") ?>
+                            <select
+                                id="<?php echo $quoteItem->getId() ?>-delivery-interval" data-subscription="<?php echo $quoteItem->getId() ?>"
+                                name="item[<?php echo $quoteItem->getId() ?>][delivery-interval]"
+                                class="">
+                                <?php foreach ($this->getIntervals() as $interval): ?>
+                                    <option value="<?php echo $interval ?>" <?php if($interval == $this->getNewSubscriptionInterval()): ?>selected="selected"<?php endif; ?>>
+                                        <?php echo $interval ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </label>
+                    </li>
+                <?php endif; ?>
+            </ul>
+        </div>
+
+    </td>
+
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td class="last"></td>
+</tr>

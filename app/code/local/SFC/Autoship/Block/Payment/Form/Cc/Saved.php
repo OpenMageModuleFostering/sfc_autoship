@@ -53,4 +53,17 @@ class SFC_Autoship_Block_Payment_Form_Cc_Saved extends SFC_Autoship_Block_Paymen
         return $vaultHelper->mapSubscribeProCardTypeToMagento($paymentProfile->getData('creditcard_type'), false);
     }
 
+    /**
+     * Retrive has verification configuration
+     *
+     * @return boolean
+     */
+    public function hasVerification()
+    {
+        if ($this->getSavedPaymentProfile()->isThirdParty()) {
+            return false;
+        }
+        return parent::hasVerification();
+    }
+
 }

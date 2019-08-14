@@ -112,12 +112,12 @@ class SFC_Autoship_NewsubscriptionController extends Mage_Core_Controller_Front_
             }
             else {
                 // No product identifying parameter passed
-                Mage::throwException('No product_id or product_sku parameter passed!');
+                Mage::throwException($this->__('No product_id or product_sku parameter passed!'));
             }
         }
         // If there is no valid product, error out
         if (!strlen($product->getId())) {
-            Mage::throwException('Invalid product requested!');
+            Mage::throwException($this->__('Invalid product requested!'));
         }
         $processedParameters['product'] = $product;
         $processedParameters['product_id'] = $product->getId();
@@ -181,11 +181,11 @@ class SFC_Autoship_NewsubscriptionController extends Mage_Core_Controller_Front_
         $platformProduct = Mage::helper('autoship/platform')->getPlatformProduct($product);
         if($subscription->getData('qty') < $platformProduct->getData('min_qty')) {
             $subscription->setData('qty', $platformProduct->getData('min_qty'));
-            Mage::getSingleton('customer/session')->addError('Minimum quantity for subscription is ' . $platformProduct->getData('min_qty'));
+            Mage::getSingleton('customer/session')->addError($this->__('Minimum quantity for subscription is %s', $platformProduct->getData('min_qty')));
         }
         if($subscription->getData('qty') > $platformProduct->getData('max_qty')) {
             $subscription->setData('qty', $platformProduct->getData('max_qty'));
-            Mage::getSingleton('customer/session')->addError('Maximum quantity for subscription is ' . $platformProduct->getData('max_qty'));
+            Mage::getSingleton('customer/session')->addError($this->__('Maximum quantity for subscription is %s', $platformProduct->getData('max_qty')));
         }
 
         // Return the new subscription model
@@ -225,7 +225,7 @@ class SFC_Autoship_NewsubscriptionController extends Mage_Core_Controller_Front_
         catch (Exception $e) {
             Mage::log($e->getMessage());
             Mage::logException($e);
-            echo '<li class="error">' . $e->getMessage() . '</li>';
+            echo '<li class="error">' . $this->__($e->getMessage()) . '</li>';
 
             return;
         }
@@ -267,7 +267,7 @@ class SFC_Autoship_NewsubscriptionController extends Mage_Core_Controller_Front_
             Mage::throwException($this->addErrorFromCimException($eCim));
         }
         catch (Exception $e) {
-            Mage::throwException('Failed to save credit card!');
+            Mage::throwException($this->__('Failed to save credit card!'));
         }
 
         // Return new model
@@ -316,7 +316,7 @@ class SFC_Autoship_NewsubscriptionController extends Mage_Core_Controller_Front_
                 $addressId = $this->saveAddress($data['billing']);
             }
             if (!is_numeric($addressId)) {
-                Mage::throwException('Failed to save address!');
+                Mage::throwException($this->__('Failed to save address!'));
             }
             // Set billing address on subscription
             $subscription->setBillingAddressId($addressId);
@@ -343,7 +343,7 @@ class SFC_Autoship_NewsubscriptionController extends Mage_Core_Controller_Front_
         catch (Exception $e) {
             Mage::log($e->getMessage());
             Mage::logException($e);
-            echo '<li class="error">' . $e->getMessage() . '</li>';
+            echo '<li class="error">' . $this->__($e->getMessage()) . '</li>';
 
             return;
         }
@@ -372,7 +372,7 @@ class SFC_Autoship_NewsubscriptionController extends Mage_Core_Controller_Front_
                 $addressId = $this->saveAddress($data['shipping']);
             }
             if (!is_numeric($addressId)) {
-                Mage::throwException('Failed to save address!');
+                Mage::throwException($this->__('Failed to save address!'));
             }
             // Set shipping address on subscription
             $subscription->setShippingAddressId($addressId);
@@ -399,7 +399,7 @@ class SFC_Autoship_NewsubscriptionController extends Mage_Core_Controller_Front_
         catch (Exception $e) {
             Mage::log($e->getMessage());
             Mage::logException($e);
-            echo '<li class="error">' . $e->getMessage() . '</li>';
+            echo '<li class="error">' . $this->__($e->getMessage()) . '</li>';
 
             return;
         }
@@ -425,7 +425,7 @@ class SFC_Autoship_NewsubscriptionController extends Mage_Core_Controller_Front_
         }
         catch (Exception $e) {
             Mage::log($e->getMessage() . '\n' . $e->getTraceAsString());
-            echo '<li class="error">' . $e->getMessage() . '</li>';
+            echo '<li class="error">' . $this->__($e->getMessage()) . '</li>';
         }
         // Load and render layout
         $this->loadLayout(false);
@@ -475,10 +475,10 @@ class SFC_Autoship_NewsubscriptionController extends Mage_Core_Controller_Front_
             Mage::log($e->getMessage());
             Mage::logException($e);
             if (strpos($e->getMessage(), '1062 Duplicate entry')) {
-                echo '<li class="error">You already have a subscription to this product.</li>';
+                echo '<li class="error">' . $this->__("You already have a subscription to this product.") . '</li>';
             }
             else {
-                echo '<li class="error">' . $e->getMessage() . '</li>';
+                echo '<li class="error">' . $this->__($e->getMessage()) . '</li>';
             }
         }
 
@@ -526,7 +526,7 @@ class SFC_Autoship_NewsubscriptionController extends Mage_Core_Controller_Front_
         else {
             $html = '';
             foreach ($errors as $error) {
-                $html .= '<li class="error">' . $error . '</li>';
+                $html .= '<li class="error">' . $this->__($error) . '</li>';
             }
 
             return $html;
@@ -541,16 +541,16 @@ class SFC_Autoship_NewsubscriptionController extends Mage_Core_Controller_Front_
     {
         switch ($eCim->getResponse()->getMessageCode()) {
             case 'E00014':
-                return ('A required field was not entered for credit card!');
+                return $this->__('A required field was not entered for credit card!');
                 break;
             case 'E00039':
-                return ('Credit card number is already saved in your account!');
+                return $this->__('Credit card number is already saved in your account!');
                 break;
             case 'E00042':
-                return ('You have already saved the maximum number of credit cards!');
+                return $this->__('You have already saved the maximum number of credit cards!');
                 break;
             default:
-                return ('Failed to save credit card with gateway!');
+                return $this->__('Failed to save credit card with gateway!');
                 break;
         }
     }

@@ -21,11 +21,11 @@
 <?php $createdSubscriptionIds = $this->getCreatedSubscriptionIds(); ?>
 <?php if ($this->getFailedSubscriptionCount()): ?>
     <?php // Output error message ?>
-    <p>Failed to create some of your product subscriptions! Please contact support for assistance.</p>
+    <p><?php echo $this->__("Failed to create some of your product subscriptions! Please contact support for assistance.") ?></p>
 <?php endif; ?>
 <?php if (is_array($createdSubscriptionIds) && count($createdSubscriptionIds)): ?>
-    <p>You will receive a separate email confirmation for your product subscription(s). Click here to <a
-            href="<?php echo $this->getUrl('autoship/mysubscriptions') ?>">manage your product subscriptions</a>.
+    <p><?php echo $this->__('You will receive a separate email confirmation for your product subscription(s). Click here to <a
+            href="%s">manage your product subscriptions</a>.', $this->getUrl('autoship/mysubscriptions')) ?>
     </p>
 <?php endif; ?>
 <?php endif; ?>

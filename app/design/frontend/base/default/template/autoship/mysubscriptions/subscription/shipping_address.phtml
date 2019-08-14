@@ -20,7 +20,7 @@ $subscription = $this->getSubscription();
 $shippingAddress = $subscription->getShippingAddress();
 ?>
 <div class="block subscription-shipping-address">
-    <p><strong>Delivery address:</strong> <a class="change" href="">(Change)</a></p>
+    <p><strong><?php echo $this->__("Delivery address:") ?></strong> <a class="adjust" href=""><?php echo $this->__("(Change)") ?></a></p>
     <address>
         <?php echo $shippingAddress->getFirstname() ?> <?php echo $shippingAddress->getLastname() ?><br/>
         <?php if (strlen($shippingAddress->getCompany())): ?>
@@ -36,9 +36,9 @@ $shippingAddress = $subscription->getShippingAddress();
     <input type="text" id="shipping_address_id" name="shipping_address_id" value="<?php echo $shippingAddress->getId() ?>"
            class="input-text" style="display:none;"/>
 
-    <div class="change" style="display: none;">
+    <div class="adjust" style="display: none;">
         <div class="block-title">
-            <h2>Change Shipping Address</h2>
+            <h2><?php echo $this->__("Change Shipping Address") ?></h2>
         </div>
         <div class="block-content">
             <?php

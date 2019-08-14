@@ -17,21 +17,21 @@
 ?>
 <?php $paymentProfiles = $this->getPaymentProfiles() ?>
 <div class="page-title">
-    <h1>My Credit Cards</h1>
+    <h1><?php echo $this->__("My Credit Cards") ?></h1>
 </div>
 
 <fieldset>
     <div class="pager">
         <p class="amount">
-            <?php echo count($paymentProfiles); ?> Item(s)
+            <?php echo count($paymentProfiles); ?> <?php echo $this->__("Item(s)") ?>
         </p>
     </div>
     <table class="data-table" id="cc-table">
         <thead>
         <tr class="first last">
-            <th>Card Number</th>
-            <th>Billing Customer Name</th>
-            <th>Edit / Delete</th>
+            <th><?php echo $this->__("Card Number") ?></th>
+            <th><?php echo $this->__("Billing Customer Name") ?></th>
+            <th><?php echo $this->__("Edit / Delete") ?></th>
         </tr>
         </thead>
         <tbody>
@@ -48,7 +48,7 @@
                     <?php echo $billingAddress->getData('first_name') . ' ' . $billingAddress->getData('last_name'); ?>
                 </td>
                 <td>
-                    <span><a href="<?php echo Mage::getUrl('subscriptions/mycreditcards/edit'); ?>id/<?php echo $profile->getId() ?>"><b>Edit</b></a></span> |
+                    <?php if (!$profile->isThirdParty()) :?><span><a href="<?php echo Mage::getUrl('subscriptions/mycreditcards/edit'); ?>id/<?php echo $profile->getId() ?>"><b>Edit</b></a></span> |<?php endif; ?>
                     <span><a href="#" class="link-reorder" onclick="confirmDelete(<?php echo $profile->getId() ?>)"> Delete</a></span>
                 </td>
             </tr>
@@ -58,7 +58,7 @@
     </table>
     <div class="pager">
         <p class="amount">
-            <?php echo count($paymentProfiles); ?> Item(s)
+            <?php echo count($paymentProfiles); ?> <?php echo $this->__("Item(s)") ?>
         </p>
     </div>
 </fieldset>
@@ -75,7 +75,7 @@
     function confirmDelete(id)
     {
         var x;
-        var r=confirm("Are you sure you want to delete this credit card?");
+        var r=confirm("<?php echo $this->__("Are you sure you want to delete this credit card?")?>");
         if (r==true)
         {
             window.location="<?php echo Mage::getUrl('subscriptions/mycreditcards/delete'); ?>id/" + id;

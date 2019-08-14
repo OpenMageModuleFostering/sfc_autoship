@@ -48,7 +48,7 @@ class SFC_Autoship_MycreditcardsController extends Mage_Core_Controller_Front_Ac
         $customerSession = Mage::getSingleton('customer/session');
         // Authorize customer for this profile - in other words profile must belong to this customer
         if ($customerSession->getCustomerId() != $paymentProfile->getData('customer_id')) {
-            throw new SFC_CyberSource_Helper_Gateway_Exception('Customer not authorized to edit this profile!');
+            throw new SFC_CyberSource_Helper_Gateway_Exception($this->__('Customer not authorized to edit this profile!'));
         }
     }
 
@@ -100,7 +100,7 @@ class SFC_Autoship_MycreditcardsController extends Mage_Core_Controller_Front_Ac
             $this->getLayout()->getBlock('payment_profile_edit')->setData('cim_profile', $paymentProfile);
         }
         catch (Exception $e) {
-            $coreSession->addError('Failed to load new credit credit card page!');
+            $coreSession->addError($this->__('Failed to load new credit credit card page!'));
             // Send customer back to grid
             $this->_redirect('creditcards/*/');
 
@@ -139,7 +139,7 @@ class SFC_Autoship_MycreditcardsController extends Mage_Core_Controller_Front_Ac
         }
         catch (Exception $e) {
             Mage::log('Error: ' . $e->getMessage(), Zend_Log::ERR, SFC_Autoship_Helper_Data::LOG_FILE);
-            $coreSession->addError('Failed to retrieve credit card for edit!');
+            $coreSession->addError($this->__('Failed to retrieve credit card for edit!'));
             // Send customer back to grid
             $this->_redirect('subscriptions/mycreditcards/');
 
@@ -172,7 +172,7 @@ class SFC_Autoship_MycreditcardsController extends Mage_Core_Controller_Front_Ac
         }
         catch (Exception $e) {
             Mage::log('Error: ' . $e->getMessage(), Zend_Log::ERR, SFC_Autoship_Helper_Data::LOG_FILE);
-            $coreSession->addError('Failed to store credit card!');
+            $coreSession->addError($this->__('Failed to store credit card!'));
         }
 
         // Send customer back to grid
@@ -203,11 +203,11 @@ class SFC_Autoship_MycreditcardsController extends Mage_Core_Controller_Front_Ac
             // Update profile in vault
             $vaultHelper->updatePaymentProfile($paymentProfile);
 
-            $coreSession->addSuccess('Credit card was successfully updated!');
+            $coreSession->addSuccess($this->__('Credit card was successfully updated!'));
         }
         catch (Exception $e) {
             Mage::log('Error: ' . $e->getMessage(), Zend_Log::ERR, SFC_Autoship_Helper_Data::LOG_FILE);
-            $coreSession->addError('Failed to save credit card!');
+            $coreSession->addError($this->__('Failed to save credit card!'));
         }
 
         // Send customer back to grid
@@ -233,10 +233,10 @@ class SFC_Autoship_MycreditcardsController extends Mage_Core_Controller_Front_Ac
             // Redact profile in vault
             $vaultHelper->redactPaymentProfile($paymentProfile);
 
-            $coreSession->addSuccess('Your credit card was deleted.');
+            $coreSession->addSuccess($this->__('Your credit card was deleted.'));
         }
         catch (Exception $e) {
-            $coreSession->addError('Failed to delete saved credit card!');
+            $coreSession->addError($this->__('Failed to delete saved credit card!'));
         }
 
         // Send customer back to grid

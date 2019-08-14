@@ -64,7 +64,7 @@ class SFC_Autoship_Block_Adminhtml_Customer_Paymentprofiles_Paymentprofile
     protected function _prepareLayout()
     {
         // Build URL to add new payment profile
-        $urlString = 'autoship_admin/adminhtml_paymentprofile/new';
+        $urlString = 'adminhtml/sppaymentprofile/new';
         $url = $this->getUrl($urlString, array('customer_id' => Mage::registry('current_customer')->getId()));
 
         $button = $this->getLayout()->createBlock('adminhtml/widget_button');
@@ -171,7 +171,7 @@ class SFC_Autoship_Block_Adminhtml_Customer_Paymentprofiles_Paymentprofile
     public function getRowUrl($row)
     {
         return $this->getUrl(
-            'autoship_admin/adminhtml_paymentprofile/edit',
+            'adminhtml/sppaymentprofile/edit',
             array(
                 'id' => $row->getId(),
                 'customer_id' => $row->getData('magento_customer_id')
@@ -185,7 +185,7 @@ class SFC_Autoship_Block_Adminhtml_Customer_Paymentprofiles_Paymentprofile
      */
     public function getGridUrl()
     {
-        return $this->getUrl('autoship_admin/adminhtml_paymentprofile/grid', array('_current' => true));
+        return $this->getUrl('adminhtml/sppaymentprofile/grid', array('_current' => true));
     }
 
     /**
@@ -204,7 +204,7 @@ class SFC_Autoship_Block_Adminhtml_Customer_Paymentprofiles_Paymentprofile
         $this->getMassactionBlock()->addItem('remove_profile', array(
             'label' => Mage::helper('autoship')->__('Delete Credit Card(s)'),
             'url' => $this->getUrl(
-                'autoship_admin/adminhtml_paymentprofile/massRemove',
+                'adminhtml/sppaymentprofile/massRemove',
                 array(
                     'customer_id' => $customer->getId(),
                 )),

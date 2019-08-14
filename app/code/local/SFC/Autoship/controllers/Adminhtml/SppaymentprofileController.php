@@ -15,7 +15,7 @@
  *
  */
 
-class SFC_Autoship_Adminhtml_PaymentprofileController extends Mage_Adminhtml_Controller_Action
+class SFC_Autoship_Adminhtml_SppaymentprofileController extends Mage_Adminhtml_Controller_Action
 {
 
     /**
@@ -189,7 +189,7 @@ class SFC_Autoship_Adminhtml_PaymentprofileController extends Mage_Adminhtml_Con
                     $vaultHelper->createPaymentProfile($profile);
                 }
 
-                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Saved credit card.'));
+                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('autoship')->__('Saved credit card.'));
                 Mage::getSingleton('adminhtml/session')->setCustomerData(false);
 
                 if ($this->getRequest()->getParam('back')) {
@@ -199,7 +199,7 @@ class SFC_Autoship_Adminhtml_PaymentprofileController extends Mage_Adminhtml_Con
                 }
             }
             catch (Exception $e) {
-                Mage::getSingleton('adminhtml/session')->addError('Failed to save credit card!');
+                Mage::getSingleton('adminhtml/session')->addError(Mage::helper('autoship')->__('Failed to save credit card!'));
             }
         }
 
@@ -242,13 +242,13 @@ class SFC_Autoship_Adminhtml_PaymentprofileController extends Mage_Adminhtml_Con
                 catch (\Exception $e) {
                     $message =
                         'Failed to delete payment profile ID #' . $profileId;
-                    Mage::getSingleton('adminhtml/session')->addError($message);
+                    Mage::getSingleton('adminhtml/session')->addError(Mage::helper('autoship')->__($message));
                 }
             }
             Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('autoship')->__('Deleted saved credit card(s).'));
         }
         catch (Exception $e) {
-            Mage::getSingleton('adminhtml/session')->addError('Failed to delete saved credit card!');
+            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('autoship')->__('Failed to delete saved credit card!'));
         }
 
         $this->_redirect('adminhtml/customer/edit/tab/customer_info_tabs_paymentprofile', array('id' => $customerId));

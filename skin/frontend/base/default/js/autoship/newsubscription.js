@@ -68,18 +68,13 @@ $j(document).ready(function(){
         var form = $j(this);
         $j("#please-wait").show();
         $j('.billing-address-block .messages').html("");
-        $j.ajax({
-            url: form.attr('action'),
-            data: form.serialize(),
-            method: "post",
-            success: function(transport){
-                $j("#please-wait").hide();
-                if(transport.match("error")){
-                    $j('.billing-address-block .messages').html(transport);
-                } else {
-                    updateSubscriptionData(transport);
-                    $j('div.change,#modal_overlay').hide();
-                }
+        $j.post(form.attr('action'), form.serialize(), function(transport){
+            $j("#please-wait").hide();
+            if(transport.match("error")){
+                $j('.billing-address-block .messages').html(transport);
+            } else {
+                updateSubscriptionData(transport);
+                $j('div.change,#modal_overlay').hide();
             }
         });
     }).on('submit', '#co-payment-form', function(e){
@@ -87,18 +82,13 @@ $j(document).ready(function(){
         var form = $j(this);
         $j("#please-wait").show();
         $j('.payment-block .messages').html("");
-        $j.ajax({
-            url: form.attr('action'),
-            data: form.serialize(),
-            method: "post",
-            success: function(transport){
-                $j("#please-wait").hide();
-                if(transport.match("error")){
-                    $j('.payment-block .messages').html(transport);
-                } else {
-                    updateSubscriptionData(transport);
-                    $j('div.change,#modal_overlay').hide();
-                }
+        $j.post(form.attr('action'), form.serialize(), function(transport){
+            $j("#please-wait").hide();
+            if(transport.match("error")){
+                $j('.payment-block .messages').html(transport);
+            } else {
+                updateSubscriptionData(transport);
+                $j('div.change,#modal_overlay').hide();
             }
         });
     }).on('change', '.shipping-address-select', function(){
@@ -112,18 +102,13 @@ $j(document).ready(function(){
         var form = $j(this);
         $j("#please-wait").show();
         $j('.shipping-address-block .messages').html("");
-        $j.ajax({
-            url: form.attr('action'),
-            data: form.serialize(),
-            method: "post",
-            success: function(transport){
-                $j("#please-wait").hide();
-                if(transport.match("error")){
-                    $j('.shipping-address-block .messages').html(transport);
-                } else {
-                    updateSubscriptionData(transport);
-                    $j('div.change,#modal_overlay').hide();
-            }
+        $j.post(form.attr('action'), form.serialize(), function(transport){
+            $j("#please-wait").hide();
+            if(transport.match("error")){
+                $j('.shipping-address-block .messages').html(transport);
+            } else {
+                updateSubscriptionData(transport);
+                $j('div.change,#modal_overlay').hide();
             }
         });
     }).on('click', '#subscribe', function(e){
@@ -131,36 +116,29 @@ $j(document).ready(function(){
         var form = $j(this);
         $j("#please-wait").show();
         $j('.summary-block .messages').html("");
-        $j.ajax({
-            url: form.attr('href'),
-            data: {"delivery_date":$j("#delivery_date").val(), "coupon_code":$j("#coupon_code").val()},
-            method: "post",
-            success: function(transport){
-                $j("#please-wait").hide();
-                if(transport.match("error")){
-                    $j('.summary-block .messages').html(transport);
-                } else {
-                    window.location = transport;
-                }
+        $j.post(form.attr('href'), {
+            "delivery_date": $j("#delivery_date").val(),
+            "coupon_code": $j("#coupon_code").val()
+        }, function(transport){
+            $j("#please-wait").hide();
+            if(transport.match("error")){
+                $j('.summary-block .messages').html(transport);
+            } else {
+                window.location = transport;
             }
         });
     });
-    
+
     $j("#delivery_qty,#delivery_interval").bind('change', function(e){
         $j("#please-wait").show();
         var form = $j("#frequency_form"); // fake form
-        $j.ajax({
-            url: form.val(),
-            data: {
-                "qty": $j("#delivery_qty").val(),
-                "interval": $j("#delivery_interval").val()
-            },
-            method: "post",
-            success: function(transport){
-                $j("#please-wait").hide();
-                updateSubscriptionData(transport);
-            }
-        });        
+        $j.post(form.val(), {
+            "qty": $j("#delivery_qty").val(),
+            "interval": $j("#delivery_interval").val()
+        }, function(transport){
+            $j("#please-wait").hide();
+            updateSubscriptionData(transport);
+        });
     });
 
 });
