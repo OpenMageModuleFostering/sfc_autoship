@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/SFC_Autoship",
+    "name": "OpenMageModuleFostering\/SFC_Autoship",
     "type": "magento-module",
     "license": "Subscribe-Pro-Commercial-Software-License",
     "homepage": "",
     "description": "Manage your auto-ship program, customer subscription payments and recurring billing transactions to optimize customer retention and recurring revenue.",
     "authors": [
-    {
-        "name": "Subscribe Pro",
-        "email": "support@subscribepro.com"
-    }
-],
+        {
+            "name": "Subscribe Pro",
+            "email": "support@subscribepro.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
